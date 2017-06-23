@@ -10,11 +10,43 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions
+  Dimensions,
+  DeviceEventEmitter
 } from 'react-native';
 import Camera from 'react-native-camera';
+import * as firebase from 'firebase';
+import ReactNativeHeading from 'react-native-heading'
+import global from './secrets';
+
+const firebaseConfig = {
+  apiKey: global.apiKey,
+  authDomain: global.authDomain,
+  databaseURL: global.databaseURL,
+  storageBucket: global.storageBucket
+};
+const firebaseApp = firebase.initializeApp(firebaseConfig)
 
 export default class PublicArt extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      headingIsSupported: false,
+      heading: ''
+    }
+  }
+
+  componentDidMount() {
+    ReactNativeHeading.start(1)
+    .then(didStart => {
+      this.setState({'headingIsSupported': didStart})
+    })
+
+    DeviceEventEmitter.addListener('headingUpdated', data => {
+      this.setState({'heading': data.heading})
+    })
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,6 +56,7 @@ export default class PublicArt extends Component {
           }}
           style={styles.preview}
         >
+          <Text>Heading: {this.state.heading}</Text>
           <Text>Hello this is on a cam</Text>
         </Camera>
       </View>

@@ -18,6 +18,15 @@
 {
   NSURL *jsCodeLocation;
 
+//  NSString *google_api_key = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"API_KEY"];
+//  NSString *database_url = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"DATABASE_URL"];
+//  NSString *storage_bucket = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"STORAGE_BUCKET"];
+//  
+//  NSDictionary *props = @{@"google_api_key" : google_api_key,
+//                          @"database_url" : database_url,
+//                          @"auth_domain" : @"nyc-art-finder.firebaseapp.com",
+//                          @"storage_bucket" : storage_bucket};
+  
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
