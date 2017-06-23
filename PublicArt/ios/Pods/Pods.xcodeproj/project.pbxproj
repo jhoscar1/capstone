@@ -1,0 +1,672 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B6FBEE3BD7242FA89C2094262A3E2D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 572DBE63D5360AB71E5F80F979738FD0 /* Foundation.framework */; };
+		0DACA1CF24B7FE1C88924D3F07CC03E6 /* Pods-PublicArt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3FF3C5793453B4AABFA0C768CE809 /* Pods-PublicArt-dummy.m */; };
+		746377D58B09F972E56CEAAFED45D4F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D154F4805B9715F0E6D79B0363CE280 /* Foundation.framework */; };
+		95D6268E185AD1DC02465BB78A6FD244 /* Pods-PublicArt-tvOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 85BA9E79FA0416EBB1B1E69E3C89EC14 /* Pods-PublicArt-tvOS-dummy.m */; };
+		B23886683F28379BF03A3C7C3CD1E8FD /* Pods-PublicArt-tvOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 399A7A3B301C8DCD9613901193DC9A2E /* Pods-PublicArt-tvOSTests-dummy.m */; };
+		F4D10F0D4D023FC01F84DDA995068A35 /* Pods-PublicArtTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6D3A9FCE0E1814EFF578562F57FA26 /* Pods-PublicArtTests-dummy.m */; };
+		F53E04A26B40CDCEEB95166C15EBBE32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D154F4805B9715F0E6D79B0363CE280 /* Foundation.framework */; };
+		FE0F43E0818B49E83F6D6D7172B84991 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D154F4805B9715F0E6D79B0363CE280 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		06A2053D9A51CE70870E1C91A90EB324 /* libPods-PublicArt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-PublicArt.a"; path = "libPods-PublicArt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		269E029793D1F0BE48DB3E88B6E0A04D /* Pods-PublicArt-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArt-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		2C9358E41934818A7D69B6BAB3D832FA /* Pods-PublicArtTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArtTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D154F4805B9715F0E6D79B0363CE280 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		31B832C24FF0BFA7CD5E78A91DE59204 /* Pods-PublicArtTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArtTests-resources.sh"; sourceTree = "<group>"; };
+		39613227E6AC1ABDA7FF57427ABBB709 /* Pods-PublicArt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArt.release.xcconfig"; sourceTree = "<group>"; };
+		399A7A3B301C8DCD9613901193DC9A2E /* Pods-PublicArt-tvOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PublicArt-tvOSTests-dummy.m"; sourceTree = "<group>"; };
+		47C3FF3C5793453B4AABFA0C768CE809 /* Pods-PublicArt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PublicArt-dummy.m"; sourceTree = "<group>"; };
+		53A5FB138E65860EB345D9BC1C085A19 /* Pods-PublicArt-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PublicArt-acknowledgements.markdown"; sourceTree = "<group>"; };
+		572DBE63D5360AB71E5F80F979738FD0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		576FF920F5DE55B544A265FA15D2C829 /* Pods-PublicArt-tvOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PublicArt-tvOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		5D4EFF8BED6CE7C7920DB6C1FD1DAD3B /* Pods-PublicArt-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArt-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		74B2742E057215AE3F34CB73A4A38557 /* Pods-PublicArt-tvOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PublicArt-tvOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		7583422541A1E623DC8E7772393B1B2C /* Pods-PublicArt-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArt-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8144EAC0CDD3BAAD3DB02562D7C0EAF7 /* libPods-PublicArt-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-PublicArt-tvOS.a"; path = "libPods-PublicArt-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85BA9E79FA0416EBB1B1E69E3C89EC14 /* Pods-PublicArt-tvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PublicArt-tvOS-dummy.m"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		960EF1CE44DDFECE2EC4A7BC682E4BF9 /* Pods-PublicArtTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArtTests.release.xcconfig"; sourceTree = "<group>"; };
+		9658E86B4EEFA88FBEE916EE4F4AE54A /* Pods-PublicArt-tvOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArt-tvOS-frameworks.sh"; sourceTree = "<group>"; };
+		97B59611DFA6017D5F3D75F887A71599 /* Pods-PublicArt-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArt-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		A585419B64F588DF78512F09C63995F7 /* Pods-PublicArt-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PublicArt-acknowledgements.plist"; sourceTree = "<group>"; };
+		AAC141AF28D3E32B16F65F7614ABB6B4 /* Pods-PublicArtTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PublicArtTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		B18692DA3A78AB2F9CD5DF425B1308C3 /* Pods-PublicArt-tvOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PublicArt-tvOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		B6E0636D9481DF93BABF34A64B873DA7 /* Pods-PublicArtTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PublicArtTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C80400FC4B8A538B71D11E6329BB2FF1 /* Pods-PublicArt-tvOSTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArt-tvOSTests-frameworks.sh"; sourceTree = "<group>"; };
+		CBF1C340574C83804ADD2CE60034219E /* Pods-PublicArtTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArtTests-frameworks.sh"; sourceTree = "<group>"; };
+		CE86AE38C9845952BCAF2692E65C0362 /* Pods-PublicArt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PublicArt.debug.xcconfig"; sourceTree = "<group>"; };
+		D029CB42EC8356F1ED6A5015249648CC /* Pods-PublicArt-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArt-frameworks.sh"; sourceTree = "<group>"; };
+		D7A1170970164159F64527FA27C9955E /* Pods-PublicArt-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArt-resources.sh"; sourceTree = "<group>"; };
+		DDFA1AC994B14C6B3D123F69C2B5CBEB /* Pods-PublicArt-tvOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PublicArt-tvOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DE6D3A9FCE0E1814EFF578562F57FA26 /* Pods-PublicArtTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PublicArtTests-dummy.m"; sourceTree = "<group>"; };
+		E7CF7A9A2874EEFE065DF79E1C4CFFD8 /* libPods-PublicArtTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-PublicArtTests.a"; path = "libPods-PublicArtTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0818FB5D603F4D48E1EBE9F53A3FB11 /* Pods-PublicArt-tvOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArt-tvOS-resources.sh"; sourceTree = "<group>"; };
+		F3CF8EE19481D44C00256030CEFC8A7B /* libPods-PublicArt-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-PublicArt-tvOSTests.a"; path = "libPods-PublicArt-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F99A4B5C65EAEFDD303C5820036184CC /* Pods-PublicArt-tvOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PublicArt-tvOSTests-resources.sh"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		251011C239489503D07368A0D9F99992 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0F43E0818B49E83F6D6D7172B84991 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DED31A7E577069079261E9921490438 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B6FBEE3BD7242FA89C2094262A3E2D2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A75424CA838D3F09C02B2002A818FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				746377D58B09F972E56CEAAFED45D4F1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E321D0A6580D9659DD53B1E4BA096E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53E04A26B40CDCEEB95166C15EBBE32 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		20F731AE46C73F232AF0C168DC383CF9 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				572DBE63D5360AB71E5F80F979738FD0 /* Foundation.framework */,
+			);
+			name = tvOS;
+			sourceTree = "<group>";
+		};
+		34D8F5ACBC72DB53C9B30CF69D48A095 /* Pods-PublicArt-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				576FF920F5DE55B544A265FA15D2C829 /* Pods-PublicArt-tvOS-acknowledgements.markdown */,
+				B18692DA3A78AB2F9CD5DF425B1308C3 /* Pods-PublicArt-tvOS-acknowledgements.plist */,
+				85BA9E79FA0416EBB1B1E69E3C89EC14 /* Pods-PublicArt-tvOS-dummy.m */,
+				9658E86B4EEFA88FBEE916EE4F4AE54A /* Pods-PublicArt-tvOS-frameworks.sh */,
+				F0818FB5D603F4D48E1EBE9F53A3FB11 /* Pods-PublicArt-tvOS-resources.sh */,
+				269E029793D1F0BE48DB3E88B6E0A04D /* Pods-PublicArt-tvOS.debug.xcconfig */,
+				5D4EFF8BED6CE7C7920DB6C1FD1DAD3B /* Pods-PublicArt-tvOS.release.xcconfig */,
+			);
+			name = "Pods-PublicArt-tvOS";
+			path = "Target Support Files/Pods-PublicArt-tvOS";
+			sourceTree = "<group>";
+		};
+		4231D6E569D20ED6815E37E60201264D /* Pods-PublicArt */ = {
+			isa = PBXGroup;
+			children = (
+				53A5FB138E65860EB345D9BC1C085A19 /* Pods-PublicArt-acknowledgements.markdown */,
+				A585419B64F588DF78512F09C63995F7 /* Pods-PublicArt-acknowledgements.plist */,
+				47C3FF3C5793453B4AABFA0C768CE809 /* Pods-PublicArt-dummy.m */,
+				D029CB42EC8356F1ED6A5015249648CC /* Pods-PublicArt-frameworks.sh */,
+				D7A1170970164159F64527FA27C9955E /* Pods-PublicArt-resources.sh */,
+				CE86AE38C9845952BCAF2692E65C0362 /* Pods-PublicArt.debug.xcconfig */,
+				39613227E6AC1ABDA7FF57427ABBB709 /* Pods-PublicArt.release.xcconfig */,
+			);
+			name = "Pods-PublicArt";
+			path = "Target Support Files/Pods-PublicArt";
+			sourceTree = "<group>";
+		};
+		58996781A54EE964D7111D73083A18A5 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2D154F4805B9715F0E6D79B0363CE280 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				A42F72DC1D780481325DD00969B19BB6 /* Frameworks */,
+				8FD3797CE284534AC49BE107F4294876 /* Products */,
+				CE79432D0CFD01229E934AA69141CF7E /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8222F0586E532534E1066A85FC3EDD2E /* Pods-PublicArtTests */ = {
+			isa = PBXGroup;
+			children = (
+				B6E0636D9481DF93BABF34A64B873DA7 /* Pods-PublicArtTests-acknowledgements.markdown */,
+				AAC141AF28D3E32B16F65F7614ABB6B4 /* Pods-PublicArtTests-acknowledgements.plist */,
+				DE6D3A9FCE0E1814EFF578562F57FA26 /* Pods-PublicArtTests-dummy.m */,
+				CBF1C340574C83804ADD2CE60034219E /* Pods-PublicArtTests-frameworks.sh */,
+				31B832C24FF0BFA7CD5E78A91DE59204 /* Pods-PublicArtTests-resources.sh */,
+				2C9358E41934818A7D69B6BAB3D832FA /* Pods-PublicArtTests.debug.xcconfig */,
+				960EF1CE44DDFECE2EC4A7BC682E4BF9 /* Pods-PublicArtTests.release.xcconfig */,
+			);
+			name = "Pods-PublicArtTests";
+			path = "Target Support Files/Pods-PublicArtTests";
+			sourceTree = "<group>";
+		};
+		8FD3797CE284534AC49BE107F4294876 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06A2053D9A51CE70870E1C91A90EB324 /* libPods-PublicArt.a */,
+				8144EAC0CDD3BAAD3DB02562D7C0EAF7 /* libPods-PublicArt-tvOS.a */,
+				F3CF8EE19481D44C00256030CEFC8A7B /* libPods-PublicArt-tvOSTests.a */,
+				E7CF7A9A2874EEFE065DF79E1C4CFFD8 /* libPods-PublicArtTests.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A42F72DC1D780481325DD00969B19BB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58996781A54EE964D7111D73083A18A5 /* iOS */,
+				20F731AE46C73F232AF0C168DC383CF9 /* tvOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD8F4209745857F0AFBBC392E6895E3C /* Pods-PublicArt-tvOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				DDFA1AC994B14C6B3D123F69C2B5CBEB /* Pods-PublicArt-tvOSTests-acknowledgements.markdown */,
+				74B2742E057215AE3F34CB73A4A38557 /* Pods-PublicArt-tvOSTests-acknowledgements.plist */,
+				399A7A3B301C8DCD9613901193DC9A2E /* Pods-PublicArt-tvOSTests-dummy.m */,
+				C80400FC4B8A538B71D11E6329BB2FF1 /* Pods-PublicArt-tvOSTests-frameworks.sh */,
+				F99A4B5C65EAEFDD303C5820036184CC /* Pods-PublicArt-tvOSTests-resources.sh */,
+				7583422541A1E623DC8E7772393B1B2C /* Pods-PublicArt-tvOSTests.debug.xcconfig */,
+				97B59611DFA6017D5F3D75F887A71599 /* Pods-PublicArt-tvOSTests.release.xcconfig */,
+			);
+			name = "Pods-PublicArt-tvOSTests";
+			path = "Target Support Files/Pods-PublicArt-tvOSTests";
+			sourceTree = "<group>";
+		};
+		CE79432D0CFD01229E934AA69141CF7E /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4231D6E569D20ED6815E37E60201264D /* Pods-PublicArt */,
+				34D8F5ACBC72DB53C9B30CF69D48A095 /* Pods-PublicArt-tvOS */,
+				CD8F4209745857F0AFBBC392E6895E3C /* Pods-PublicArt-tvOSTests */,
+				8222F0586E532534E1066A85FC3EDD2E /* Pods-PublicArtTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		02D16895363C6092B72C1B692E9D625C /* Pods-PublicArt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 864AB25417143B2918C6B198FDBFDD72 /* Build configuration list for PBXNativeTarget "Pods-PublicArt" */;
+			buildPhases = (
+				E3CE2F9285F783017F9D68FE9A95A8EA /* Sources */,
+				8A75424CA838D3F09C02B2002A818FDB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-PublicArt";
+			productName = "Pods-PublicArt";
+			productReference = 06A2053D9A51CE70870E1C91A90EB324 /* libPods-PublicArt.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		83EFBC526737049D2901D1D71B247499 /* Pods-PublicArt-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 726BCF458C823070871EAEF752138C30 /* Build configuration list for PBXNativeTarget "Pods-PublicArt-tvOS" */;
+			buildPhases = (
+				C22C85080D6AA99DA1A5FC639C85F94F /* Sources */,
+				3DED31A7E577069079261E9921490438 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-PublicArt-tvOS";
+			productName = "Pods-PublicArt-tvOS";
+			productReference = 8144EAC0CDD3BAAD3DB02562D7C0EAF7 /* libPods-PublicArt-tvOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BF546B8026AAFC871293E2F5547D38EE /* Pods-PublicArt-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2B380279A5D49F8AC20FF9E30D330E8 /* Build configuration list for PBXNativeTarget "Pods-PublicArt-tvOSTests" */;
+			buildPhases = (
+				B3E0ED69D8C2B643E8DEF8E47623AE7E /* Sources */,
+				251011C239489503D07368A0D9F99992 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-PublicArt-tvOSTests";
+			productName = "Pods-PublicArt-tvOSTests";
+			productReference = F3CF8EE19481D44C00256030CEFC8A7B /* libPods-PublicArt-tvOSTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F7A7AE49236231015B6437D781BBAF00 /* Pods-PublicArtTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 844A7CAE289E80C07E710ACD6ABBB916 /* Build configuration list for PBXNativeTarget "Pods-PublicArtTests" */;
+			buildPhases = (
+				DF980811AEFB773F556BB3F976263F40 /* Sources */,
+				9E321D0A6580D9659DD53B1E4BA096E2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-PublicArtTests";
+			productName = "Pods-PublicArtTests";
+			productReference = E7CF7A9A2874EEFE065DF79E1C4CFFD8 /* libPods-PublicArtTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 8FD3797CE284534AC49BE107F4294876 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				02D16895363C6092B72C1B692E9D625C /* Pods-PublicArt */,
+				83EFBC526737049D2901D1D71B247499 /* Pods-PublicArt-tvOS */,
+				BF546B8026AAFC871293E2F5547D38EE /* Pods-PublicArt-tvOSTests */,
+				F7A7AE49236231015B6437D781BBAF00 /* Pods-PublicArtTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B3E0ED69D8C2B643E8DEF8E47623AE7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B23886683F28379BF03A3C7C3CD1E8FD /* Pods-PublicArt-tvOSTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C22C85080D6AA99DA1A5FC639C85F94F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95D6268E185AD1DC02465BB78A6FD244 /* Pods-PublicArt-tvOS-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF980811AEFB773F556BB3F976263F40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4D10F0D4D023FC01F84DDA995068A35 /* Pods-PublicArtTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3CE2F9285F783017F9D68FE9A95A8EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DACA1CF24B7FE1C88924D3F07CC03E6 /* Pods-PublicArt-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		13553EE8F24C514AA6441D2CE06D05EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		2981532B3AD0416744362EFFAE366A32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39613227E6AC1ABDA7FF57427ABBB709 /* Pods-PublicArt.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		44B5F8F16637E111E26A6B5708DC212A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 269E029793D1F0BE48DB3E88B6E0A04D /* Pods-PublicArt-tvOS.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		4DED255FC7CC72EE93EBEA7E73EEBC01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7583422541A1E623DC8E7772393B1B2C /* Pods-PublicArt-tvOSTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5356C201B4B56C77C07C10572FC0587B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 960EF1CE44DDFECE2EC4A7BC682E4BF9 /* Pods-PublicArtTests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		5877AB87C1B20EF830CFF361ED1386EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C9358E41934818A7D69B6BAB3D832FA /* Pods-PublicArtTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		92EAB8ADC60E5000B73968F9ED3A72F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97B59611DFA6017D5F3D75F887A71599 /* Pods-PublicArt-tvOSTests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AFC68722148905714165497912F92B58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B0ECF9694BC2B8F08FC1E9E241327914 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D4EFF8BED6CE7C7920DB6C1FD1DAD3B /* Pods-PublicArt-tvOS.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
+		D0A32EBBD28C46930FE671942F7170B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE86AE38C9845952BCAF2692E65C0362 /* Pods-PublicArt.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13553EE8F24C514AA6441D2CE06D05EA /* Debug */,
+				AFC68722148905714165497912F92B58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		726BCF458C823070871EAEF752138C30 /* Build configuration list for PBXNativeTarget "Pods-PublicArt-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44B5F8F16637E111E26A6B5708DC212A /* Debug */,
+				B0ECF9694BC2B8F08FC1E9E241327914 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		844A7CAE289E80C07E710ACD6ABBB916 /* Build configuration list for PBXNativeTarget "Pods-PublicArtTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5877AB87C1B20EF830CFF361ED1386EC /* Debug */,
+				5356C201B4B56C77C07C10572FC0587B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		864AB25417143B2918C6B198FDBFDD72 /* Build configuration list for PBXNativeTarget "Pods-PublicArt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0A32EBBD28C46930FE671942F7170B0 /* Debug */,
+				2981532B3AD0416744362EFFAE366A32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2B380279A5D49F8AC20FF9E30D330E8 /* Build configuration list for PBXNativeTarget "Pods-PublicArt-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DED255FC7CC72EE93EBEA7E73EEBC01 /* Debug */,
+				92EAB8ADC60E5000B73968F9ED3A72F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
