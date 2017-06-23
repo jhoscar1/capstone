@@ -13,19 +13,9 @@ import {
   Dimensions,
   DeviceEventEmitter
 } from 'react-native';
-import Camera from 'react-native-camera';
-import * as firebase from 'firebase';
 import ReactNativeHeading from 'react-native-heading'
-import global from './secrets';
-
-const firebaseConfig = {
-  apiKey: global.apiKey,
-  authDomain: global.authDomain,
-  databaseURL: global.databaseURL,
-  storageBucket: global.storageBucket
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig)
 import AppCamera from './app/Camera';
+import firebaseApp from './firebase';
 
 export default class PublicArt extends Component {
   constructor(props) {
@@ -38,6 +28,12 @@ export default class PublicArt extends Component {
   }
 
   componentDidMount() {
+    const result = firebaseApp.database().ref('/').orderByChild('name')
+    .on('value', (snapshot) => {
+      console.log('here');
+      const val = snapshot.val();
+      console.log(val);
+    })
 
     navigator.geolocation.getCurrentPosition((position) => {
         this.setState({
@@ -49,7 +45,6 @@ export default class PublicArt extends Component {
     );
 
     this.watchID = navigator.geolocation.watchPosition((newPosition) => {
-        console.log('new', newPosition);
         this.setState({
           position: newPosition
         });
@@ -69,12 +64,10 @@ export default class PublicArt extends Component {
   }
 
   componentWillUnmount() {
-    console.log('here');
     navigator.geolocation.clearWatch(this.watchID);
   }
 
   render() {
-    console.log(this.state.position);
     return (
       <View style={styles.container}>
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
