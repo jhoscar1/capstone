@@ -25,6 +25,7 @@ const firebaseConfig = {
   storageBucket: global.storageBucket
 };
 const firebaseApp = firebase.initializeApp(firebaseConfig)
+import AppCamera from './app/Camera';
 
 export default class PublicArt extends Component {
   constructor(props) {
@@ -50,15 +51,7 @@ export default class PublicArt extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-        >
-          <Text>Heading: {this.state.heading}</Text>
-          <Text>Hello this is on a cam</Text>
-        </Camera>
+        <AppCamera heading={this.state.heading}/>
       </View>
     );
   }
