@@ -32,11 +32,32 @@ export default class PublicArt extends Component {
     super(props);
     this.state = {
       headingIsSupported: false,
-      heading: ''
+      heading: '',
+      position: ''
     }
   }
 
   componentDidMount() {
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({
+          position: position
+        });
+      },
+      (error) => console.error(error),
+      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000}
+    );
+
+    this.watchID = navigator.geolocation.watchPosition((newPosition) => {
+        console.log('new', newPosition);
+        this.setState({
+          position: newPosition
+        });
+      },
+      (error) => console.error(error),
+      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
+    )
+
     ReactNativeHeading.start(1)
     .then(didStart => {
       this.setState({'headingIsSupported': didStart})
@@ -47,11 +68,18 @@ export default class PublicArt extends Component {
     })
   }
 
+  componentWillUnmount() {
+    console.log('here');
+    navigator.geolocation.clearWatch(this.watchID);
+  }
 
   render() {
+    console.log(this.state.position);
     return (
       <View style={styles.container}>
-        <AppCamera heading={this.state.heading}/>
+        <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
+        <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
+        <AppCamera heading={this.state.heading} />
       </View>
     );
   }
