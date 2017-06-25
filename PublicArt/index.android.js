@@ -9,23 +9,40 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Dimensions,
+  DeviceEventEmitter
 } from 'react-native';
+//import Camera from 'react-native-camera';
+import ListItem from './app/db_data';
+import ReactNativeHeading from 'react-native-heading'
+import AppCamera from './app/Camera';
 
 export default class PublicArt extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      headingIsSupported: false,
+      heading: ''
+    }
+  }
+
+  componentDidMount() {
+    ReactNativeHeading.start(1)
+    .then(didStart => {
+      this.setState({'headingIsSupported': didStart})
+    })
+
+    DeviceEventEmitter.addListener('headingUpdated', data => {
+      this.setState({'heading': data.heading})
+    })
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+        <ListItem />
       </View>
     );
   }
@@ -48,6 +65,13 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width
+  }
 });
 
 AppRegistry.registerComponent('PublicArt', () => PublicArt);
