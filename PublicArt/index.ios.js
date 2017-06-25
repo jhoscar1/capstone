@@ -23,36 +23,13 @@ export default class PublicArt extends Component {
     this.state = {
       headingIsSupported: false,
       heading: '',
-      position: ''
+      position: '',
+      pois: []
     }
   }
 
   componentDidMount() {
-    const result = firebaseApp.database().ref('/').orderByChild('name')
-    .on('value', (snapshot) => {
-      console.log('here');
-      const val = snapshot.val();
-      console.log(val);
-    })
-
-    navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({
-          position: position
-        });
-      },
-      (error) => console.error(error),
-      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000}
-    );
-
-    this.watchID = navigator.geolocation.watchPosition((newPosition) => {
-        this.setState({
-          position: newPosition
-        });
-      },
-      (error) => console.error(error),
-      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
-    )
-
+    /* get direction of user */
     ReactNativeHeading.start(1)
     .then(didStart => {
       this.setState({'headingIsSupported': didStart})
@@ -61,6 +38,35 @@ export default class PublicArt extends Component {
     DeviceEventEmitter.addListener('headingUpdated', data => {
       this.setState({'heading': data.heading})
     })
+
+    /* get location of current user*/
+    navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({'position': position});
+      },
+      (error) => console.error(error),
+      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000}
+    );
+    let nearbyPOIs = [];
+    this.watchID = navigator.geolocation.watchPosition((newPosition) => {
+        this.setState({'position': newPosition });
+        firebaseApp.database().ref('/').orderByChild('name')
+        .on('value', snapshot => {
+           nearbyPOIs = [];
+           snapshot.val().forEach(poi => {
+            let x1 = +poi.lat;
+            let y1 = +poi.lng;
+            let x2 = +this.state.position.coords.latitude;
+            let y2 = +this.state.position.coords.longitude;
+            let distance = Math.sqrt(Math.pow((x2-x1), 2) + Math.pow((y2-y1),2))
+            if (distance < 0.1) nearbyPOIs.push(poi);
+          })
+        })
+        this.setState({'pois': nearbyPOIs})
+      },
+      (error) => console.error(error),
+      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
+    )
+
   }
 
   componentWillUnmount() {
@@ -72,7 +78,7 @@ export default class PublicArt extends Component {
       <View style={styles.container}>
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
         <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        <AppCamera heading={this.state.heading} />
+        <AppCamera pois={this.state.pois} position={this.state.position} heading={this.state.heading} />
       </View>
     );
   }
