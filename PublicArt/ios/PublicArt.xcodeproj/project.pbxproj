@@ -708,20 +708,19 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = M9ENKV8N2P;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = M9ENKV8N2P;
+						DevelopmentTeam = LY9K5KN6L3;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = M9ENKV8N2P;
+						DevelopmentTeam = LY9K5KN6L3;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = M9ENKV8N2P;
+						DevelopmentTeam = LY9K5KN6L3;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -1400,7 +1399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = M9ENKV8N2P;
+				DEVELOPMENT_TEAM = LY9K5KN6L3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
@@ -1414,7 +1413,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PublicArtFB-cw";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PublicArtFB";
 				PRODUCT_NAME = PublicArt;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1426,7 +1425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M9ENKV8N2P;
+				DEVELOPMENT_TEAM = LY9K5KN6L3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios",
@@ -1440,7 +1439,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PublicArtFB-cw";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PublicArtFB";
 				PRODUCT_NAME = PublicArt;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1477,7 +1476,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PublicArt-tvOS-cw";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PublicArt-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1516,7 +1515,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PublicArt-tvOS-cw";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PublicArt-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
