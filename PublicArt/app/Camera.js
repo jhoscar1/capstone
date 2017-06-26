@@ -22,7 +22,7 @@ export default class AppCamera extends Component {
 
     // this returns the relative direction of the POI - for example, if user is facing south
     // but the attraction is due north, then this will return 180
-    getDirection(long1, long2, lat1, lat2, userDir) {
+    getDirection(long1, long2, lat1, lat2) {
         // // converts the differences btwn lat's and lng's into radians
         // let dLat = (lat2 - lat1) * (Math.PI / 180);
         // let dLng = (long2 - long1) * (Math.PI / 180);
@@ -41,52 +41,46 @@ export default class AppCamera extends Component {
           theta += (2 * (Math.PI))
         }
         theta =  theta * (180 / Math.PI);
-        let relDir;
+        return theta;
+      }
 
         ///VERY DUMB MATH//
 
-        function converter(userDir, theta){
-   const absDiff = Math.abs(theta - userDir); //is abs diff > 180?
-   relDir = absDiff;
+   convertToOrientation (userDirection, thetaDirection) {
+     const absDiff = Math.abs(thetaDirection - userDirection); //is abs diff > 180?
+     let relDir = absDiff;
 
-   let left;
-   let otherWayAround;
-   if (absDiff > 180) { //is the difference greater than 180?
-     otherWayAround = true;
-   }
-   else {
-     otherWayAround = false;
-   }
-
-   if ((userDir > theta) && (!otherWayAround) || (userDir < theta) && (otherWayAround)) { //is the object to the left or the right?
-     left = true;
-   }
-   else {
-     left = false;
-   }
-
-   if (otherWayAround) {
-     if (left){
-       relDir = 360 - theta + userDir;
+     let left;
+     let otherWayAround;
+     if (absDiff > 180) { //is the difference greater than 180?
+       otherWayAround = true;
      }
      else {
-       relDir = 360 - userDir + theta;
+       otherWayAround = false;
      }
-   }
 
-   if (left){
-     relDir = -relDir;
-   }
+     if ((userDirection > thetaDirection) && (!otherWayAround) || (userDirection < thetaDirection) && (otherWayAround)) { //is the object to the left or the right?
+       left = true;
+     }
+     else {
+       left = false;
+     }
 
-    return relDir;
+     if (otherWayAround) {
+       if (left) {
+         relDir = 360 - thetaDirection + userDirection;
+       }
+       else {
+         relDir = 360 - userDirection + thetaDirection;
+       }
+     }
+
+     if (left){
+       relDir = -relDir;
+     }
+     return relDir;
   }
 
-        console.log('USERDIR==>', userDir);
-        console.log('THETA==>', theta);
-        console.log('RELDIR==>', relDir);
-
-        return relDir;
-    }
 
     render() {
         /* gets all pois and their lats and lngs */
@@ -98,7 +92,7 @@ export default class AppCamera extends Component {
             let long1 = +this.props.position.coords.longitude;
             let relativePos = {
               distance: this.getDistanceInMeters(long1, long2, lat1, lat2),
-              dir: this.getDirection(long1, long2, lat1, lat2, this.props.heading)
+              dir: this.convertToOrientation(this.props.heading, this.getDirection(long1, long2, lat1, lat2))
             }
             relPosition.push(relativePos)
           })
