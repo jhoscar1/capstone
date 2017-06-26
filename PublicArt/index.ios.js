@@ -13,6 +13,8 @@ import {
   Dimensions,
   DeviceEventEmitter
 } from 'react-native';
+import {StackNavigator} from 'react-navigation';
+import PointDetails from './app/PointDetails'
 import ReactNativeHeading from 'react-native-heading'
 import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
@@ -23,16 +25,19 @@ export default class PublicArt extends Component {
     this.state = {
       headingIsSupported: false,
       heading: '',
-      position: ''
+      position: '',
+      points: []
     }
   }
 
   componentDidMount() {
-    const result = firebaseApp.database().ref('/').orderByChild('name')
+    firebaseApp.database().ref('/').orderByChild('name').equalTo('Rene')
     .on('value', (snapshot) => {
-      console.log('here');
       const val = snapshot.val();
       console.log(val);
+      this.setState({
+        points: val
+      })
     })
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -72,11 +77,25 @@ export default class PublicArt extends Component {
       <View style={styles.container}>
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
         <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        <AppCamera heading={this.state.heading} />
+        <AppCamera heading={this.state.heading} points={this.state.points} />
       </View>
     );
   }
 }
+
+// App Router
+
+const AppRouter = StackNavigator({
+    Home: {
+        screen: PublicArt
+    },
+    Details: {
+        screen: PointDetails,
+        path: 'poi/:name'
+    }
+})
+
+// Stylesheet
 
 const styles = StyleSheet.create({
   container: {
@@ -104,4 +123,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('PublicArt', () => PublicArt);
+AppRegistry.registerComponent('PublicArt', () => AppRouter);

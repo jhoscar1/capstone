@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Camera from 'react-native-camera';
 import {Text, Dimensions, StyleSheet} from 'react-native';
+import PointOfInterest from './PointOfInterest';
 
 export default class AppCamera extends Component {
     render() {
@@ -13,6 +14,9 @@ export default class AppCamera extends Component {
             >
                 <Text>Heading: {this.props.heading}</Text>
                 <Text>Hello this is on a cam</Text>
+                { this.props.points.map(point => {
+                    return <PointOfInterest key={point.id} point={point} />
+                }) }
             </Camera>
         )
     }
