@@ -73,11 +73,12 @@ export default class PublicArt extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
         <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        <AppCamera heading={this.state.heading} points={this.state.points} />
+        <AppCamera heading={this.state.heading} points={this.state.points} navigation={navigation} />
       </View>
     );
   }

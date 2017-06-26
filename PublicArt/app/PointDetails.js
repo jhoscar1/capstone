@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import {View, WebView} from 'react-native';
+import {View, Text, WebView, StyleSheet, Dimensions} from 'react-native';
 
 const PointDetails = (props) => {
+    console.log(props.navigation);
     return (
-        <View>
             <WebView
-                source={{uri: `https://www.nycgovparks.org${props.link}`}}
+                style={styles.webView}
+                source={{uri: `https://www.nycgovparks.org${props.navigation.state.params.name}`}}
             />
-        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    webView: {
+        width: Dimensions.get('window').width
+    }
+})
 
 export default PointDetails;
