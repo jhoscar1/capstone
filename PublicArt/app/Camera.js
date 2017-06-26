@@ -5,6 +5,7 @@ import PointOfInterest from './PointOfInterest';
 
 export default class AppCamera extends Component {
     render() {
+        console.log('THIS.PROPS.POINTS',this.props.points)
         return (
             <Camera
             ref={(cam) => {
@@ -12,9 +13,12 @@ export default class AppCamera extends Component {
             }}
             style={styles.preview}
             >
-                { this.props.points.map(point => {
+                { this.props.points.length
+                    ?this.props.points.map(point => {
                     return <PointOfInterest navigation={this.props.navigation} key={point.id} point={point} />
-                }) }
+                    })
+                    :null
+                 }
             </Camera>
         )
     }

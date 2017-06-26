@@ -36,7 +36,7 @@ export default class PublicArt extends Component {
       const val = snapshot.val();
       console.log(val);
       this.setState({
-        points: val
+        points: [val]
       })
     })
 
