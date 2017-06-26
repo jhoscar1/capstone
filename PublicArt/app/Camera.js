@@ -12,9 +12,12 @@ export default class AppCamera extends Component {
             }}
             style={styles.preview}
             >
-                { this.props.points.map(point => {
+                { this.props.points.length ? this.props.points.map(point => {
                     return <PointOfInterest navigation={this.props.navigation} key={point.id} point={point} />
-                }) }
+                })
+                :
+                null
+                }
             </Camera>
         )
     }

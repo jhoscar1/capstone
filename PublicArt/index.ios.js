@@ -31,12 +31,12 @@ export default class PublicArt extends Component {
   }
 
   componentDidMount() {
-    firebaseApp.database().ref('/').orderByChild('name').equalTo('Rene')
+    firebaseApp.database().ref('/').orderByChild('name')
     .on('value', (snapshot) => {
       const val = snapshot.val();
-      console.log(val);
+      console.log('val', val);
       this.setState({
-        points: val
+        points: this.state.points.concat(val)
       })
     })
 

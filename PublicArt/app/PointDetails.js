@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {View, Text, WebView, StyleSheet, Dimensions} from 'react-native';
 
 const PointDetails = (props) => {
-    console.log(props.navigation);
     return (
             <WebView
                 style={styles.webView}
