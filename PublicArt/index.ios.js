@@ -46,7 +46,7 @@ export default class PublicArt extends Component {
         });
       },
       (error) => console.error(error),
-      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000}
+      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
     );
 
     this.watchID = navigator.geolocation.watchPosition((newPosition) => {

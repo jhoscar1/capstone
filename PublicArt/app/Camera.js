@@ -12,8 +12,6 @@ export default class AppCamera extends Component {
             }}
             style={styles.preview}
             >
-                <Text>Heading: {this.props.heading}</Text>
-                <Text>Hello this is on a cam</Text>
                 { this.props.points.map(point => {
                     return <PointOfInterest navigation={this.props.navigation} key={point.id} point={point} />
                 }) }
