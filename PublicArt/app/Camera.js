@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Camera from 'react-native-camera';
 import {Text, Dimensions, StyleSheet} from 'react-native';
+import PointOfInterest from './PointOfInterest';
 import firebaseApp from '../firebase'
 
 export default class AppCamera extends Component {
@@ -58,12 +59,16 @@ export default class AppCamera extends Component {
             }}
             style={styles.preview}
             >
-                <Text>Heading: {this.props.heading}</Text>
+                { this.props.pois.length ? this.props.pois.map(poi => {
+                    return <PointOfInterest navigation={this.props.navigation} key={poi.id} point={poi} />
+                })
+                :
+                null
+                }
                 {
                     (relPosition.length) ? <Text> First POI distance: {relPosition[0].distance} and direction: {relPosition[0].dir} </Text>
                     : null
                 }
-                <Text>Hello this is on a cam</Text>
             </Camera>
         )
     }

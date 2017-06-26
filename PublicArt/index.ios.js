@@ -13,6 +13,8 @@ import {
   Dimensions,
   DeviceEventEmitter
 } from 'react-native';
+import {StackNavigator} from 'react-navigation';
+import PointDetails from './app/PointDetails'
 import ReactNativeHeading from 'react-native-heading'
 import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
@@ -29,6 +31,14 @@ export default class PublicArt extends Component {
   }
 
   componentDidMount() {
+//     firebaseApp.database().ref('/').orderByChild('name')
+//     .on('value', (snapshot) => {
+//       const val = snapshot.val();
+//       console.log('val', val);
+//       this.setState({
+//         points: this.state.points.concat(val)
+//       })
+
     /* get direction of user */
     ReactNativeHeading.start(1)
     .then(didStart => {
@@ -44,7 +54,7 @@ export default class PublicArt extends Component {
         this.setState({'position': position});
       },
       (error) => console.error(error),
-      {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000}
+      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
     );
     let nearbyPOIs = [];
     this.watchID = navigator.geolocation.watchPosition((newPosition) => {
@@ -74,15 +84,30 @@ export default class PublicArt extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
         <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        <AppCamera pois={this.state.pois} position={this.state.position} heading={this.state.heading} />
+        <AppCamera pois={this.state.pois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
   }
 }
+
+// App Router
+
+const AppRouter = StackNavigator({
+    Home: {
+        screen: PublicArt
+    },
+    Details: {
+        screen: PointDetails,
+        path: 'poi/:name'
+    }
+})
+
+// Stylesheet
 
 const styles = StyleSheet.create({
   container: {
@@ -110,4 +135,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('PublicArt', () => PublicArt);
+AppRegistry.registerComponent('PublicArt', () => AppRouter);
