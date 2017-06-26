@@ -8,19 +8,35 @@ class PointOfInterest extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sizeAnim: new Animated.Value(0),  // Initial value for size: 0
+            sizeAnim: new Animated.Value(150),
+            expandedFlag: false  // Initial value for card height and width
         }
   this.onPress = this.onPress.bind(this);
     }
 
     onPress() {
-        Animated.timing(                  // Animate over time
-        this.state.fadeAnim,            // The animated value to drive
-        {
-            toValue: '100%',                   // Animate to opacity: 1 (opaque)
-            duration: 15000,              // Make it take a while
+        if(!this.state.expandedFlag){
+            Animated.timing(                  // Animate over time
+            this.state.sizeAnim,            // The animated value to drive
+            {
+                toValue: 300,                   // Animate to value
+                duration: 1000,              // Make it take a bit
+            }
+            ).start()
+            this.setState({expandedFlag: true})
+
+            console.log('HERE')                      // Starts the animation
+        } else {
+            Animated.timing(                  // Animate over time
+            this.state.sizeAnim,            // The animated value to drive
+            {
+                toValue: 150,                   // Animate to value
+                duration: 1000,              // Make it take a bit
+            }
+            ).start()
+            this.setState({expandedFlag: false})
+            //this.expandedFlag = false
         }
-        ).start();                        // Starts the animation
     }
 
     render() {
@@ -29,15 +45,19 @@ class PointOfInterest extends Component {
         return (
             <Animated.View                 // Special animatable View
         style={{
-          //...this.props.style,
-          maxWidth: this.state.fadeAnim,         // Bind maxWidth to animated value
-        }}
-        onPress={this._onPressButton}>
+          //...styles,
+          width: this.state.sizeAnim,         // Bind width / height to animated value
+          height: this.state.sizeAnim
+        }}>
                 <Text style={styles.text}>Name: {this.props.point.name}</Text>
                 <HTMLView
                     stylesheet={htmlViewStyles}
                     value={unescapedDescription}
                 />
+                <Button
+                    onPress={this.onPress}
+                    title="Expand"
+                    />
                 <Button
                     style={{color: 'blue', fontSize: 12}}
                     title="Learn More"
@@ -52,7 +72,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'rgba(255, 255, 255, .8)',
         borderRadius: 1,
-        maxWidth: '33%'
+        maxWidth: '100%'
     },
     text: {
         fontSize: 10
