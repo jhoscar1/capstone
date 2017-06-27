@@ -68,7 +68,7 @@ export default class PublicArt extends Component {
             let x2 = +this.state.position.coords.latitude;
             let y2 = +this.state.position.coords.longitude;
             let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
-            if (distance < 0.1) nearbyPOIs.push(poi);
+            if (distance < 0.008) nearbyPOIs.push(poi);
           })
         })
         this.setState({'pois': nearbyPOIs})

@@ -10,12 +10,30 @@ class PointOfInterest extends Component {
             open: false
         }
     }
+    componentDidMount() {
+        console.log("poi mounted!")
+    }
+
+    componentWillUnmount() {
+        console.log("poi is about to unmount!")
+    }
 
     render() {
+        console.log('rendering ', this.props.point.name)
         const navigation = this.props.navigation
         const unescapedDescription = `<p>Description: ${this.props.point.descrip}</p>`
+        const containerStyle = {
+            backgroundColor: 'rgba(255, 255, 255, .8)',
+            borderRadius: 5,
+            padding: 5,
+            maxHeight: '19%',
+            maxWidth: 300,
+            position: 'absolute',
+            left: this.props.dir,
+            top: 50*this.props.counter
+        }
         return (
-            <View style={styles.container}>
+            <View style={containerStyle}>
                 <Image 
                     source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
                 />
@@ -47,7 +65,9 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 5,
         maxHeight: '19%',
-        maxWidth: 300
+        maxWidth: 300,
+        position: 'absolute',
+        paddingBottom: 200
     },
     text: {
         fontSize: 16,

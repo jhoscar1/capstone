@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Camera from 'react-native-camera';
-import {Text, Dimensions, StyleSheet} from 'react-native';
+import {Text, Dimensions, StyleSheet, View} from 'react-native';
 import PointOfInterest from './PointOfInterest';
 import firebaseApp from '../firebase'
 
@@ -24,19 +24,6 @@ export default class AppCamera extends Component {
     // this returns the relative direction of the POI - for example, if user is facing south
     // but the attraction is due north, then this will return 180
     getDirection(long1, long2, lat1, lat2) {
-        // // converts the differences btwn lat's and lng's into radians
-        // let dLat = (lat2 - lat1) * (Math.PI / 180);
-        // let dLng = (long2 - long1) * (Math.PI / 180);
-        // // convert current lcoation lat and lng to radians
-        // long1 = long1 * (Math.PI / 180);
-        // lat1 = lat1 * (Math.PI / 180);
-        // let y = Math.sin(dLng) * Math.cos(lat2);
-        // let x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng)
-        // let brng = Math.atan2(y, x) * (180 / Math.PI)
-        // // if (brng < 0) brng = 360 - Math.abs(brng);
-        // // return brng - userDir;
-        // return brng;
-
         let theta = Math.atan2(lat2 - lat1, long2 - long1);
         if (theta < 0){
           theta += (2 * (Math.PI))
@@ -51,21 +38,13 @@ export default class AppCamera extends Component {
      const absDiff = Math.abs(thetaDirection - userDirection); //is abs diff > 180?
      let relDir = absDiff;
 
-     let left;
-     let otherWayAround;
-     if (absDiff > 180) { //is the difference greater than 180?
-       otherWayAround = true;
-     }
-     else {
-       otherWayAround = false;
-     }
+     let left = false;
+     let otherWayAround = false;
 
-     if ((userDirection > thetaDirection) && (!otherWayAround) || (userDirection < thetaDirection) && (otherWayAround)) { //is the object to the left or the right?
-       left = true;
-     }
-     else {
-       left = false;
-     }
+     if (absDiff > 180) otherWayAround = true;
+
+     //is the object to the left or the right?
+     if ((userDirection > thetaDirection) && (!otherWayAround) || (userDirection < thetaDirection) && (otherWayAround)) left = true;
 
      if (otherWayAround) {
        if (left) {
@@ -76,9 +55,8 @@ export default class AppCamera extends Component {
        }
      }
 
-     if (left){
-       relDir = -relDir;
-     }
+     if (left) relDir = -relDir;
+
      return relDir;
   }
 
@@ -97,26 +75,21 @@ export default class AppCamera extends Component {
             }
             relPosition.push(relativePos)
           })
-
+        console.log(relPosition.length)
+        let counter = 0;
         return (
-            <Camera
-            ref={(cam) => {
-                this.camera = cam;
-            }}
-            style={styles.preview}
-            >
-                { this.props.pois.length ? this.props.pois.map(poi => {
-                    return <PointOfInterest navigation={this.props.navigation} key={poi.id} point={poi} />
-                })
-                :
-                null
-                }
+            <View>
+                <Camera ref={(cam) => {this.camera = cam}} style={styles.preview} />
                 {
-                    (relPosition.length) ? <Text> First POI distance: {relPosition[0].distance} and direction: {relPosition[0].dir} and name: {this.props.pois[0].name} </Text>
+                    (relPosition.length) ? relPosition.map((poi, idx) => {
+                        return (
+                            (poi.distance < 300 && poi.dir < 45 && poi.dir > -45) ? <PointOfInterest dir={poi.dir} num={counter++} navigation={this.props.navigation} key={idx} point={this.props.pois[idx]} />
+                            : null
+                        )
+                    })
                     : null
                 }
-            </Camera>
-        )
+            </View>)
     }
 }
 
