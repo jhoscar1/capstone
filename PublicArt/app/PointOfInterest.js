@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback} from 'react-native';
+import {Animated, View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback, Dimensions} from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import PointDetails from './PointDetails';
 
@@ -7,34 +7,41 @@ class PointOfInterest extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            viewSize: new Animated.Value(200)
         }
-    }
-    componentDidMount() {
-        console.log("poi mounted!")
+        this.selectPOI = this.selectPOI.bind(this);
     }
 
-    componentWillUnmount() {
-        console.log("poi is about to unmount!")
+    selectPOI() {
+        if (this.state.open) {
+            Animated.timing(this.state.viewSize,
+                            {toValue: 200,
+                             duation: 1000}).start()
+        } else {
+            Animated.timing(this.state.viewSize,
+                            {toValue: Dimensions.get('window').width-30,
+                             duation: 1000}).start()
+        }
+        this.setState({open: !this.state.open});
     }
 
     render() {
         console.log('rendering ', this.props.point.name)
         const navigation = this.props.navigation
         const unescapedDescription = `<p>Description: ${this.props.point.descrip}</p>`
-        const containerStyle = {
-            backgroundColor: 'rgba(255, 255, 255, .8)',
-            borderRadius: 5,
-            padding: 5,
-            maxHeight: '19%',
-            maxWidth: 300,
+
+        const cardStyle = {
+            borderRadius: 4,
             position: 'absolute',
-            left: this.props.dir,
-            top: 50*this.props.counter
+            left: 50 + ((Dimensions.get('window').width / 80) * this.props.dir),
+            top: 50*this.props.num,
+            height: this.state.viewSize
         }
+        console.log(cardStyle.left)
         return (
-            <TouchableWithoutFeedback onPress={() => this.setState({open: !this.state.open})}>
-                <View style={containerStyle}>
+            <TouchableWithoutFeedback onPress={this.selectPOI} >
+                <Animated.View style={cardStyle}>
                     <Image
                         source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
                     />
@@ -54,25 +61,17 @@ class PointOfInterest extends Component {
                         :
                         null
                     }
-                </View>
+                </Animated.View>
             </TouchableWithoutFeedback>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'rgba(255, 255, 255, .8)',
-        borderRadius: 5,
-        padding: 5,
-        maxHeight: '19%',
-        maxWidth: 300,
-        position: 'absolute',
-        paddingBottom: 200
-    },
     text: {
         fontSize: 16,
-        fontWeight: "800"
+        fontWeight: "800",
+        padding: 10
     }
 })
 
