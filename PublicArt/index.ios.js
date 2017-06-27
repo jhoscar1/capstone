@@ -11,7 +11,8 @@ import {
   Text,
   View,
   Dimensions,
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  Button
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import PointDetails from './app/PointDetails'
@@ -27,7 +28,8 @@ export default class PublicArt extends Component {
       headingIsSupported: false,
       heading: '',
       position: '',
-      pois: []
+      pois: [],
+      allPois: []
     }
   }
 
@@ -58,10 +60,12 @@ export default class PublicArt extends Component {
       {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
     );
     let nearbyPOIs = [];
+    let allPOIs = [];
     this.watchID = navigator.geolocation.watchPosition((newPosition) => {
         this.setState({'position': newPosition });
         firebaseApp.database().ref('/').orderByChild('name')
         .on('value', snapshot => {
+           allPOIs = [];
            nearbyPOIs = [];
            snapshot.val().forEach(poi => {
             let x1 = +poi.lat;
@@ -69,9 +73,11 @@ export default class PublicArt extends Component {
             let x2 = +this.state.position.coords.latitude;
             let y2 = +this.state.position.coords.longitude;
             let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
+            allPOIs.push(poi)
             if (distance < 0.008) nearbyPOIs.push(poi);
           })
         })
+        this.setState({allPois: allPOIs})
         this.setState({'pois': nearbyPOIs})
       },
       (error) => console.error(error),
@@ -85,11 +91,13 @@ export default class PublicArt extends Component {
   }
 
   render() {
+    console.log('STATE', this.state);
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
         <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
+        <Button onPress={() => navigation.navigate('Mapview',{userLocation: this.state.position, markers: this.state.allPois})} title="MapView"></Button>
         <AppCamera pois={this.state.pois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
@@ -105,6 +113,9 @@ const AppRouter = StackNavigator({
     Details: {
         screen: PointDetails,
         path: 'poi/:name'
+    },
+    Mapview: {
+      screen: Mapview
     }
 })
 

@@ -1,23 +1,52 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-export default class Mapview extends Component {
+class Mapview extends Component {
+  constructor(props){
+    super(props)
+    console.log(this.props);
+    var userLocation = this.props.navigation.state.params.userLocation.coords
+    this.state = {
+      region: {
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+       },
+      markers: this.props.navigation.state.params.markers
+    }
+  }
+
   render() {
+    //var userLocation = this.props.navigation.state.params.userLocation.coords
+    //console.log(userLocation);
     return (
       <View style={styles.container}>
       <MapView
       style={ styles.map }
-        initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-  }}
-/>
+        initialRegion={this.state.region}>
+          <MapView.Marker
+            coordinate={{
+              latitude: this.state.region.latitude,
+              longitude: this.state.region.longitude
+            }}
+            image={require('../PersonIcon.png')}
+          />
+          {this.state.markers.map(marker => (
+            <MapView.Marker
+              coordinate={{
+                latitude: marker.lat,
+                longitude: marker.lng}}
+              title={marker.name}
+              key={marker.name}
+            />
+          ))}
+        </MapView>
       </View>
     );
   }
@@ -42,3 +71,5 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
+
+export default Mapview;
