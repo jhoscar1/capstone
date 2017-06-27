@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import PointDetails from './app/PointDetails'
+import Mapview from './app/Mapview'
 import ReactNativeHeading from 'react-native-heading'
 import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
