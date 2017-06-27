@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, Button, StyleSheet, Image} from 'react-native';
+import {View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback} from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import PointDetails from './PointDetails';
 
@@ -33,28 +33,29 @@ class PointOfInterest extends Component {
             top: 50*this.props.counter
         }
         return (
-            <View style={containerStyle}>
-                <Image 
-                    source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
-                />
-                <Text style={styles.text}>{this.props.point.name}</Text>
-                {this.state.open ?
-                    <View>
-                        <HTMLView
-                            stylesheet={htmlViewStyles}
-                            value={unescapedDescription}
-                        />
-                        <Button
-                            style={{color: 'blue'}}
-                            title="Learn More"
-                            onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
-                        />
-                        <Text onPress={() => this.setState({open: !this.state.open})}>Minimize</Text>
-                    </View>
-                :
-                    <Text onPress={() => this.setState({open: !this.state.open})}>Expand</Text>
-                }
-            </View>
+            <TouchableWithoutFeedback onPress={() => this.setState({open: !this.state.open})}>
+                <View style={containerStyle}>
+                    <Image
+                        source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
+                    />
+                    <Text style={styles.text}>{this.props.point.name}</Text>
+                    {this.state.open ?
+                        <View>
+                            <HTMLView
+                                stylesheet={htmlViewStyles}
+                                value={unescapedDescription}
+                            />
+                            <Button
+                                style={{color: 'blue'}}
+                                title="Learn More"
+                                onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
+                            />
+                        </View>
+                        :
+                        null
+                    }
+                </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
