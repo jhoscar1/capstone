@@ -76,14 +76,16 @@ export default class AppCamera extends Component {
             relPosition.push(relativePos)
           })
         console.log(relPosition.length)
-        let counter = 0;
+        let counter = 1;
         return (
             <View>
                 <Camera ref={(cam) => {this.camera = cam}} style={styles.preview} />
                 {
                     (relPosition.length) ? relPosition.map((poi, idx) => {
                         return (
-                            (poi.distance < 300 && poi.dir < 45 && poi.dir > -45) ? <PointOfInterest dir={poi.dir} num={counter++} navigation={this.props.navigation} key={idx} point={this.props.pois[idx]} />
+                            (poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
+                            <PointOfInterest dir={poi.dir} num={counter++} navigation={this.props.navigation}
+                                            key={idx} point={this.props.pois[idx]} onClick={() => {this.setState({selectedPOI})}} />
                             : null
                         )
                     })
