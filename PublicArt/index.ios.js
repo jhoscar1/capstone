@@ -32,9 +32,11 @@ export default class PublicArt extends Component {
       nearbyPois: [],
       allPois: []
     }
-  }
+    this.onMapPress = this.onMapPress.bind(this)
+}
 
   componentDidMount() {
+
 //     firebaseApp.database().ref('/').orderByChild('name')
 //     .on('value', (snapshot) => {
 //       const val = snapshot.val();
@@ -84,28 +86,43 @@ export default class PublicArt extends Component {
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
-
+    this.props.navigation.setParams({ handleMapInfo: this.onMapPress });
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
+  onMapPress(){
+    this.props.navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})
+  }
+
+  static navigationOptions = (props) => {
+      console.log('PROPS',props);
+      var navigation = props.navigation
+      return {
+        headerRight:
+          <Icon
+            name="ios-map"
+            size={30}
+            iconStyle={marginLeft=20}
+            onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
+          <Text>  </Text></Icon>,
+        title: 'I (AR)t NY'
+        };
+    }
+
   render() {
-      const myButton = (
-        <Icon.Button name="ios-map" onPress={() => navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})}>
-        </Icon.Button>
-      );
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
-        <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        {myButton}
         <AppCamera pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
   }
+
+
+
 }
 
 // App Router
@@ -129,8 +146,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
+    borderRadius: 10
+  },
+  button: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(52, 52, 52, 1.0)',
     borderRadius: 10
   },
   welcome: {
