@@ -12,7 +12,7 @@ import {
   View,
   Dimensions,
   DeviceEventEmitter,
-  Button
+  TouchableWithoutFeedback
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import PointDetails from './app/PointDetails'
@@ -20,6 +20,7 @@ import Mapview from './app/Mapview'
 import ReactNativeHeading from 'react-native-heading'
 import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class PublicArt extends Component {
   constructor(props) {
@@ -91,12 +92,16 @@ export default class PublicArt extends Component {
   }
 
   render() {
+      const myButton = (
+        <Icon.Button name="ios-map" onPress={() => navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})}>
+        </Icon.Button>
+      );
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
         <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        <Button onPress={() => navigation.navigate('Mapview',{userLocation: this.state.position, markers: this.state.allPois})} title="MapView"></Button>
+        {myButton}
         <AppCamera pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
