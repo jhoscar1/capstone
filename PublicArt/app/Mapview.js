@@ -35,14 +35,16 @@ class Mapview extends Component {
             }}
             image={require('../PersonIcon.png')}
           />
-          {this.state.markers.map(marker => (
-            <MapView.Marker
-              coordinate={{
-                latitude: marker.lat,
-                longitude: marker.lng}}
-              title={marker.name}
-              key={marker.name}
-            />
+          {this.state.markers.map((marker, index) => (
+            marker.lat > 0
+              ? <MapView.Marker
+                  coordinate={{
+                    latitude: +marker.lat,
+                    longitude: +marker.lng}}
+                  title={marker.name}
+                  key={index}
+                />
+              : null
           ))}
         </MapView>
       </View>
