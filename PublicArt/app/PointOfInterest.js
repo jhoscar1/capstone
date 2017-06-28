@@ -35,10 +35,10 @@ class PointOfInterest extends Component {
             borderRadius: 4,
             position: 'absolute',
             left: 50 + ((Dimensions.get('window').width / 80) * this.props.dir),
-            top: 50*this.props.num,
+            top: (50*this.props.num) - ((Dimensions.get('window').height) * this.props.tilt),
             height: this.state.viewSize
         }
-        console.log(cardStyle.left)
+        console.log('tilt: ', this.props.tilt)
         return (
             <TouchableWithoutFeedback onPress={this.selectPOI} >
                 <Animated.View style={cardStyle}>

@@ -15,6 +15,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import PointDetails from './app/PointDetails'
 import Mapview from './app/Mapview'
 import ReactNativeHeading from 'react-native-heading'
@@ -30,12 +31,20 @@ export default class PublicArt extends Component {
       heading: '',
       position: '',
       nearbyPois: [],
-      allPois: []
+      allPois: [],
+      gyro: {}
     }
     this.onMapPress = this.onMapPress.bind(this)
 }
 
   componentDidMount() {
+    const accelerationObservable = new Accelerometer({
+      updateInterval: 100, // defaults to 100ms
+    });
+
+  // Normal RxJS functions
+  accelerationObservable
+  .subscribe(speed => this.setState({gyro: speed}));
     /* get direction of user */
     ReactNativeHeading.start(1)
     .then(didStart => {
@@ -114,7 +123,14 @@ export default class PublicArt extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
+<<<<<<< HEAD
         <AppCamera pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+=======
+        <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
+        <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
+        {myButton}
+        <AppCamera tilt={(50*this.state.gyro.y)+50} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+>>>>>>> adding gyroscope tilt changes
       </View>
     );
   }
