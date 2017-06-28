@@ -23,6 +23,7 @@ class Mapview extends Component {
   }
 
   render() {
+    const navigation = this.props.navigation
     return (
       <View style={styles.container}>
       <MapView
@@ -42,6 +43,7 @@ class Mapview extends Component {
                 longitude: marker.lng}}
               title={marker.name}
               key={marker.name}
+              onSelect={() => navigation.navigate('Details', { name: marker.link})}
             />
           ))}
         </MapView>
