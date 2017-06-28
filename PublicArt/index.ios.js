@@ -91,7 +91,6 @@ export default class PublicArt extends Component {
   }
 
   render() {
-    console.log('STATE', this.state);
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
