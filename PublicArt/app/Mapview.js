@@ -23,8 +23,6 @@ class Mapview extends Component {
   }
 
   render() {
-    //var userLocation = this.props.navigation.state.params.userLocation.coords
-    //console.log(userLocation);
     return (
       <View style={styles.container}>
       <MapView
