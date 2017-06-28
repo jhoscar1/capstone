@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Animated, View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback, Dimensions} from 'react-native';
 import HTMLView from 'react-native-htmlview';
-import PointDetails from './PointDetails';
 
 class PointOfInterest extends Component {
     constructor(props) {
@@ -37,36 +36,45 @@ class PointOfInterest extends Component {
         let tilt = (this.props.tilt.z + 1) * 50
         let h = Dimensions.get('window').height
         const cardStyle = {
-            borderRadius: 4,
+            borderRadius: 5,
+            padding: 15,
+            marginTop: 10,
+            marginBottom: 15,
             position: 'absolute',
             left: 50 + ((Dimensions.get('window').width / 80) * this.props.dir),
             top: 50*this.props.num + ((h/300) * tilt) + h/10,
-            height: this.state.viewSize
+            backgroundColor: '#F5FCFF',
+            flexDirection: 'row'
         }
-        console.log('tilt: ', tilt)
         return (
             <TouchableWithoutFeedback onPress={this.selectPOI} >
-                <Animated.View style={cardStyle}>
-                    <Image
+                <View style={cardStyle}>
+                    {this.state.open ? <Image
                         source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
-                    />
-                    <Text style={styles.text}>{this.props.point.name}</Text>
-                    {this.state.open ?
-                        <View>
-                            <HTMLView
-                                stylesheet={htmlViewStyles}
-                                value={unescapedDescription}
-                            />
-                            <Button
-                                style={{color: 'blue'}}
-                                title="Learn More"
-                                onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
-                            />
-                        </View>
+                        style={{height: 75, width: 75}}
+                        />
                         :
                         null
                     }
-                </Animated.View>
+                    <View>
+                        <Text style={styles.text}>{this.props.point.name}</Text>
+                        {this.state.open ?
+                            <View>
+                                <HTMLView
+                                    stylesheet={htmlViewStyles}
+                                    value={unescapedDescription}
+                                />
+                                <Button
+                                    style={{color: 'blue'}}
+                                    title="Learn More"
+                                    onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
+                                />
+                            </View>
+                            :
+                            null
+                        }
+                    </View>
+                </View>
             </TouchableWithoutFeedback>
         )
     }
@@ -74,9 +82,13 @@ class PointOfInterest extends Component {
 
 const styles = StyleSheet.create({
     text: {
+        position: 'relative',
         fontSize: 16,
         fontWeight: "800",
-        padding: 10
+        backgroundColor: 'transparent',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        marginLeft: 5
     }
 })
 
