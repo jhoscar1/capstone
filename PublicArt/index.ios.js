@@ -28,7 +28,7 @@ export default class PublicArt extends Component {
       headingIsSupported: false,
       heading: '',
       position: '',
-      pois: [],
+      nearbyPois: [],
       allPois: []
     }
   }
@@ -78,7 +78,7 @@ export default class PublicArt extends Component {
           })
         })
         this.setState({allPois: allPOIs})
-        this.setState({'pois': nearbyPOIs})
+        this.setState({'nearbyPois': nearbyPOIs})
       },
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
@@ -98,7 +98,7 @@ export default class PublicArt extends Component {
         <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
         <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
         <Button onPress={() => navigation.navigate('Mapview',{userLocation: this.state.position, markers: this.state.allPois})} title="MapView"></Button>
-        <AppCamera pois={this.state.pois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+        <AppCamera pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
   }
