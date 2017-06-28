@@ -36,15 +36,17 @@ class Mapview extends Component {
             }}
             image={require('../PersonIcon.png')}
           />
-          {this.state.markers.map(marker => (
-            <MapView.Marker
-              coordinate={{
-                latitude: marker.lat,
-                longitude: marker.lng}}
-              title={marker.name}
-              key={marker.name}
-              onSelect={() => navigation.navigate('Details', { name: marker.link})}
-            />
+          {this.state.markers.map((marker, index) => (
+            marker.lat > 0
+              ? <MapView.Marker
+                  coordinate={{
+                    latitude: +marker.lat,
+                    longitude: +marker.lng}}
+                  title={marker.name}
+                  key={index}
+                  onSelect={() => navigation.navigate('Details', { name: marker.link})}
+                />
+              : null
           ))}
         </MapView>
       </View>
