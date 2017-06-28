@@ -35,14 +35,6 @@ export default class PublicArt extends Component {
   }
 
   componentDidMount() {
-//     firebaseApp.database().ref('/').orderByChild('name')
-//     .on('value', (snapshot) => {
-//       const val = snapshot.val();
-//       console.log('val', val);
-//       this.setState({
-//         points: this.state.points.concat(val)
-//       })
-
     /* get direction of user */
     ReactNativeHeading.start(1)
     .then(didStart => {
@@ -53,38 +45,44 @@ export default class PublicArt extends Component {
       this.setState({'heading': data.heading})
     })
 
+    let nearbyPOIs = [];
     /* get location of current user*/
     navigator.geolocation.getCurrentPosition((position) => {
         this.setState({'position': position});
-      },
-      (error) => console.error(error),
-      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
-    );
-    let nearbyPOIs = [];
-    let allPOIs = [];
-    this.watchID = navigator.geolocation.watchPosition((newPosition) => {
-        this.setState({'position': newPosition });
         firebaseApp.database().ref('/').orderByChild('name')
         .on('value', snapshot => {
-           allPOIs = [];
-           nearbyPOIs = [];
-           snapshot.val().forEach(poi => {
+          let allpois = snapshot.val();
+          this.setState({allPois: allpois});
+          allpois.forEach(poi => {
             let x1 = +poi.lat;
             let y1 = +poi.lng;
             let x2 = +this.state.position.coords.latitude;
             let y2 = +this.state.position.coords.longitude;
             let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
-            allPOIs.push(poi)
             if (distance < 0.008) nearbyPOIs.push(poi);
-          })
         })
-        this.setState({allPois: allPOIs})
+      },
+      (error) => console.error(error),
+      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
+    )
+  });
+    
+    this.watchID = navigator.geolocation.watchPosition((newPosition) => {
+        this.setState({'position': newPosition });
+        nearbyPOIs = [];
+        this.state.allPois.forEach(poi => {
+            let x1 = +poi.lat;
+            let y1 = +poi.lng;
+            let x2 = +this.state.position.coords.latitude;
+            let y2 = +this.state.position.coords.longitude;
+            let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
+            if (distance < 0.008) nearbyPOIs.push(poi);
+        })
         this.setState({'nearbyPois': nearbyPOIs})
       },
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
-
   }
 
   componentWillUnmount() {
