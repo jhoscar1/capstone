@@ -15,6 +15,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import PointDetails from './app/PointDetails'
 import Mapview from './app/Mapview'
 import ReactNativeHeading from 'react-native-heading'
@@ -30,14 +31,22 @@ export default class PublicArt extends Component {
       heading: '',
       position: '',
       nearbyPois: [],
-      allPois: []
+      allPois: [],
+      gyro: {}
     }
-  }
+    this.onMapPress = this.onMapPress.bind(this)
+}
 
   componentDidMount() {
+    const accelerationObservable = new Accelerometer({
+      updateInterval: 100, // defaults to 100ms
+    });
 
+  // Normal RxJS functions
+  accelerationObservable
+  .subscribe(speed => this.setState({gyro: speed}));
     /* get direction of user */
-    ReactNativeHeading.start(1)
+    ReactNativeHeading.start(15)
     .then(didStart => {
       this.setState({'headingIsSupported': didStart})
     })
@@ -46,59 +55,81 @@ export default class PublicArt extends Component {
       this.setState({'heading': data.heading})
     })
 
+    let nearbyPOIs = [];
     /* get location of current user*/
     navigator.geolocation.getCurrentPosition((position) => {
         this.setState({'position': position});
-      },
-      (error) => console.error(error),
-      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
-    );
-    let nearbyPOIs = [];
-    let allPOIs = [];
-    this.watchID = navigator.geolocation.watchPosition((newPosition) => {
-        this.setState({'position': newPosition });
         firebaseApp.database().ref('/').orderByChild('name')
         .on('value', snapshot => {
-           allPOIs = [];
-           nearbyPOIs = [];
-           snapshot.val().forEach(poi => {
+          let allpois = snapshot.val();
+          this.setState({allPois: allpois});
+          allpois.forEach(poi => {
             let x1 = +poi.lat;
             let y1 = +poi.lng;
             let x2 = +this.state.position.coords.latitude;
             let y2 = +this.state.position.coords.longitude;
             let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
-            allPOIs.push(poi)
             if (distance < 0.008) nearbyPOIs.push(poi);
-          })
         })
-        this.setState({allPois: allPOIs})
+      },
+      (error) => console.error(error),
+      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
+    )
+  });
+
+    this.watchID = navigator.geolocation.watchPosition((newPosition) => {
+        this.setState({'position': newPosition });
+        nearbyPOIs = [];
+        this.state.allPois.forEach(poi => {
+            let x1 = +poi.lat;
+            let y1 = +poi.lng;
+            let x2 = +this.state.position.coords.latitude;
+            let y2 = +this.state.position.coords.longitude;
+            let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
+            if (distance < 0.008) nearbyPOIs.push(poi);
+        })
         this.setState({'nearbyPois': nearbyPOIs})
       },
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
-
+    this.props.navigation.setParams({ handleMapInfo: this.onMapPress });
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
+  onMapPress(){
+    this.props.navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})
+  }
+
+  static navigationOptions = (props) => {
+      console.log('PROPS',props);
+      var navigation = props.navigation
+      return {
+        headerRight:
+          <Icon
+            name="ios-map"
+            size={30}
+            iconStyle={marginLeft=20}
+            onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
+          <Text>  </Text></Icon>,
+        title: 'I (AR)t NY'
+        };
+    }
+
   render() {
-      const myButton = (
-        <Icon.Button name="ios-map" onPress={() => navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})}>
-        </Icon.Button>
-      );
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
-        <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        {myButton}
-        <AppCamera pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+        <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
   }
+
+
+
 }
 
 // App Router
@@ -123,7 +154,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  },
+  button: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(52, 52, 52, 1.0)',
     borderRadius: 10
   },
   welcome: {
