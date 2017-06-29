@@ -34,6 +34,7 @@ class Mapview extends Component {
       style={ styles.map }
         initialRegion={this.state.region}>
           <MapView.Marker
+            style={ styles.personMarker }
             coordinate={{
               latitude: this.state.region.latitude,
               longitude: this.state.region.longitude
@@ -49,12 +50,15 @@ class Mapview extends Component {
                     <MapView.Callout tooltip style={styles.customView}
                       onPress={() => navigation.navigate('Details', { name: marker.link})}>
                       <MapCallout>
-                        <Text>{marker.name}</Text>
+                        <Text
+                          style={ styles.titleText }
+                          >{marker.name}</Text>
                         <Image
                           source={{uri: `https://www.nycgovparks.org${marker.thumb_path}`}}
-                          style={{height: 75, width: 75}}
+                          style={styles.placeImage}
                             />
-                          <Text>Tap to learn more</Text>
+                          <Text
+                            style={ styles.tapText }>Tap to learn more</Text>
                       </MapCallout>
                     </MapView.Callout>
               </MapView.Marker>
@@ -87,6 +91,24 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  personMarker: {
+    zIndex: 1,
+    position: 'relative'
+  },
+  titleText: {
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  tapText: {
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+    color: '#0000ff'
+  },
+  placeImage: {
+    height: 75,
+    width: 75,
+    alignSelf: 'center'
+  }
 });
 
 export default Mapview;
