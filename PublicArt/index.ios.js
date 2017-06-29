@@ -153,9 +153,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    backgroundColor: '#F5FCFF',
-    borderRadius: 10
+    alignItems: 'center',
   },
   button: {
     flex: 1,
