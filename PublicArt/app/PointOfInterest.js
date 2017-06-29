@@ -60,10 +60,6 @@ class PointOfInterest extends Component {
                         <Text style={styles.text}>{this.props.point.name}</Text>
                         {this.state.open ?
                             <View>
-                                <HTMLView
-                                    stylesheet={htmlViewStyles}
-                                    value={unescapedDescription}
-                                />
                                 <Button
                                     style={{color: 'blue'}}
                                     title="Learn More"
