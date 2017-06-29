@@ -98,8 +98,8 @@ class PointOfInterest extends Component {
         }
 
         return (
-            <TouchableWithoutFeedback onPress={this.selectPOI}>
-                <View style={cardStyle}>
+            <TouchableWithoutFeedback onPress={() => this.props.handlePress(this.props.point)} >
+                <Animated.View style={{ ...cardStyle, height: this.state.viewSize}}>
                     {this.state.open ? <Image
                         source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
                         style={{height: 75, width: 75}}
@@ -131,7 +131,7 @@ class PointOfInterest extends Component {
                             null
                         }
                     </View>
-                </View>
+                </Animated.View>
             </TouchableWithoutFeedback>
         )
     }

@@ -143,7 +143,7 @@ export default class PublicArt extends Component {
     return (
       <View style={styles.container}>
         { this.state.nearbyPois.length ?
-        <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+        <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} handlePress={this.handlePress} />
         : <View><ActivityIndicator size={'large'} /><Text style={{fontSize: 24, fontWeight: '800'}}>Loading Art Installations...</Text></View>
         }
       </View>
@@ -189,16 +189,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(52, 52, 52, 1.0)',
     borderRadius: 10
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
   preview: {
     flex: 1,

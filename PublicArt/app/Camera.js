@@ -2,35 +2,77 @@ import React, { Component } from 'react';
 import Camera from 'react-native-camera';
 import {Dimensions, StyleSheet, View} from 'react-native';
 import PointOfInterest from './PointOfInterest';
+import SelectedPointOfInterest from './SelectedPointOfInterest';
 import utils from '../utils';
 
 export default class AppCamera extends Component {
+    constructor(props) {
+        super(props);
+        this.handlePress = this.handlePress.bind(this);
+        this.state = {
+            selectedPOI: {},
+            relSelectedPos: {},
+            selected: false
+        }
+    }
+
+    handlePress(POI) {
+        console.log(POI);
+        if (!this.state.selected) {
+            const relativePosition = utils.getRelativePos(POI, this.props.heading, this.props.position.coords)
+            this.setState({
+                selectedPOI: POI,
+                relSelectedPos: relativePosition,
+                selected: true
+            });
+        }
+        else {
+            this.setState({
+                selectedPOI: {},
+                relSelectedPos: {},
+                selected: false
+            })
+        }
+    }
 
     render() {
         /* gets all pois and their lats and lngs */
         let relPosition =  [];
         this.props.pois.forEach(poi => {
-            let lat2 = +poi.lat;
-            let long2 = +poi.lng;
-            let lat1 = +this.props.position.coords.latitude;
-            let long1 = +this.props.position.coords.longitude;
-            let relativePos = {
-              distance: utils.getDistanceInMeters(long1, long2, lat1, lat2),
-              dir: utils.convertToOrientation(this.props.heading, utils.getDirection(long1, long2, lat1, lat2))
-            }
+            let relativePos = utils.getRelativePos(poi, this.props.heading, this.props.position.coords)
             relPosition.push(relativePos)
-          })
+        })
         console.log(relPosition.length)
         let counter = 1;
+        console.log(relPosition.filter(el => {
+            return el.distance < 300;
+        }));
         return (
             <View>
                 <Camera ref={(cam) => {this.camera = cam}} style={styles.preview} />
-                {
-                    (relPosition.length) ? relPosition.map((poi, idx) => {
+                {   Object.keys(this.state.selectedPOI).length ?
+                    <SelectedPointOfInterest
+                        dir={this.state.relSelectedPos.dir}
+                        navigation={this.props.navigation}
+                        tilt={this.props.tilt}
+                        handlePress={this.handlePress}
+                        point={this.state.selectedPOI}
+                        left={50 + ((Dimensions.get('window').width / 80) * this.state.relSelectedPos.dir)}
+                        top={50*counter + ((h/300) * tilt) + h/10}
+                    />
+                    :
+                    (relPosition.length) ? relPosition.reverse().map((poi, idx) => {
                         return (
                             (poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
-                            <PointOfInterest dir={poi.dir} dist={poi.distance} num={counter++} navigation={this.props.navigation}
-                                             key={idx} tilt={this.props.tilt} point={this.props.pois[idx]} onClick={() => {this.setState({selectedPOI})}} />
+                            <PointOfInterest
+                                dir={poi.dir}
+                                num={counter++}
+                                navigation={this.props.navigation}
+                                key={idx}
+                                tilt={this.props.tilt}
+                                point={poi.poi}
+                                handlePress={this.handlePress}
+                            />
                             : null
                         )
                     })
