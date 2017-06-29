@@ -15,12 +15,20 @@ class Mapview extends Component {
       region: {
         latitude: userLocation.latitude,
         longitude: userLocation.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitudeDelta: 0.0122,
+        longitudeDelta: 0.0021,
        },
       markers: this.props.navigation.state.params.markers
     }
   }
+
+  // static navigationOptions = (props) => {
+  //     console.log('PROPS',props);
+  //     var navigation = props.navigation
+  //     return {
+  //       title: 'I (AR)t NY'
+  //       };
+  //   }
 
   render() {
     return (
