@@ -46,7 +46,7 @@ export default class PublicArt extends Component {
   accelerationObservable
   .subscribe(speed => this.setState({gyro: speed}));
     /* get direction of user */
-    ReactNativeHeading.start(1)
+    ReactNativeHeading.start(15)
     .then(didStart => {
       this.setState({'headingIsSupported': didStart})
     })
@@ -123,14 +123,7 @@ export default class PublicArt extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-<<<<<<< HEAD
-        <AppCamera pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
-=======
-        <Text>Lat: {this.state.position.coords ? this.state.position.coords.latitude : null}</Text>
-        <Text>Long: {this.state.position.coords ? this.state.position.coords.longitude : null}</Text>
-        {myButton}
-        <AppCamera tilt={(50*this.state.gyro.y)+50} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
->>>>>>> adding gyroscope tilt changes
+        <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
   }
