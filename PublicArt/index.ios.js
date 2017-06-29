@@ -76,7 +76,7 @@ export default class PublicArt extends Component {
       {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
     )
   });
-    
+
     this.watchID = navigator.geolocation.watchPosition((newPosition) => {
         this.setState({'position': newPosition });
         nearbyPOIs = [];
