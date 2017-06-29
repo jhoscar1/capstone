@@ -85,12 +85,13 @@ export default class AppCamera extends Component {
                         return (
                             (poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
                             <PointOfInterest dir={poi.dir} num={counter++} navigation={this.props.navigation}
-                                            key={idx} point={this.props.pois[idx]} onClick={() => {this.setState({selectedPOI})}} />
+                                            key={idx} tilt={this.props.tilt} point={this.props.pois[idx]} onClick={() => {this.setState({selectedPOI})}} />
                             : null
                         )
                     })
                     : null
                 }
+
             </View>)
     }
 }

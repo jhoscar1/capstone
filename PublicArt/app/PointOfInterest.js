@@ -31,14 +31,19 @@ class PointOfInterest extends Component {
         const navigation = this.props.navigation
         const unescapedDescription = `<p>Description: ${this.props.point.descrip}</p>`
 
+        // 0 == face up
+        // 50 == straight up and down
+        // 100 == face down
+        let tilt = (this.props.tilt.z + 1) * 50
+        let h = Dimensions.get('window').height
         const cardStyle = {
             borderRadius: 4,
             position: 'absolute',
             left: 50 + ((Dimensions.get('window').width / 80) * this.props.dir),
-            top: 50*this.props.num,
+            top: 50*this.props.num + ((h/300) * tilt) + h/10,
             height: this.state.viewSize
         }
-        console.log(cardStyle.left)
+        console.log('tilt: ', tilt)
         return (
             <TouchableWithoutFeedback onPress={this.selectPOI} >
                 <Animated.View style={cardStyle}>

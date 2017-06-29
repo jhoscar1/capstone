@@ -15,6 +15,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import PointDetails from './app/PointDetails'
 import Mapview from './app/Mapview'
 import ReactNativeHeading from 'react-native-heading'
@@ -30,14 +31,22 @@ export default class PublicArt extends Component {
       heading: '',
       position: '',
       nearbyPois: [],
-      allPois: []
+      allPois: [],
+      gyro: {}
     }
     this.onMapPress = this.onMapPress.bind(this)
 }
 
   componentDidMount() {
+    const accelerationObservable = new Accelerometer({
+      updateInterval: 100, // defaults to 100ms
+    });
+
+  // Normal RxJS functions
+  accelerationObservable
+  .subscribe(speed => this.setState({gyro: speed}));
     /* get direction of user */
-    ReactNativeHeading.start(1)
+    ReactNativeHeading.start(15)
     .then(didStart => {
       this.setState({'headingIsSupported': didStart})
     })
@@ -114,7 +123,7 @@ export default class PublicArt extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <AppCamera pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+        <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
       </View>
     );
   }
