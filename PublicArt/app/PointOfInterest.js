@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Animated, View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback, Dimensions} from 'react-native';
-import HTMLView from 'react-native-htmlview';
 
 class PointOfInterest extends Component {
     constructor(props) {
