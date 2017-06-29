@@ -35,13 +35,6 @@ export default class PublicArt extends Component {
   }
 
   componentDidMount() {
-//     firebaseApp.database().ref('/').orderByChild('name')
-//     .on('value', (snapshot) => {
-//       const val = snapshot.val();
-//       console.log('val', val);
-//       this.setState({
-//         points: this.state.points.concat(val)
-//       })
 
     /* get direction of user */
     ReactNativeHeading.start(1)
