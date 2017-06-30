@@ -9,20 +9,18 @@ const propTypes = {
   style: PropTypes.object,
 };
 
-class MapCallout extends React.Component {
-  render() {
-    return (
-      <View style={[styles.container, this.props.style]}>
-        <View style={styles.bubble}>
-          <View style={styles.amount}>
-            {this.props.children}
-          </View>
+const MapCallout = (props) => {
+  return (
+    <View style={[styles.container, this.props.style]}>
+      <View style={styles.bubble}>
+        <View style={styles.amount}>
+          {this.props.children}
         </View>
-        <View style={styles.arrowBorder} />
-        <View style={styles.arrow} />
       </View>
-    );
-  }
+      <View style={styles.arrowBorder} />
+      <View style={styles.arrow} />
+    </View>
+  );
 }
 
 MapCallout.propTypes = propTypes;
@@ -65,14 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = MapCallout;
-
-// <Image
-//   source={{uri: `https://www.nycgovparks.org${this.props.imageSourcePath.thumb_path}`}}
-//   style={{height: 75, width: 75}}
-//     />
-// <Button
-//     style={{color: 'blue'}}
-//     title="Learn More"
-//     onPress={() => navigation.navigate('Details', { name: this.props.detailsLink})}
-// />
+export default MapCallout;
