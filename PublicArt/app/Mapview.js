@@ -44,6 +44,7 @@ class Mapview extends Component {
           {this.state.markers.map((marker, index) => (
             marker.lat > 0 ?
                <MapView.Marker
+                  key={marker.unique_id}
                   coordinate={{
                     latitude: +marker.lat,
                     longitude: +marker.lng}}>
