@@ -11,7 +11,7 @@ const propTypes = {
 
 const MapCallout = (props) => {
   return (
-    <View style={[styles.container, this.props.style]}>
+    <View style={[styles.container, props.style]}>
       <View style={styles.bubble}>
         <View style={styles.amount}>
           {props.children}
