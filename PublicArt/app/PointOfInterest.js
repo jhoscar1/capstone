@@ -34,6 +34,7 @@ class PointOfInterest extends Component {
         // 100 == face down
         let tilt = (this.props.tilt.z + 1) * 50
         let h = Dimensions.get('window').height
+        let size = this.props.dist / 10
         const cardStyle = {
             borderRadius: 5,
             padding: 15,
@@ -43,10 +44,23 @@ class PointOfInterest extends Component {
             left: 50 + ((Dimensions.get('window').width / 80) * this.props.dir),
             top: 50*this.props.num + ((h/300) * tilt) + h/10,
             backgroundColor: '#F5FCFF',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: (!this.state.open) ? 55-size : null,
+            maxWidth: (!this.state.open) ? this.props.point.name.length * (35 - Math.floor(size)) : null
         }
+        const textStyle = {
+            position: 'relative',
+            fontWeight: "800",
+            backgroundColor: 'transparent',
+            flexWrap: 'wrap',
+            fontSize: 35 - Math.floor(size),
+            marginLeft: 5
+        }
+
         return (
-            <TouchableWithoutFeedback onPress={this.selectPOI} >
+            <TouchableWithoutFeedback onPress={this.selectPOI}>
                 <View style={cardStyle}>
                     {this.state.open ? <Image
                         source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
@@ -56,7 +70,7 @@ class PointOfInterest extends Component {
                         null
                     }
                     <View>
-                        <Text style={styles.text}>{this.props.point.name}</Text>
+                        <Text style={textStyle}>{this.props.point.name} <Text style={{textAlign: 'right', fontSize: 8}}>{Math.floor(this.props.dist)}m</Text> </Text>
                         {this.state.open ?
                             <View>
                                 <Button
