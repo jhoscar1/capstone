@@ -62,6 +62,12 @@ export default class PublicArt extends Component {
         firebaseApp.database().ref('/').orderByChild('name')
         .on('value', snapshot => {
           let allpois = snapshot.val();
+          console.log(typeof allpois);
+          if (typeof allpois == 'object') {
+            allpois = Object.values(allpois);
+          }
+          console.log(allpois)
+
           this.setState({allPois: allpois});
           allpois.forEach(poi => {
             let x1 = +poi.lat;
