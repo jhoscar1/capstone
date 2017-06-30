@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     likes: {
-        marginLeft: 140
+        marginLeft: 185
     }
 })
 
