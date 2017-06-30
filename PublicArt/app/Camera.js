@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Camera from 'react-native-camera';
 import {Dimensions, StyleSheet, View, Animated} from 'react-native';
 import PointOfInterest from './PointOfInterest';
-import SelectedPointOfInterest from './SelectedPointOfInterest';
+import SelectedPointOfInterest from './SelectedPOITransitionMotion';
 import utils from '../utils';
 
 export default class AppCamera extends Component {
