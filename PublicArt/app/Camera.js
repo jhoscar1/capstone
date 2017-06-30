@@ -32,8 +32,8 @@ export default class AppCamera extends Component {
                     (relPosition.length) ? relPosition.map((poi, idx) => {
                         return (
                             (poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
-                            <PointOfInterest dir={poi.dir} num={counter++} navigation={this.props.navigation}
-                                            key={idx} tilt={this.props.tilt} point={this.props.pois[idx]} onClick={() => {this.setState({selectedPOI})}} />
+                            <PointOfInterest dir={poi.dir} dist={poi.distance} num={counter++} navigation={this.props.navigation}
+                                             key={idx} tilt={this.props.tilt} point={this.props.pois[idx]} onClick={() => {this.setState({selectedPOI})}} />
                             : null
                         )
                     })
