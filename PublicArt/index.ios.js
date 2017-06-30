@@ -22,6 +22,7 @@ import ReactNativeHeading from 'react-native-heading'
 import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
+import TourMaker from './app/Tour';
 
 export default class PublicArt extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ export default class PublicArt extends Component {
       gyro: {}
     }
     this.onMapPress = this.onMapPress.bind(this)
+    this.onTourPress = this.onTourPress.bind(this)
 }
 
   componentDidMount() {
@@ -104,10 +106,20 @@ export default class PublicArt extends Component {
     this.props.navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})
   }
 
+  onTourPress(){
+    this.this.props.navigation.navigate('TourMaker', {userLocation: this.state.position})
+  }
+
   static navigationOptions = (props) => {
       console.log('PROPS',props);
       var navigation = props.navigation
       return {
+        headerLeft:
+        <Icon
+          name="ios-walk"
+          size={30}
+          iconStyle={marginLeft=0}
+          onPress={console.log('button pressed')} />,
         headerRight:
           <Icon
             name="ios-map"
@@ -144,6 +156,9 @@ const AppRouter = StackNavigator({
     },
     Mapview: {
       screen: Mapview
+    },
+    Tourview: {
+      screen: TourMaker
     }
 })
 

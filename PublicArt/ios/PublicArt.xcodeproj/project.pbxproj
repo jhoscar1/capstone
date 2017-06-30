@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -348,6 +349,7 @@
 		97A4794E21B94BBAB4562C33 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
 		A9F2D149D050C29E9CE4BE7B /* libPods-PublicArt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PublicArt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6DDB8593464E3DA9B08E48 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		B5CEBBE81F05A03B00E53DF1 /* PublicArt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PublicArt.entitlements; path = PublicArt/PublicArt.entitlements; sourceTree = "<group>"; };
 		B9B308DE94D5E4F571EC813B /* libPods-PublicArtTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PublicArtTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAACE49956F457BAFA4793E /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		C8E9457890F84776B04D7ADE /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 		13B07FAE1A68108700A75B9A /* PublicArt */ = {
 			isa = PBXGroup;
 			children = (
+				B5CEBBE81F05A03B00E53DF1 /* PublicArt.entitlements */,
 				8754788C1EFC7633009178AA /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
