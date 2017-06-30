@@ -17,7 +17,6 @@ export default class AppCamera extends Component {
     }
 
     handlePress(POI) {
-        console.log(POI);
         if (!this.state.selected) {
             const relativePosition = utils.getRelativePos(POI, this.props.heading, this.props.position.coords)
             this.setState({
@@ -50,15 +49,14 @@ export default class AppCamera extends Component {
         return (
             <View>
                 <Camera ref={(cam) => {this.camera = cam}} style={styles.preview} />
-                {   Object.keys(this.state.selectedPOI).length ?
+                    {   Object.keys(this.state.selectedPOI).length ?
                     <SelectedPointOfInterest
                         dir={this.state.relSelectedPos.dir}
                         navigation={this.props.navigation}
-                        tilt={this.props.tilt}
                         handlePress={this.handlePress}
                         point={this.state.selectedPOI}
                         left={50 + ((Dimensions.get('window').width / 80) * this.state.relSelectedPos.dir)}
-                        top={50*counter + ((h/300) * tilt) + h/10}
+                        top={50*counter + ((Dimensions.get('window').height/300)) + Dimensions.get('window').height/10}
                     />
                     :
                     (relPosition.length) ? relPosition.reverse().map((poi, idx) => {

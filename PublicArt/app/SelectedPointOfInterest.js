@@ -5,36 +5,80 @@ class SelectedPointOfInterest extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            viewSize: new Animated.Value(50)
+            width: new Animated.Value(250),
+            height: new Animated.Value(125),
+            left: new Animated.Value(this.props.left),
+            top: new Animated.Value(this.props.top)
         }
     }
 
     componentDidMount() {
-        console.log('mounted');
-        Animated.timing(this.state.viewSize,
-            {
-                toValue: 200,
-                duation: 1000
-            }).start()
+        // Animated.timing(this.state.viewSize,
+        //     {
+        //         toValue: 200,
+        //         duation: 1000
+        //     }).start()
+        
+        Animated.timing(this.state.left, {
+            toValue: Dimensions.get('screen').width / 6,
+            duration: 1000
+        }).start();
+
+        Animated.timing(this.state.top, {
+            toValue: Dimensions.get('screen').height / 8,
+            duration: 1000
+        }).start();
+
+        Animated.timing(this.state.width, {
+            toValue: Dimensions.get('screen').width / 1.5,
+            duration: 1000
+        }).start();
+
+        Animated.timing(this.state.height, {
+            toValue: Dimensions.get('screen').height / 5,
+            duration: 1000
+        }).start();
+    }
+
+    componentWillUnmount() {
+        Animated.timing(this.state.left, {
+            toValue: this.props.left,
+            duration: 1000
+        }).start();
+
+        Animated.timing(this.state.top, {
+            toValue: this.props.top,
+            duration: 1000
+        }).start();
+
+        Animated.timing(this.state.width, {
+            toValue: Dimensions.get('screen').width / 1.5,
+            duration: 1000
+        }).start();
+
+        Animated.timing(this.state.height, {
+            toValue: Dimensions.get('screen').height / 4,
+            duration: 1000
+        }).start();
     }
 
     render() {
-
+        const {navigation} = this.props;
         const cardStyle = {
             borderRadius: 5,
             padding: 15,
             marginTop: 10,
             marginBottom: 15,
             position: 'absolute',
-            left: this.props.left,
-            top: 50*this.props.num + ((h/300) * tilt) + h/10,
+            left: this.state.left,
+            top: this.state.top,
             backgroundColor: '#F5FCFF',
             flexDirection: 'row'
         }
 
         return (
             <TouchableWithoutFeedback onPress={() => this.props.handlePress(this.props.point)} >
-                <Animated.View style={{ ...cardStyle, height: this.state.viewSize}}>
+                <Animated.View style={{ ...cardStyle, height: this.state.height, width: this.state.width}}>
                     <Image
                         source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
                         style={{height: 75, width: 75}}
