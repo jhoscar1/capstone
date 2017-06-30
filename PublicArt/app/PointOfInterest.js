@@ -19,9 +19,8 @@ class PointOfInterest extends Component {
     }
 
     selectPOI() {
-        // check if the poi has been liked
         const pointID = String(this.props.point.unique_id)
-        console.log('POINTid',pointID)
+        // set local state with # of likes and firebase ID of the selected item
         firebaseApp.database().ref('/').orderByChild('unique_id').equalTo(+pointID)
             .on('value', item => {
                 let itemVal;
@@ -41,11 +40,12 @@ class PointOfInterest extends Component {
             Animated.timing(this.state.viewSize,
                             {toValue: Dimensions.get('window').width-30,
                              duation: 1000}).start()
+
+            // set the state of the like icon based on user's asyncStorage
             try {
                 AsyncStorage.getItem(pointID)
                 .then(value => {
                     if (value !== null && value !== 'false'){
-                        // Item has not been upvoted by this user yet
                         this.setState({upvoted: true})
                     }
                 })
@@ -53,13 +53,13 @@ class PointOfInterest extends Component {
                 console.error(error);
             }
         }
-        console.log('upvoted? ', this.state.upvoted)
         this.setState({open: !this.state.open});
     }
 
     selectUpvote(){
         const pointID = String(this.props.point.unique_id)
-
+        // when the user clicks the like icon we
+        // set upvoted state and increment / decrement likes for item in DB
         AsyncStorage.setItem(pointID, String(!this.state.upvoted))
         .then(() => {
             this.setState({upvoted: !this.state.upvoted})
