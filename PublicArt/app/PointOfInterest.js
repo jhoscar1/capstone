@@ -115,14 +115,16 @@ class PointOfInterest extends Component {
                                     title="Learn More"
                                     onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
                                 />
-                                <Text style={styles.upvote}>{this.state.itemLikes}</Text>
-                                <Icon
-                                    name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
-                                    size={15}
-                                    style={styles.upvote}
-                                    color={this.state.upvoted ? '#4F8EF7' : '#000000' }
-                                    onPress={this.selectUpvote}>
-                                </Icon>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Text style={styles.likes}>{this.state.itemLikes}</Text>
+                                    <Icon
+                                        name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
+                                        size={15}
+                                        style={styles.upvote}
+                                        color={this.state.upvoted ? '#4F8EF7' : '#000000' }
+                                        onPress={this.selectUpvote}>
+                                    </Icon>
+                                </View>
                             </View>
                             :
                             null
@@ -145,7 +147,10 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     upvote: {
-        marginLeft: 150
+        marginLeft: 10
+    },
+    likes: {
+        marginLeft: 140
     }
 })
 
