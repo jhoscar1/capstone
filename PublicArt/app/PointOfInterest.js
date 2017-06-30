@@ -32,27 +32,15 @@ class PointOfInterest extends Component {
                 this.setState({firebaseId: key})
             })
 
-        if (this.state.open) {
-            Animated.timing(this.state.viewSize,
-                            {toValue: 200,
-                             duation: 1000}).start()
-        } else {
-            Animated.timing(this.state.viewSize,
-                            {toValue: Dimensions.get('window').width-30,
-                             duation: 1000}).start()
-
-            // set the state of the like icon based on user's asyncStorage
-            try {
-                AsyncStorage.getItem(pointID)
-                .then(value => {
-                    if (value !== null && value !== 'false'){
-                        this.setState({upvoted: true})
-                    }
-                })
-            } catch (error) {
-                console.error(error);
+        // set the state of the like icon based on user's asyncStorage
+        AsyncStorage.getItem(pointID)
+        .then(value => {
+            if (value !== null && value !== 'false'){
+                this.setState({upvoted: true})
             }
-        }
+        })
+        .catch(console.error.bind(console))
+
         this.setState({open: !this.state.open});
     }
 
@@ -78,7 +66,6 @@ class PointOfInterest extends Component {
     render() {
         console.log('rendering ', this.props.point.name)
         const navigation = this.props.navigation
-        const unescapedDescription = `<p>Description: ${this.props.point.descrip}</p>`
 
         // 0 == face up
         // 50 == straight up and down
@@ -168,9 +155,4 @@ const styles = StyleSheet.create({
     }
 })
 
-const htmlViewStyles = StyleSheet.create({
-        p: {
-        fontSize: 10
-    }
-})
 export default PointOfInterest;

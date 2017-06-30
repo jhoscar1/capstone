@@ -12,7 +12,7 @@ import MapCallout from './MapCallout';
 class Mapview extends Component {
   constructor(props){
     super(props)
-    var userLocation = this.props.navigation.state.params.userLocation.coords
+    const userLocation = this.props.navigation.state.params.userLocation.coords
     this.state = {
       region: {
         latitude: userLocation.latitude,

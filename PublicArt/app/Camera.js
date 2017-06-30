@@ -5,9 +5,6 @@ import PointOfInterest from './PointOfInterest';
 import utils from '../utils';
 
 export default class AppCamera extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         /* gets all pois and their lats and lngs */

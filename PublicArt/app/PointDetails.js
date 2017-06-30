@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {View, Text, WebView, StyleSheet, Dimensions} from 'react-native';
+import React from 'react';
+import {WebView, StyleSheet, Dimensions} from 'react-native';
 
 const PointDetails = (props) => {
     return (
