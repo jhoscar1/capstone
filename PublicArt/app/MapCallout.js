@@ -14,7 +14,7 @@ const MapCallout = (props) => {
     <View style={[styles.container, this.props.style]}>
       <View style={styles.bubble}>
         <View style={styles.amount}>
-          {this.props.children}
+          {props.children}
         </View>
       </View>
       <View style={styles.arrowBorder} />
