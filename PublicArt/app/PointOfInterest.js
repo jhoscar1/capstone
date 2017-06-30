@@ -19,9 +19,8 @@ class PointOfInterest extends Component {
     }
 
     selectPOI() {
-        // check if the poi has been liked
         const pointID = String(this.props.point.unique_id)
-        console.log('POINTid',pointID)
+        // set local state with # of likes and firebase ID of the selected item
         firebaseApp.database().ref('/').orderByChild('unique_id').equalTo(+pointID)
             .on('value', item => {
                 let itemVal;
@@ -41,11 +40,12 @@ class PointOfInterest extends Component {
             Animated.timing(this.state.viewSize,
                             {toValue: Dimensions.get('window').width-30,
                              duation: 1000}).start()
+
+            // set the state of the like icon based on user's asyncStorage
             try {
                 AsyncStorage.getItem(pointID)
                 .then(value => {
                     if (value !== null && value !== 'false'){
-                        // Item has not been upvoted by this user yet
                         this.setState({upvoted: true})
                     }
                 })
@@ -53,13 +53,13 @@ class PointOfInterest extends Component {
                 console.error(error);
             }
         }
-        console.log('upvoted? ', this.state.upvoted)
         this.setState({open: !this.state.open});
     }
 
     selectUpvote(){
         const pointID = String(this.props.point.unique_id)
-
+        // when the user clicks the like icon we
+        // set upvoted state and increment / decrement likes for item in DB
         AsyncStorage.setItem(pointID, String(!this.state.upvoted))
         .then(() => {
             this.setState({upvoted: !this.state.upvoted})
@@ -115,14 +115,16 @@ class PointOfInterest extends Component {
                                     title="Learn More"
                                     onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
                                 />
-                                <Text style={styles.upvote}>{this.state.itemLikes}</Text>
-                                <Icon
-                                    name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
-                                    size={15}
-                                    style={styles.upvote}
-                                    color={this.state.upvoted ? '#4F8EF7' : '#000000' }
-                                    onPress={this.selectUpvote}>
-                                </Icon>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Text style={styles.likes}>{this.state.itemLikes}</Text>
+                                    <Icon
+                                        name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
+                                        size={15}
+                                        style={styles.upvote}
+                                        color={this.state.upvoted ? '#4F8EF7' : '#000000' }
+                                        onPress={this.selectUpvote}>
+                                    </Icon>
+                                </View>
                             </View>
                             :
                             null
@@ -145,7 +147,10 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     upvote: {
-        marginLeft: 150
+        marginLeft: 5
+    },
+    likes: {
+        marginLeft: 140
     }
 })
 
