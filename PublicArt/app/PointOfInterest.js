@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
-import {Animated, View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback, Dimensions} from 'react-native';
+import {Animated, AsyncStorage, View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback, Dimensions} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import firebaseApp from '../firebase';
+//import * as Firebase from 'firebase';
 
 class PointOfInterest extends Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
-            viewSize: new Animated.Value(200)
+            viewSize: new Animated.Value(200),
+            upvoted: false,
+            itemLikes: 'default',
+            firebaseId: 'default'
         }
         this.selectPOI = this.selectPOI.bind(this);
+        this.selectUpvote = this.selectUpvote.bind(this)
     }
 
     selectPOI() {
+        // check if the poi has been liked
+        const pointID = String(this.props.point.unique_id)
+        console.log('POINTid',pointID)
+        firebaseApp.database().ref('/').orderByChild('unique_id').equalTo(+pointID)
+            .on('value', item => {
+                let itemVal;
+                let firebaseId;
+                let key;
+                itemVal = item.val();
+                key = +Object.keys(itemVal)[0];
+                this.setState({itemLikes: itemVal[key].likes});
+                this.setState({firebaseId: key})
+            })
+
         if (this.state.open) {
             Animated.timing(this.state.viewSize,
                             {toValue: 200,
@@ -20,8 +41,38 @@ class PointOfInterest extends Component {
             Animated.timing(this.state.viewSize,
                             {toValue: Dimensions.get('window').width-30,
                              duation: 1000}).start()
+            try {
+                AsyncStorage.getItem(pointID)
+                .then(value => {
+                    if (value !== null && value !== 'false'){
+                        // Item has not been upvoted by this user yet
+                        this.setState({upvoted: true})
+                    }
+                })
+            } catch (error) {
+                console.error(error);
+            }
         }
+        console.log('upvoted? ', this.state.upvoted)
         this.setState({open: !this.state.open});
+    }
+
+    selectUpvote(){
+        const pointID = String(this.props.point.unique_id)
+
+        AsyncStorage.setItem(pointID, String(!this.state.upvoted))
+        .then(() => {
+            this.setState({upvoted: !this.state.upvoted})
+            let ref = firebaseApp.database().ref(`${this.state.firebaseId}`);
+            let itemLikes = this.state.itemLikes
+            this.state.upvoted
+                ? ref.update({
+                    likes: itemLikes + 1,
+                  })
+                : ref.update({
+                    likes: itemLikes - 1,
+                  })
+        });
     }
 
     render() {
@@ -64,6 +115,14 @@ class PointOfInterest extends Component {
                                     title="Learn More"
                                     onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
                                 />
+                                <Text style={styles.upvote}>{this.state.itemLikes}</Text>
+                                <Icon
+                                    name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
+                                    size={15}
+                                    style={styles.upvote}
+                                    color={this.state.upvoted ? '#4F8EF7' : '#000000' }
+                                    onPress={this.selectUpvote}>
+                                </Icon>
                             </View>
                             :
                             null
@@ -84,6 +143,9 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         marginLeft: 5
+    },
+    upvote: {
+        marginLeft: 150
     }
 })
 
