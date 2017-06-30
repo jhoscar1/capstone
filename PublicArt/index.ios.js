@@ -61,13 +61,11 @@ export default class PublicArt extends Component {
         this.setState({'position': position});
         firebaseApp.database().ref('/').orderByChild('name')
         .on('value', snapshot => {
+          nearbyPOIs = [];
           let allpois = snapshot.val();
-          console.log(typeof allpois);
           if (typeof allpois == 'object') {
             allpois = Object.values(allpois);
           }
-          console.log(allpois)
-
           this.setState({allPois: allpois});
           allpois.forEach(poi => {
             let x1 = +poi.lat;
@@ -111,7 +109,6 @@ export default class PublicArt extends Component {
   }
 
   static navigationOptions = (props) => {
-      console.log('PROPS',props);
       var navigation = props.navigation
       return {
         headerRight:

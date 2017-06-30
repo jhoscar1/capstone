@@ -22,15 +22,15 @@ class PointOfInterest extends Component {
         const pointID = String(this.props.point.unique_id)
         // set local state with # of likes and firebase ID of the selected item
         firebaseApp.database().ref('/').orderByChild('unique_id').equalTo(+pointID)
-            .on('value', item => {
-                let itemVal;
-                let firebaseId;
-                let key;
-                itemVal = item.val();
-                key = +Object.keys(itemVal)[0];
-                this.setState({itemLikes: itemVal[key].likes});
-                this.setState({firebaseId: key})
-            })
+        .on('value', item => {
+            let itemVal;
+            let firebaseId;
+            let key;
+            itemVal = item.val();
+            key = +Object.keys(itemVal)[0];
+            this.setState({itemLikes: itemVal[key].likes});
+            this.setState({firebaseId: key})
+        })
 
         // set the state of the like icon based on user's asyncStorage
         AsyncStorage.getItem(pointID)
@@ -120,7 +120,7 @@ class PointOfInterest extends Component {
                                     <Text style={styles.likes}>{this.state.itemLikes}</Text>
                                     <Icon
                                         name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
-                                        size={15}
+                                        size={25}
                                         style={styles.upvote}
                                         color={this.state.upvoted ? '#4F8EF7' : '#000000' }
                                         onPress={this.selectUpvote}>
