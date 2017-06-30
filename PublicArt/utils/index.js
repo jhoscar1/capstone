@@ -23,32 +23,26 @@ utils.getDirection = (long1, long2, lat1, lat2) => {
     return theta;
 }
 
-///VERY DUMB MATH//
-
 utils.convertToOrientation = (userDirection, thetaDirection) => {
-    const absDiff = Math.abs(thetaDirection - userDirection); //is abs diff > 180?
-    let relDir = absDiff;
-
-    let left = false;
-    let otherWayAround = false;
-
-    if (absDiff > 180) otherWayAround = true;
-
-    //is the object to the left or the right?
-    if ((userDirection > thetaDirection) && (!otherWayAround) || (userDirection < thetaDirection) && (otherWayAround)) left = true;
-
-    if (otherWayAround) {
-    if (left) {
-        relDir = 360 - thetaDirection + userDirection;
+  let relDiff;
+  const absDiff = Math.max((thetaDirection - userDirection), (userDirection - thetaDirection));
+  switch (true) {
+    case (userDirection > thetaDirection) && (absDiff > 180):
+      relDiff = 360 - absDiff;
+    break;
+    case (userDirection > thetaDirection) && (absDiff < 180):
+      relDiff = -(absDiff % 360);
+    break;
+    case (thetaDirection > userDirection) && (absDiff > 180):
+      relDiff = absDiff - 360;
+    break;
+    case (thetaDirection > userDirection) && (absDiff < 180):
+      relDiff = absDiff % 360;
+    break;
+    default:
+      relDiff = absDiff;
     }
-    else {
-        relDir = 360 - userDirection + thetaDirection;
-    }
-    }
-
-    if (left) relDir = -relDir;
-
-    return relDir;
-}
+  return relDiff;
+};
 
 export default utils;
