@@ -11,7 +11,8 @@ class PointOfInterest extends Component {
             open: false,
             viewSize: new Animated.Value(200),
             upvoted: false,
-            itemLikes: ''
+            itemLikes: 'default',
+            firebaseId: 'default'
         }
         this.selectPOI = this.selectPOI.bind(this);
         this.selectUpvote = this.selectUpvote.bind(this)
@@ -20,6 +21,18 @@ class PointOfInterest extends Component {
     selectPOI() {
         // check if the poi has been liked
         const pointID = String(this.props.point.unique_id)
+        console.log('POINTid',pointID)
+        firebaseApp.database().ref('/').orderByChild('unique_id').equalTo(+pointID)
+            .on('value', item => {
+                let itemVal;
+                let firebaseId;
+                let key;
+                itemVal = item.val();
+                key = +Object.keys(itemVal)[0];
+                this.setState({itemLikes: itemVal[key].likes});
+                this.setState({firebaseId: key})
+            })
+
         if (this.state.open) {
             Animated.timing(this.state.viewSize,
                             {toValue: 200,
@@ -50,27 +63,15 @@ class PointOfInterest extends Component {
         AsyncStorage.setItem(pointID, String(!this.state.upvoted))
         .then(() => {
             this.setState({upvoted: !this.state.upvoted})
-            let itemVal;
-            let firebaseId;
-            firebaseApp.database().ref('/').orderByChild('unique_id').equalTo(+pointID)
-                .on('value', item => {
-                    itemVal = item.val();
-                    console.log('ItemVAL', itemVal)
-                    firebaseId = +Object.keys(itemVal)[0]
-                })
-            let ref = firebaseApp.database().ref(`${firebaseId}`);
-            let itemLikes = itemVal[firebaseId].likes;
-            console.log('ITEM LIKES', itemLikes)
+            let ref = firebaseApp.database().ref(`${this.state.firebaseId}`);
+            let itemLikes = this.state.itemLikes
             this.state.upvoted
                 ? ref.update({
                     likes: itemLikes + 1,
                   })
-                  .then(()=>{this.setState({itemLikes: itemLikes + 1})})
                 : ref.update({
                     likes: itemLikes - 1,
                   })
-                  .then(()=>{this.setState({itemLikes: itemLikes - 1})})
-
         });
     }
 
