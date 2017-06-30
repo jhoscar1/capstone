@@ -40,7 +40,7 @@ class SelectedPointOfInterest extends Component {
         }).start();
     }
 
-    componentWillUnmount() {
+    animateOnUnmount() {
         Animated.timing(this.state.left, {
             toValue: this.props.left,
             duration: 1000

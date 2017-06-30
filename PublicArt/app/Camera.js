@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Camera from 'react-native-camera';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, View, Animated} from 'react-native';
 import PointOfInterest from './PointOfInterest';
 import SelectedPointOfInterest from './SelectedPointOfInterest';
 import utils from '../utils';
@@ -26,6 +26,7 @@ export default class AppCamera extends Component {
             });
         }
         else {
+            animateOnUnmount();
             this.setState({
                 selectedPOI: {},
                 relSelectedPos: {},
