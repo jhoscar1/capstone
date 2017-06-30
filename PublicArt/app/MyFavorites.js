@@ -30,7 +30,6 @@ export default class MyFavorites extends Component {
 						.on('value', item => {
 							fbId = +Object.keys(item.val())[0]
 						})
-						console.log("fbId: ", fbId)
 						firebaseApp.database().ref(fbId)
 						.on('value', poi => {
 							this.setState({favorited: this.state.favorited.concat(poi.val())})
@@ -43,7 +42,6 @@ export default class MyFavorites extends Component {
 	}
 
 	render() {
-		console.log(this.state.favorited.length, " faves saved")
 		return (<View>
 			{
 				(this.state.favorited.length) ? this.state.favorited.map(poi => {
