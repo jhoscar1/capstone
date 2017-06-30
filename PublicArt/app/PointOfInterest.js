@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     upvote: {
-        marginLeft: 10
+        marginLeft: 5
     },
     likes: {
         marginLeft: 140
