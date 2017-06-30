@@ -71,7 +71,6 @@ export default class SelectedPointOfInterest extends Component {
 						})
 					}
 				</View>
-				
 			}
 			</TransitionMotion>
 		)
