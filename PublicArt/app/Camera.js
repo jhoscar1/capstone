@@ -42,11 +42,8 @@ export default class AppCamera extends Component {
             let relativePos = utils.getRelativePos(poi, this.props.heading, this.props.position.coords)
             relPosition.push(relativePos)
         })
-        console.log(relPosition.length)
+        // console.log(relPosition.length)
         let counter = 1;
-        console.log(relPosition.filter(el => {
-            return el.distance < 300;
-        }));
         return (
             <View>
                 <Camera ref={(cam) => {this.camera = cam}} style={styles.preview} />
@@ -64,6 +61,7 @@ export default class AppCamera extends Component {
                         return (
                             (poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
                             <PointOfInterest
+                                dist={poi.distance}
                                 dir={poi.dir}
                                 num={counter++}
                                 navigation={this.props.navigation}

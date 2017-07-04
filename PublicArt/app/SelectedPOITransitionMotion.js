@@ -36,9 +36,18 @@ export default class SelectedPointOfInterest extends Component {
 		return (
 			<TransitionMotion
 				willLeave={this.willLeave}
-				styles={[{
-					key: this.props.point.unique_id,
+				defaultStyles={[{
+					key: String(this.props.point.unique_id),
 					style: this.state
+				}]}
+				styles={[{
+					key: String(this.props.point.unique_id),
+					style: {
+						left: spring(Dimensions.get('screen').width / 6),
+						top: spring(Dimensions.get('screen').height / 8),
+						width: spring(Dimensions.get('screen').width / 1.5),
+						height: spring(Dimensions.get('screen').height / 5)
+					}
 				}]}
 			>
 			{
@@ -47,7 +56,7 @@ export default class SelectedPointOfInterest extends Component {
 					{
 						interpolatedStyles.map(config => {
 							<TouchableWithoutFeedback key={config.key} onPress={() => this.props.handlePress(this.props.point)} >
-								<Animated.View style={{ 
+								<View style={{ 
 									...cardStyle, 
 									...config.style
 									}}
@@ -66,7 +75,7 @@ export default class SelectedPointOfInterest extends Component {
 												/>
 											</View>
 									</View>
-								</Animated.View>
+								</View>
 							</TouchableWithoutFeedback>
 						})
 					}
@@ -75,5 +84,16 @@ export default class SelectedPointOfInterest extends Component {
 			</TransitionMotion>
 		)
 	}
-
 }
+
+const styles = StyleSheet.create({
+    text: {
+        position: 'relative',
+        fontSize: 16,
+        fontWeight: "800",
+        backgroundColor: 'transparent',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        marginLeft: 5
+    }
+})
