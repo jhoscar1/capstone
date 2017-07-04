@@ -12,7 +12,8 @@ import {
   View,
   Dimensions,
   DeviceEventEmitter,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ActivityIndicator
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
@@ -126,7 +127,10 @@ export default class PublicArt extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
+        { this.state.nearbyPois.length ?
         <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+        : <View><ActivityIndicator size={'large'} /><Text style={{fontSize: 24, fontWeight: '800'}}>Loading Art Installations...</Text></View>
+        }
       </View>
     );
   }
