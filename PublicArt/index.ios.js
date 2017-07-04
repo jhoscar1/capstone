@@ -119,19 +119,14 @@ export default class PublicArt extends Component {
       var navigation = props.navigation
       return {
         headerRight:
-          <Icon
-            name="ios-map"
-            size={30}
-            iconStyle={marginLeft=20}
-            onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
-          <Text>  </Text></Icon>,
+          <Icon name="ios-map" size={30} iconStyle={marginLeft=20}
+                onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
+              <Text>  </Text>
+          </Icon>,
         headerLeft:
-          <Icon
-            name="ios-heart"
-            size={30}
-            iconStyle={marginLeft=20}
-            onPress={navigation.state.params && navigation.state.params.handleMyFaves}>
-            </Icon>,
+          <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20}
+                        onPress={navigation.state.params && navigation.state.params.handleMyFaves} />
+          </Text>,
         title: 'I (AR)t NY'
         };
     }
