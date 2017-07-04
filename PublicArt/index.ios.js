@@ -23,6 +23,7 @@ import ReactNativeHeading from 'react-native-heading'
 import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Favorites from './app/MyFavorites'
 
 export default class PublicArt extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ export default class PublicArt extends Component {
       gyro: {}
     }
     this.onMapPress = this.onMapPress.bind(this)
+    this.onFavPress = this.onFavPress.bind(this)
 }
 
   componentDidMount() {
@@ -99,6 +101,7 @@ export default class PublicArt extends Component {
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
     this.props.navigation.setParams({ handleMapInfo: this.onMapPress });
+    this.props.navigation.setParams({ handleMyFaves: this.onFavPress });
   }
 
   componentWillUnmount() {
@@ -109,16 +112,22 @@ export default class PublicArt extends Component {
     this.props.navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})
   }
 
+  onFavPress() {
+    this.props.navigation.navigate('Favorites', {})
+  }
+
   static navigationOptions = (props) => {
       var navigation = props.navigation
       return {
         headerRight:
-          <Icon
-            name="ios-map"
-            size={30}
-            iconStyle={marginLeft=20}
-            onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
-          <Text>  </Text></Icon>,
+          <Icon name="ios-map" size={30} iconStyle={marginLeft=20}
+                onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
+              <Text>  </Text>
+          </Icon>,
+        headerLeft:
+          <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20}
+                        onPress={navigation.state.params && navigation.state.params.handleMyFaves} />
+          </Text>,
         title: 'I (AR)t NY'
         };
     }
@@ -151,6 +160,9 @@ const AppRouter = StackNavigator({
     },
     Mapview: {
       screen: Mapview
+    },
+    Favorites: {
+      screen: Favorites
     }
 })
 
