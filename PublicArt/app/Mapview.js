@@ -12,7 +12,7 @@ import MapCallout from './MapCallout';
 class Mapview extends Component {
   constructor(props){
     super(props)
-    var userLocation = this.props.navigation.state.params.userLocation.coords
+    const userLocation = this.props.navigation.state.params.userLocation.coords
     this.state = {
       region: {
         latitude: userLocation.latitude,
@@ -44,6 +44,7 @@ class Mapview extends Component {
           {this.state.markers.map((marker, index) => (
             marker.lat > 0 ?
                <MapView.Marker
+                  key={marker.unique_id}
                   coordinate={{
                     latitude: +marker.lat,
                     longitude: +marker.lng}}>
