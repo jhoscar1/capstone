@@ -22,7 +22,8 @@ utils.getDirection = (long1, long2, lat1, lat2) => {
     theta =  theta * (180 / Math.PI);
     return theta;
 }
-
+//this converts the direction theta into a number between -180 and 180
+// such that an object at 0 is directly in front of the user, 90 to the right, etc.
 utils.convertToOrientation = (userDirection, thetaDirection) => {
   let relDiff;
   const absDiff = Math.max((thetaDirection - userDirection), (userDirection - thetaDirection));

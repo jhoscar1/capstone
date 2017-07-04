@@ -23,8 +23,17 @@ class Mapview extends Component {
       markers: this.props.navigation.state.params.markers,
       selectedMarker: false
     };
+    this.markerSelected = this.markerSelected.bind(this)
   }
 
+markerSelected (markerId) {
+  this.setState({
+    selectedMarker: markerId
+  });
+  // const markerId = event.nativeEvent;
+  // console.log(this.state.markers[0]);
+  console.log('hello', markerId);
+}
 
   render() {
     const navigation = this.props.navigation
@@ -47,20 +56,24 @@ class Mapview extends Component {
                   key={marker.unique_id}
                   coordinate={{
                     latitude: +marker.lat,
-                    longitude: +marker.lng}}>
+                    longitude: +marker.lng}}
+                  id={marker.unique_id}
+                  onPress={(event) => this.markerSelected(marker.unique_id)}>
                     <MapView.Callout tooltip style={styles.customView}
                       onPress={() => navigation.navigate('Details', { name: marker.link})}>
+                      {marker.unique_id === this.state.selectedMarker ?
                       <MapCallout>
                         <Text
                           style={ styles.titleText }
                           >{marker.name}</Text>
                         <Image
                           source={{uri: `https://www.nycgovparks.org${marker.thumb_path}`}}
-                          style={styles.placeImage}
-                            />
-                          <Text
-                            style={ styles.tapText }>Tap to learn more</Text>
+                          style={styles.placeImage}/>
+                        <Text
+                          style={ styles.titleText }>Tap for Info</Text>
                       </MapCallout>
+                       :
+                      null}
                     </MapView.Callout>
               </MapView.Marker>
               : null
@@ -72,10 +85,6 @@ class Mapview extends Component {
   }
 
 const styles = StyleSheet.create({
-  customView: {
-    width: 200,
-    height: 100,
-  },
   container: {
     position: 'absolute',
     top: 0,
