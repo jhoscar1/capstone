@@ -10,29 +10,31 @@ import {
   Dimensions
 } from 'react-native';
 import firebaseApp from '../firebase';
+import {StackNavigator} from 'react-navigation';
 
 export default class ListItem extends Component {
 	constructor(props) {
 		super(props);
 		this.mapView = this.mapView.bind(this);
-		this.unfavorite = this.unfavorite.bind(this);
 		this.moreInfo = this.moreInfo.bind(this);
 	}
 
-
 	mapView() {
-
+		this.props.navigation.navigate('Mapview',
+			{
+				userLocation: this.props.position,
+				markers: [this.props.item]
+			})
 	}
 
-	unfavorite() {
 
-	}
 
 	moreInfo() {
-
+		this.props.navigation.navigate('Details', { name: this.props.item.link})
 	}
 
 	render() {
+		console.log('list item props: ', this.props);
 		const viewStyle = {
 			flexDirection: 'row',
 			justifyContent: 'space-around',
@@ -48,6 +50,8 @@ export default class ListItem extends Component {
 			width: Dimensions.get('window').width - 80
 		}
 
+		const { navigation } = this.props;
+		
 		return(
 			<View key={this.props.item.unique_id}>
 				<View style={viewStyle}>
@@ -58,13 +62,14 @@ export default class ListItem extends Component {
 					</View>
 				</View>
 				<View style={viewStyle}>
-					<Button onPress={this.mapView} title='Map View' />
-					<Button onPress={this.moreInfo} title='More Info'/>
-					<Button onPress={this.unfavorite} title='Un-favorite' />
+					<Button onPress={navigation.state.params && this.mapView} title='Map View' />
+					<Button onPress={navigation.state.params && this.moreInfo} title='More Info'/>
+					<Button onPress={navigation.state.params && (() => {this.props.unfavorite(this.props.item)})} title='Un-favorite' />
 				</View>
 			</View>			
 		)
-  }
-
-
+ 	}
 }
+
+
+
