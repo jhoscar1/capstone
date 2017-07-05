@@ -99,7 +99,10 @@ export default class PublicArt extends Component {
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
-    this.props.navigation.setParams({ handleMapInfo: this.onMapPress });
+    this.props.navigation.setParams({
+      handleMapInfo: this.onMapPress,
+      handleWalkInfo: this.onTourPress
+    });
   }
 
   componentWillUnmount() {
@@ -111,7 +114,7 @@ export default class PublicArt extends Component {
   }
 
   onTourPress(){
-    this.this.props.navigation.navigate('TourMaker', {userLocation: this.state.position})
+    this.props.navigation.navigate('Tourview', {userLocation: this.state.position, markers: this.state.allPois})
   }
 
   static navigationOptions = (props) => {
@@ -122,7 +125,7 @@ export default class PublicArt extends Component {
           name="ios-walk"
           size={30}
           iconStyle={marginLeft=0}
-          onPress={console.log('button pressed')} />,
+          onPress={navigation.state.params && navigation.state.params.handleWalkInfo} />,
         headerRight:
           <Icon
             name="ios-map"
