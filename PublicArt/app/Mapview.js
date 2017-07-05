@@ -13,14 +13,19 @@ class Mapview extends Component {
   constructor(props){
     super(props)
     const userLocation = this.props.navigation.state.params.userLocation.coords
+    const markersArr = this.props.navigation.state.params.markers;
     this.state = {
-      region: {
+      userLocation: {
         latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
+        longitude: userLocation.longitude
+      },
+      region: {
+        latitude: (markersArr.length==1) ? markersArr[0].lat : userLocation.latitude,
+        longitude: (markersArr.length==1) ? markersArr[0].lng : userLocation.longitude,
         latitudeDelta: 0.0122,
         longitudeDelta: 0.0021,
        },
-      markers: this.props.navigation.state.params.markers,
+      markers: markersArr,
       selectedMarker: false
     };
     this.markerSelected = this.markerSelected.bind(this)
@@ -42,8 +47,8 @@ markerSelected (markerId) {
           <MapView.Marker
             style={ styles.personMarker }
             coordinate={{
-              latitude: this.state.region.latitude,
-              longitude: this.state.region.longitude
+              latitude: this.state.userLocation.latitude,
+              longitude: this.state.userLocation.longitude
             }}
             image={require('../PersonIcon.png')}
           />
