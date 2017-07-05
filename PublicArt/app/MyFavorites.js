@@ -23,7 +23,6 @@ export default class MyFavorites extends Component {
 	}
 
 	unfavorite(poi) {
-		console.log("UNFAVORITING")
 		const pointID = String(poi.unique_id)
 
 		// set to false on async storage
@@ -91,7 +90,6 @@ export default class MyFavorites extends Component {
     }
 
 	render() {
-		console.log(this.props);
 		return (<View>
 					{
 						(this.state.favorited.length) ?
