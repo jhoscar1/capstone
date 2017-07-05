@@ -65,7 +65,6 @@ export default class MyFavorites extends Component {
 						.then((fbId) => {
 							firebaseApp.database().ref(fbId)
 							.on('value', poi => {
-								console.log("poi val: ", poi.val())
 								// faves.push(poi.val());
 								this.setState({favorited: this.state.favorited.concat([poi.val()])})
 							})
