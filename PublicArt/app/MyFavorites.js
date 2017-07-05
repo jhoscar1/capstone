@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import firebaseApp from '../firebase';
 import ListItem from './ListItem'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class MyFavorites extends Component {
 	constructor(props) {
@@ -20,6 +21,7 @@ export default class MyFavorites extends Component {
 		}
 		this.unfavorite = this.unfavorite.bind(this);
 		this.getFavorites = this.getFavorites.bind(this);
+    	this.onPopularPress = this.onPopularPress.bind(this);
 	}
 
 	unfavorite(poi) {
@@ -75,6 +77,11 @@ export default class MyFavorites extends Component {
 				.catch(console.error.bind(console))
 			})
 		})
+		this.props.navigation.setParams({handlePopular: this.onPopularPress})
+	}
+
+	onPopularPress() {
+		this.props.navigation.navigate('Popular', {})
 	}
 
 	componentDidMount() {
@@ -93,12 +100,28 @@ export default class MyFavorites extends Component {
 					{
 						(this.state.favorited.length) ?
 						<FlatList data={this.state.favorited}
-							renderItem={({item}) => <ListItem  key={item.unique_id} position={this.props.navigation.state.params.position}
-															   item={item} navigation={this.props.navigation} unfavorite={this.unfavorite}/> } />
+							keyExtractor={item => String(item.unique_id)}
+							renderItem={({item}) => <ListItem 
+							position={this.props.navigation.state.params.position}
+							item={item} 
+							navigation={this.props.navigation} 
+							unfavorite={this.unfavorite}/> 
+							} 
+						/>
 						: <Text>You haven't saved any favorites yet!</Text>
 					}
 				</View>)
 	}
 
+	static navigationOptions = (props) => {
+    	var navigation = props.navigation
+    	return {
+        	title: 'My Favorites',
+			headerRight:
+				<Icon name="emoticon-cool" size={30} iconStyle={marginLeft=20}
+					onPress={navigation.state.params && navigation.state.params.handlePopular}>
+				</Icon>
+        };
+    }
 
 }

@@ -24,6 +24,7 @@ import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Favorites from './app/MyFavorites'
+import MostPopular from './app/MostPopular';
 
 
 export default class PublicArt extends Component {
@@ -168,6 +169,9 @@ const AppRouter = StackNavigator({
     },
     Favorites: {
       screen: Favorites
+    },
+    Popular: {
+      screen: MostPopular
     }
 })
 
