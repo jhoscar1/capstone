@@ -12,7 +12,8 @@ import {
   View,
   Dimensions,
   DeviceEventEmitter,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ActivityIndicator
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
@@ -22,6 +23,8 @@ import ReactNativeHeading from 'react-native-heading'
 import AppCamera from './app/Camera';
 import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Favorites from './app/MyFavorites'
+
 
 export default class PublicArt extends Component {
   constructor(props) {
@@ -35,6 +38,7 @@ export default class PublicArt extends Component {
       gyro: {}
     }
     this.onMapPress = this.onMapPress.bind(this)
+    this.onFavPress = this.onFavPress.bind(this)
 }
 
   componentDidMount() {
@@ -61,6 +65,7 @@ export default class PublicArt extends Component {
         this.setState({'position': position});
         firebaseApp.database().ref('/').orderByChild('name')
         .on('value', snapshot => {
+          nearbyPOIs = [];
           let allpois = snapshot.val();
           if (typeof allpois == 'object') {
             allpois = Object.values(allpois);
@@ -74,7 +79,8 @@ export default class PublicArt extends Component {
             let y2 = +this.state.position.coords.longitude;
             let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
             if (distance < 0.008) nearbyPOIs.push(poi);
-        })
+          })
+          this.setState({'nearbyPois': nearbyPOIs})
       },
       (error) => console.error(error),
       {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
@@ -97,7 +103,10 @@ export default class PublicArt extends Component {
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
-    this.props.navigation.setParams({ handleMapInfo: this.onMapPress });
+    this.props.navigation.setParams(
+      {handleMapInfo: this.onMapPress,
+      handleMyFaves: this.onFavPress} );
+    // this.props.navigation.setParams({ handleMyFaves: this.onFavPress });
   }
 
   componentWillUnmount() {
@@ -108,26 +117,34 @@ export default class PublicArt extends Component {
     this.props.navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})
   }
 
+  onFavPress() {
+    this.props.navigation.navigate('Favorites', {position: this.state.position})
+  }
+
   static navigationOptions = (props) => {
-      console.log('PROPS',props);
       var navigation = props.navigation
       return {
         headerRight:
-          <Icon
-            name="ios-map"
-            size={30}
-            iconStyle={marginLeft=20}
-            onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
-          <Text>  </Text></Icon>,
+          <Icon name="ios-map" size={30} iconStyle={marginLeft=20}
+                onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
+              <Text>  </Text>
+          </Icon>,
+        headerLeft:
+          <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20} position={navigation.state.params && navigation.state.params.position} navigation={navigation}
+                        onPress={navigation.state.params && navigation.state.params.handleMyFaves} />
+          </Text>,
         title: 'I (AR)t NY'
-        };
+      };
     }
 
   render() {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
+        { this.state.nearbyPois.length ?
         <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
+        : <View><ActivityIndicator size={'large'} /><Text style={{fontSize: 24, fontWeight: '800'}}>Loading Art Installations...</Text></View>
+        }
       </View>
     );
   }
@@ -148,6 +165,9 @@ const AppRouter = StackNavigator({
     },
     Mapview: {
       screen: Mapview
+    },
+    Favorites: {
+      screen: Favorites
     }
 })
 
