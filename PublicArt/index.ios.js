@@ -25,6 +25,7 @@ import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Favorites from './app/MyFavorites'
 
+
 export default class PublicArt extends Component {
   constructor(props) {
     super(props);
@@ -113,7 +114,7 @@ export default class PublicArt extends Component {
   }
 
   onFavPress() {
-    this.props.navigation.navigate('Favorites', {})
+    this.props.navigation.navigate('Favorites', {position: this.state.position})
   }
 
   static navigationOptions = (props) => {
@@ -125,18 +126,18 @@ export default class PublicArt extends Component {
               <Text>  </Text>
           </Icon>,
         headerLeft:
-          <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20}
+          <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20} position={navigation.state.params && navigation.state.params.position} navigation={navigation}
                         onPress={navigation.state.params && navigation.state.params.handleMyFaves} />
           </Text>,
         title: 'I (AR)t NY'
-        };
+      };
     }
 
   render() {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        { this.state.nearbyPois.length ?
+        { this.state.allPois.length ?
         <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
         : <View><ActivityIndicator size={'large'} /><Text style={{fontSize: 24, fontWeight: '800'}}>Loading Art Installations...</Text></View>
         }

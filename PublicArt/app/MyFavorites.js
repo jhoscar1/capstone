@@ -18,10 +18,34 @@ export default class MyFavorites extends Component {
 		this.state = {
 			favorited: [],
 		}
+		this.unfavorite = this.unfavorite.bind(this);
+		this.getFavorites = this.getFavorites.bind(this);
 	}
 
-	componentDidMount() {
-		let faves = [];
+	unfavorite(poi) {
+		const pointID = String(poi.unique_id)
+
+		// set to false on async storage
+		AsyncStorage.setItem(pointID, 'false');
+
+		// get firebase id
+		let fbId, itemLikes;
+		firebaseApp.database().ref('/').orderByChild('unique_id').equalTo(+pointID)
+		.on('value', item => {
+			fbId = +Object.keys(item.val())[0];
+			itemLikes = item.val()[fbId].likes
+		})
+
+		// decrement likes in firebase
+		let ref = firebaseApp.database().ref(`${fbId}`);
+		ref.update({ likes: itemLikes-1})
+
+		this.getFavorites();
+	}
+
+	getFavorites() {
+		// let faves = [];
+		this.setState({favorited: []})
 		AsyncStorage.getAllKeys()
 		.then(allKeys => {
 			allKeys.map(key => {
@@ -41,7 +65,8 @@ export default class MyFavorites extends Component {
 						.then((fbId) => {
 							firebaseApp.database().ref(fbId)
 							.on('value', poi => {
-								this.setState({favorited: this.state.favorited.concat(poi.val())})
+								// faves.push(poi.val());
+								this.setState({favorited: this.state.favorited.concat([poi.val()])})
 							})
 						})
 
@@ -52,15 +77,8 @@ export default class MyFavorites extends Component {
 		})
 	}
 
-	render() {
-		return (<View>
-					{
-						(this.state.favorited.length) ?
-						<FlatList data={this.state.favorited}
-							renderItem={({item}) => <ListItem  key={item.unique_id} item={item} /> } />
-						: <Text>You haven't saved any favorites yet!</Text>
-					}
-				</View>)
+	componentDidMount() {
+		this.getFavorites();
 	}
 
 	static navigationOptions = (props) => {
@@ -69,5 +87,18 @@ export default class MyFavorites extends Component {
         	title: 'My Favorites'
         };
     }
+
+	render() {
+		return (<View>
+					{
+						(this.state.favorited.length) ?
+						<FlatList data={this.state.favorited}
+							renderItem={({item}) => <ListItem  key={item.unique_id} position={this.props.navigation.state.params.position}
+															   item={item} navigation={this.props.navigation} unfavorite={this.unfavorite}/> } />
+						: <Text>You haven't saved any favorites yet!</Text>
+					}
+				</View>)
+	}
+
 
 }
