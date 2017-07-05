@@ -28,7 +28,7 @@ class MostPopular extends Component {
 				return b.likes - a.likes
 			})
 			console.log(sortedByPopularity);
-			this.setState({popular: [sortedByPopularity]})
+			this.setState({popular: sortedByPopularity})
 		})
 	}
 
@@ -38,7 +38,13 @@ class MostPopular extends Component {
 			{	this.state.popular.length ?
 				<FlatList
 					data={this.state.popular}
-					renderItem={({item}) => <ListItem key={item.unique_id} item={item} />
+					initialNumToRender={10}
+					keyExtractor={item => String(item.unique_id)} 
+					renderItem={({item}) => <ListItem 
+						item={item}
+						position={this.props.navigation.state.params.position}
+						navigation={this.props.navigation}
+					/>
 					}
 				/>
 				:
