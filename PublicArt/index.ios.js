@@ -15,7 +15,7 @@ import {
   TouchableWithoutFeedback,
   ActivityIndicator
 } from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import { StackNavigator, TabNavigator} from 'react-navigation';
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import PointDetails from './app/PointDetails'
 import Mapview from './app/Mapview'
@@ -105,7 +105,7 @@ export default class PublicArt extends Component {
     )
     this.props.navigation.setParams(
       {handleMapInfo: this.onMapPress,
-      handleMyFaves: this.onFavPress} );
+       handleMyFaves: this.onFavPress} );
     // this.props.navigation.setParams({ handleMyFaves: this.onFavPress });
   }
 
@@ -121,21 +121,25 @@ export default class PublicArt extends Component {
     this.props.navigation.navigate('Favorites', {position: this.state.position})
   }
 
-  static navigationOptions = (props) => {
-      var navigation = props.navigation
-      return {
-        headerRight:
-          <Icon name="ios-map" size={30} iconStyle={marginLeft=20}
-                onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
-              <Text>  </Text>
-          </Icon>,
-        headerLeft:
-          <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20} position={navigation.state.params && navigation.state.params.position} navigation={navigation}
-                        onPress={navigation.state.params && navigation.state.params.handleMyFaves} />
-          </Text>,
-        title: 'I (AR)t NY'
+  static navigationOptions = {
+  //     var navigation = props.navigation
+  //     return {
+        // headerRight:
+        //   <Icon name="ios-map" size={30} iconStyle={marginLeft=20}
+        //         onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
+        //       <Text>  </Text>
+        //   </Icon>,
+        // headerLeft:
+        //   <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20} position={navigation.state.params && navigation.state.params.position} navigation={navigation}
+        //                 onPress={navigation.state.params && navigation.state.params.handleMyFaves} />
+        //   </Text>,
+        title: 'I (AR)t NY',
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ tintColor }) => {
+          <Icon name="ion-camera" />
+        }
       };
-    }
+    // }
 
   render() {
     const { navigation } = this.props;
@@ -149,21 +153,14 @@ export default class PublicArt extends Component {
     );
   }
 
-
-
 }
 
-// App Router
-
-const AppRouter = StackNavigator({
+// Routers
+const tabRouter = TabNavigator({
     Home: {
         screen: PublicArt
     },
-    Details: {
-        screen: PointDetails,
-        path: 'poi/:name'
-    },
-    Mapview: {
+    Map: {
       screen: Mapview
     },
     Favorites: {
@@ -171,8 +168,18 @@ const AppRouter = StackNavigator({
     }
 })
 
-// Stylesheet
+const AppRouter = StackNavigator({
+    Home: {
+        screen: tabRouter
+    },
+    Details: {
+        screen: PointDetails,
+        path: 'poi/:name'
+    },
+})
 
+
+// Stylesheet
 const styles = StyleSheet.create({
   container: {
     flex: 1,

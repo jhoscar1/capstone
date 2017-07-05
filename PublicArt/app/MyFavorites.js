@@ -81,19 +81,18 @@ export default class MyFavorites extends Component {
 		this.getFavorites();
 	}
 
-	static navigationOptions = (props) => {
-    	var navigation = props.navigation
-    	return {
-        	title: 'My Favorites'
-        };
+	static navigationOptions = {
+    	title: 'I (AR)t NY',
+    	tabBarLabel: 'Favorites'
     }
 
 	render() {
+		console.log('favorites navigation.state: ', this.props.navigation.state)
 		return (<View>
 					{
 						(this.state.favorited.length) ?
 						<FlatList data={this.state.favorited}
-							renderItem={({item}) => <ListItem  key={item.unique_id} position={this.props.navigation.state.params.position}
+							renderItem={({item}) => <ListItem  key={item.unique_id} position={this.props.navigation.state}//.params.position}
 															   item={item} navigation={this.props.navigation} unfavorite={this.unfavorite}/> } />
 						: <Text>You haven't saved any favorites yet!</Text>
 					}
