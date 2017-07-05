@@ -78,7 +78,8 @@ export default class PublicArt extends Component {
             let y2 = +this.state.position.coords.longitude;
             let distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
             if (distance < 0.008) nearbyPOIs.push(poi);
-        })
+          })
+          this.setState({'nearbyPois': nearbyPOIs})
       },
       (error) => console.error(error),
       {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
@@ -137,7 +138,7 @@ export default class PublicArt extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        { this.state.allPois.length ?
+        { this.state.nearbyPois.length ?
         <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} />
         : <View><ActivityIndicator size={'large'} /><Text style={{fontSize: 24, fontWeight: '800'}}>Loading Art Installations...</Text></View>
         }
