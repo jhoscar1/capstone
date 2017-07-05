@@ -30,9 +30,6 @@ markerSelected (markerId) {
   this.setState({
     selectedMarker: markerId
   });
-  // const markerId = event.nativeEvent;
-  // console.log(this.state.markers[0]);
-  console.log('hello', markerId);
 }
 
   render() {
