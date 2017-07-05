@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
   bubble: {
     width: 140,
     backgroundColor: '#4da2ab',
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
     borderColor: '#007a87',
     borderWidth: 0.5,
     position: 'relative'
