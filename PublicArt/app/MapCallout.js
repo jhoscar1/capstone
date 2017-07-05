@@ -32,15 +32,10 @@ const styles = StyleSheet.create({
   },
   bubble: {
     width: 140,
-    flexDirection: 'row',
-    backgroundColor: '#fa8072',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 6,
-    borderColor: '#000000',
+    backgroundColor: '#4da2ab',
+    borderColor: '#007a87',
     borderWidth: 0.5,
-    zIndex: 2,
-    position: 'absolute'
+    position: 'relative'
   },
   amount: {
     flex: 1,
@@ -49,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 16,
     borderColor: 'transparent',
-    borderTopColor: '#fa8072',
+    borderTopColor: '#4da2ab',
     alignSelf: 'center',
     marginTop: -32,
   },
@@ -57,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 16,
     borderColor: 'transparent',
-    borderTopColor: '#000000',
+    borderTopColor: '#007a87',
     alignSelf: 'center',
     marginTop: -0.5,
   },
