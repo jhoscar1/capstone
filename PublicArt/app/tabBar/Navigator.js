@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
+import React from 'react';
+import { TabNavigator } from 'react-navigation';
 import CameraStack from '../CameraView/Camera'
 import MapStack from '../MapView/Mapview'
 import FavStack from '../FavoritesView/MyFavorites'

@@ -3,11 +3,9 @@ import Camera from 'react-native-camera';
 import {Text, Dimensions, StyleSheet, View, ActivityIndicator, DeviceEventEmitter} from 'react-native';
 import PointOfInterest from './PointOfInterest';
 import utils from '../../utils';
-import { StackNavigator, NavigationActions } from 'react-navigation';
-import firebaseApp from '../../firebase';
+import { StackNavigator } from 'react-navigation';
 import ReactNativeHeading from 'react-native-heading'
-import { Accelerometer, Gyroscope } from 'react-native-sensors';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Accelerometer } from 'react-native-sensors';
 import SelectedPointOfInterest from '../SelectedPointOfInterest';
 import PointDetails from '../PointDetails.js'
 
@@ -125,23 +123,6 @@ const styles = StyleSheet.create({
 	flex: 1,
 	justifyContent: 'center',
 	alignItems: 'center',
-  },
-  button: {
-	flex: 1,
-	justifyContent: 'center',
-	alignItems: 'center',
-	backgroundColor: 'rgba(52, 52, 52, 1.0)',
-	borderRadius: 10
-  },
-  welcome: {
-	fontSize: 20,
-	textAlign: 'center',
-	margin: 10,
-  },
-  instructions: {
-	textAlign: 'center',
-	color: '#333333',
-	marginBottom: 5,
   },
   preview: {
 	flex: 1,

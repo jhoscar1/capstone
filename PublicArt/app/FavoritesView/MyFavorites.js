@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
-  Button,
   Text,
-  Image,
   AsyncStorage,
-  FlatList,
-  Dimensions,
-  AppRegistry
+  FlatList
 } from 'react-native';
 import firebaseApp from '../../firebase';
 import ListItem from './ListItem'
-import Icon from 'react-native-vector-icons/Ionicons';
-import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 import PointDetails from '../PointDetails.js'
 import MapStack from '../MapView/Mapview.js'
 
@@ -85,18 +79,7 @@ class MyFavorites extends Component {
 		this.getFavorites();
 	}
 
-	// static navigationOptions = (props) => {
-	// 	const navigation = props.navigation;
-	// 	return {
-	//     	tabBarLabel: 'Favorites',
-	//     	tabBarIcon: ({tintColor}) => (
-	// 	    	<Icon name="ios-heart-outline" navigation={navigation} size={26} style={{width: 26, height: 26, /*tintColor: tintColor*/}} />
-	// 	    )
-	// 	}
-    // }
-
 	render() {
-		console.log('favorites props: ', this.props)
 		return (<View>
 					{
 						(this.state.favorited.length) ?
