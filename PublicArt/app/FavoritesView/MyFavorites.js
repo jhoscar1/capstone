@@ -7,13 +7,17 @@ import {
   Image,
   AsyncStorage,
   FlatList,
-  Dimensions
+  Dimensions,
+  AppRegistry
 } from 'react-native';
-import firebaseApp from '../firebase';
+import firebaseApp from '../../firebase';
 import ListItem from './ListItem'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
+import PointDetails from '../PointDetails.js'
+import Mapview from '../MapView/Mapview.js'
 
-export default class MyFavorites extends Component {
+class MyFavorites extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -46,7 +50,6 @@ export default class MyFavorites extends Component {
 	}
 
 	getFavorites() {
-		// let faves = [];
 		this.setState({favorited: []})
 		AsyncStorage.getAllKeys()
 		.then(allKeys => {
@@ -67,7 +70,6 @@ export default class MyFavorites extends Component {
 						.then((fbId) => {
 							firebaseApp.database().ref(fbId)
 							.on('value', poi => {
-								// faves.push(poi.val());
 								this.setState({favorited: this.state.favorited.concat([poi.val()])})
 							})
 						})
@@ -89,39 +91,53 @@ export default class MyFavorites extends Component {
 	}
 
 	static navigationOptions = (props) => {
-    	var navigation = props.navigation
-    	return {
-        	title: 'My Favorites'
-        };
+		const navigation = props.navigation;
+		return {
+	    	tabBarLabel: 'Favorites',
+	    	tabBarIcon: ({tintColor}) => (
+		    	<Icon name="ios-heart-outline" navigation={navigation} size={26} style={{width: 26, height: 26, /*tintColor: tintColor*/}} />
+		    )
+		}
     }
 
 	render() {
+		console.log('favorites props: ', this.props)
 		return (<View>
 					{
 						(this.state.favorited.length) ?
 						<FlatList data={this.state.favorited}
 							keyExtractor={item => String(item.unique_id)}
 							renderItem={({item}) => <ListItem 
-							position={this.props.navigation.state.params.position}
-							item={item} 
-							navigation={this.props.navigation} 
-							unfavorite={this.unfavorite}/> 
-							} 
-						/>
+											position={this.props.screenProps.position}
+											item={item} 
+											navigation={this.props.navigation} 
+											unfavorite={this.unfavorite}/> 
+											} 
+										/>
 						: <Text>You haven't saved any favorites yet!</Text>
 					}
 				</View>)
 	}
-
-	static navigationOptions = (props) => {
-    	var navigation = props.navigation
-    	return {
-        	title: 'My Favorites',
-			headerRight:
-				<Icon name="emoticon-cool" size={30} iconStyle={marginLeft=20}
-					onPress={navigation.state.params && navigation.state.params.handlePopular}>
-				</Icon>
-        };
-    }
-
 }
+
+const FavStack = StackNavigator({
+  MyFaves: {
+    screen: MyFavorites,
+    title: "My Favorites"
+  },
+  Details: {
+    screen: PointDetails,
+    path: 'poi/:name',
+    title: "Details"
+  },
+  SinglePOIMap: {
+    screen: Mapview,
+    title: "Map View"
+  }
+})
+
+AppRegistry.registerComponent('FavStack', () => FavStack);
+
+export default FavStack
+
+

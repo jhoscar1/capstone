@@ -13,55 +13,33 @@ import {
   Dimensions,
   DeviceEventEmitter,
   TouchableWithoutFeedback,
-  ActivityIndicator
+  ActivityIndicator,
+  Image
 } from 'react-native';
-import {StackNavigator} from 'react-navigation';
-import { Accelerometer, Gyroscope } from 'react-native-sensors';
-import PointDetails from './app/PointDetails'
-import Mapview from './app/Mapview'
-import ReactNativeHeading from 'react-native-heading'
-import AppCamera from './app/Camera';
+import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
+import PointDetails from './app/PointDetails.js'
+import Mapview from './app/MapView/Mapview.js'
+import AppCamera from './app/CameraView/Camera.js';
 import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Favorites from './app/MyFavorites'
-import MostPopular from './app/MostPopular';
+import Favorites from './app/FavoritesView/MyFavorites.js';
+import TabBar from './app/tabBar/Navigator.js'
 
 
 export default class PublicArt extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      headingIsSupported: false,
-      heading: '',
       position: '',
       nearbyPois: [],
       allPois: [],
-      gyro: {}
     }
-    this.onMapPress = this.onMapPress.bind(this)
-    this.onFavPress = this.onFavPress.bind(this)
-}
+  }
 
   componentDidMount() {
-    const accelerationObservable = new Accelerometer({
-      updateInterval: 100, // defaults to 100ms
-    });
-
-  // Normal RxJS functions
-  accelerationObservable
-  .subscribe(speed => this.setState({gyro: speed}));
-    /* get direction of user */
-    ReactNativeHeading.start(15)
-    .then(didStart => {
-      this.setState({'headingIsSupported': didStart})
-    })
-
-    DeviceEventEmitter.addListener('headingUpdated', data => {
-      this.setState({'heading': data.heading})
-    })
 
     let nearbyPOIs = [];
-    /* get location of current user*/
+    // get location of current user
     navigator.geolocation.getCurrentPosition((position) => {
         this.setState({'position': position});
         firebaseApp.database().ref('/').orderByChild('name')
@@ -84,9 +62,8 @@ export default class PublicArt extends Component {
           this.setState({'nearbyPois': nearbyPOIs})
       },
       (error) => console.error(error),
-      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000}
-    )
-  });
+      {timeout: 25000, enableHighAccuracy: true, maximumAge: 1000})
+    });
 
     this.watchID = navigator.geolocation.watchPosition((newPosition) => {
         this.setState({'position': newPosition });
@@ -104,99 +81,21 @@ export default class PublicArt extends Component {
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
-    this.props.navigation.setParams({
-      handleMapInfo: this.onMapPress,
-      handleMyFaves: this.onFavPress
-    });
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
-  onMapPress(){
-    this.props.navigation.navigate('Mapview', {userLocation: this.state.position, markers: this.state.allPois})
-  }
-
-  onFavPress() {
-    this.props.navigation.navigate('Favorites', {position: this.state.position})
-  }
-
-  static navigationOptions = (props) => {
-      var navigation = props.navigation
-      return {
-        headerRight:
-          <Icon name="ios-map" size={30} iconStyle={marginLeft=20}
-                onPress={navigation.state.params && navigation.state.params.handleMapInfo}>
-              <Text>  </Text>
-          </Icon>,
-        headerLeft:
-          <Text>  <Icon name="ios-heart" size={30} iconStyle={marginLeft=20} position={navigation.state.params && navigation.state.params.position} navigation={navigation}
-                        onPress={navigation.state.params && navigation.state.params.handleMyFaves} />
-          </Text>,
-        title: 'I (AR)t NY'
-      };
-    }
-
   render() {
-    const { navigation } = this.props;
     return (
-      <View style={styles.container}>
-        { this.state.nearbyPois.length ?
-        <AppCamera tilt={this.state.gyro} pois={this.state.nearbyPois} position={this.state.position} heading={this.state.heading} navigation={navigation} handlePress={this.handlePress} />
-        : <View><ActivityIndicator size={'large'} /><Text style={{fontSize: 24, fontWeight: '800'}}>Loading Art Installations...</Text></View>
-        }
-      </View>
-    );
+      <TabBar screenProps={{
+        pois: this.state.nearbyPois,
+        allPois: this.state.allPois,
+        position: this.state.position}} />)
   }
-
-
-
 }
 
-// App Router
+AppRegistry.registerComponent('PublicArt', () => PublicArt);
 
-const AppRouter = StackNavigator({
-    Home: {
-        screen: PublicArt
-    },
-    Details: {
-        screen: PointDetails,
-        path: 'poi/:name'
-    },
-    Mapview: {
-      screen: Mapview
-    },
-    Favorites: {
-      screen: Favorites
-    },
-    Popular: {
-      screen: MostPopular
-    }
-})
 
-// Stylesheet
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(52, 52, 52, 1.0)',
-    borderRadius: 10
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width
-  }
-});
-
-AppRegistry.registerComponent('PublicArt', () => AppRouter);

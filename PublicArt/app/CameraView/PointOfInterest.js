@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Animated, AsyncStorage, View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import firebaseApp from '../firebase';
+import firebaseApp from '../../firebase';
 //import * as Firebase from 'firebase';
 
 const PointOfInterest = (props) => {
