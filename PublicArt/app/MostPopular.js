@@ -11,6 +11,9 @@ import {
 } from 'react-native';
 import firebaseApp from '../firebase';
 import ListItem from './FavoritesView/ListItem'
+import { StackNavigator } from 'react-navigation';
+import MapStack from './MapView/Mapview.js'
+import PointDetails from './PointDetails.js'
 
 class MostPopular extends Component {
 	constructor(props) {
@@ -27,7 +30,6 @@ class MostPopular extends Component {
 			const sortedByPopularity = resultArr.sort((a, b) => {
 				return b.likes - a.likes
 			})
-			console.log(sortedByPopularity);
 			this.setState({popular: sortedByPopularity})
 		})
 	}
@@ -53,13 +55,26 @@ class MostPopular extends Component {
 			</View>
 		)
 	}
-
-	static navigationOptions = (props) => {
-    	var navigation = props.navigation
-    	return {
-        	title: 'Most Popular'
-        };
-    }
 }
 
-export default MostPopular;
+const PopularStack = StackNavigator({
+	MostPop: {
+		screen: MostPopular,
+		title: "Most Popular"
+	},
+	PopDetails: {
+		screen: PointDetails,
+		path: 'poi/:name',
+    	title: "Details"
+	},
+	PopMap: {
+		screen: MapStack,
+		title: "Map View"
+	}
+})
+
+
+export default PopularStack;
+
+
+

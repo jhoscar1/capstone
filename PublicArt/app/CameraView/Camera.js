@@ -9,6 +9,7 @@ import ReactNativeHeading from 'react-native-heading'
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SelectedPointOfInterest from '../SelectedPointOfInterest';
+import PointDetails from '../PointDetails.js'
 
 class AppCamera extends Component {
 	constructor(props) {
@@ -70,8 +71,7 @@ class AppCamera extends Component {
             let relativePos = utils.getRelativePos(poi, this.state.heading, this.props.screenProps.position.coords)
             relPosition.push(relativePos)
         })
-		console.log(relPosition.length)
-		// console.log("CAMERA PROPS: ", this.props)
+
 		let counter = 1;
 
 
@@ -86,7 +86,7 @@ class AppCamera extends Component {
 						key={this.state.selectedPOI.unique_id}
                         dir={this.state.relSelectedPos.dir}
                         dist={this.state.relSelectedPos.distance}
-                        navigation={this.props.screenProps.navigation}
+                        navigation={this.props.navigation}
                         handlePress={this.handlePress}
                         point={this.state.selectedPOI}
                         left={50 + ((Dimensions.get('window').width / 80) * this.state.relSelectedPos.dir)}
@@ -154,6 +154,17 @@ const styles = StyleSheet.create({
   },
 });
 
+const CameraStack = StackNavigator({
+	MainCamera: {
+		screen: AppCamera,
+		title: "Home"
+	},
+	CameraDetails: {
+		screen: PointDetails,
+		path: 'poi/:name',
+		title: "Details"
+	}
+})
 
-export default AppCamera;
+export default CameraStack;
 

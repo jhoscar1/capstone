@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import AppCamera from '../CameraView/Camera'
+import CameraStack from '../CameraView/Camera'
 import MapStack from '../MapView/Mapview'
 import FavStack from '../FavoritesView/MyFavorites'
 import Icon from 'react-native-vector-icons/Ionicons';
-import MostPopular from '../MostPopular.js'
+import PopularStack from '../MostPopular.js'
 
 // Routers
 const TabBar = TabNavigator({
 	Home: {
-		screen: AppCamera,
+		screen: CameraStack,
 		navigationOptions: (props) => ({
 			title: 'I (AR)t NY',
 			tabBarLabel: 'Home',
@@ -39,7 +39,7 @@ const TabBar = TabNavigator({
 		})
 	},
 	Popular: {
-		screen: MostPopular,
+		screen: PopularStack,
 		navigationOptions: (props) => ({
 			title: 'I (AR)t NY',
 			tabBarLabel: 'Popular',
