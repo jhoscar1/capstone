@@ -19,7 +19,7 @@ class SelectedPointOfInterest extends Component {
     componentDidMount() {
         Animated.parallel([
             Animated.timing(this.state.left, {
-                toValue: Dimensions.get('screen').width / 6 - 25,
+                toValue: Dimensions.get('screen').width / 6 - 35,
                 duration: 1000
             }),
             Animated.timing(this.state.top, {
@@ -27,7 +27,7 @@ class SelectedPointOfInterest extends Component {
                 duration: 1000
             }),
             Animated.timing(this.state.width, {
-                toValue: Dimensions.get('screen').width / 1.5 + 75,
+                toValue: Dimensions.get('screen').width / 1.5 + 30,
                 duration: 1000
             }),
             Animated.timing(this.state.height, {
@@ -49,7 +49,7 @@ class SelectedPointOfInterest extends Component {
                 duration: 1000
             }),
             Animated.timing(this.state.width, {
-                toValue: this.props.point.name.length * (35 - Math.floor(this.size)) + 100,
+                toValue: this.props.point.name.length * 19,
                 duration: 1000
             })
         ])
@@ -85,7 +85,7 @@ class SelectedPointOfInterest extends Component {
                     {this.state.showFull ? 
                     <Image
                         source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
-                        style={{height: 75, width: 75}}
+                        style={{height: 75, width: 75, marginRight: 3}}
                     />
                     :
                     null
