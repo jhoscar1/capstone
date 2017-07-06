@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -702,16 +701,15 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = LY9K5KN6L3;
 					};
-					2D02E47A1E0B4A5D006451C7 = {
-						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+                    2D02E47A1E0B4A5D006451C7 = {
+                        CreatedOnToolsVersion = 8.2.1;
+                        ProvisioningStyle = Automatic;
+                    };
+                    2D02E48F1E0B4A5D006451C7 = {
+                        CreatedOnToolsVersion = 8.2.1;
+                        ProvisioningStyle = Automatic;
+                        TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
-					2D02E48F1E0B4A5D006451C7 = {
-						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 2D02E47A1E0B4A5D006451C7;
-					};
-				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PublicArt" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1305,7 +1303,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.PublicArtFB;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.PublicArtFB";
 				PRODUCT_NAME = PublicArt;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -110,7 +110,7 @@ class SelectedPointOfInterest extends Component {
     }
 
     render() {
-        console.log(this.props)
+
         const {navigation} = this.props;
         const cardStyle = {
             borderRadius: 5,
@@ -152,7 +152,7 @@ class SelectedPointOfInterest extends Component {
                                     <Button
                                         style={{color: 'blue'}}
                                         title="Learn More"
-                                        onPress={() => navigation.navigate('Details', { name: this.props.point.link})}
+                                        onPress={() => navigation.navigate('CameraDetails', { name: this.props.point.link})}
                                     />
                                 </View>
                                 <View style={{flexDirection: 'row'}}>

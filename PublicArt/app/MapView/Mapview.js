@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   Text,
   Image
 } from 'react-native';
 import MapView from 'react-native-maps';
 import MapCallout from './MapCallout';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { NavigationActions } from 'react-navigation'
+import { StackNavigator } from 'react-navigation';
+import PointDetails from '../PointDetails';
 
 class Mapview extends Component {
   constructor(props){
@@ -27,7 +26,6 @@ class Mapview extends Component {
   }
 
   render() {
-    console.log("map props when rendering: ", this.props)
     let region = {};
 
     const navigation = this.props.navigation
@@ -42,7 +40,6 @@ class Mapview extends Component {
           latitudeDelta: 0.0122,
           longitudeDelta: 0.0021,
         }
-        console.log("MARKERS: ", markerArr)
         return (
           <View style={styles.container}>
           <MapView
@@ -67,7 +64,7 @@ class Mapview extends Component {
                       id={marker.unique_id}
                       onPress={(event) => this.markerSelected(marker.unique_id)}>
                         <MapView.Callout tooltip style={styles.customView}
-                          onPress={() => navigation.navigate('Details', { name: marker.link})}>
+                          onPress={() => navigation.navigate('MapDetails', { name: marker.link})}>
                           {marker.unique_id === this.state.selectedMarker ?
                           <MapCallout>
                             <Text
@@ -135,4 +132,20 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Mapview;
+const MapStack = StackNavigator({
+  MainMap: {
+    screen: Mapview,
+    title: "Map View"
+  },
+  MapDetails: {
+    screen: PointDetails,
+    path: 'poi/:name',
+    title: "Details"
+  }
+}, {
+  headerMode: "none"
+})
+
+// AppRegistry.registerComponent('MapStack', () => MapStack);
+
+export default MapStack;
