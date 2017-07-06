@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Camera from 'react-native-camera';
 import {Dimensions, StyleSheet, View, Animated} from 'react-native';
 import PointOfInterest from './PointOfInterest';
-import SelectedPointOfInterest from './SelectedPOITransitionMotion';
+import SelectedPointOfInterest from './SelectedPointOfInterest';
 import utils from '../utils';
 
 export default class AppCamera extends Component {
@@ -24,9 +24,9 @@ export default class AppCamera extends Component {
                 relSelectedPos: relativePosition,
                 selected: true
             });
+            console.log(relativePosition);
         }
         else {
-            animateOnUnmount();
             this.setState({
                 selectedPOI: {},
                 relSelectedPos: {},
@@ -34,6 +34,7 @@ export default class AppCamera extends Component {
             })
         }
     }
+
 
     render() {
         /* gets all pois and their lats and lngs */
@@ -50,6 +51,7 @@ export default class AppCamera extends Component {
                     {   Object.keys(this.state.selectedPOI).length ?
                     <SelectedPointOfInterest
                         dir={this.state.relSelectedPos.dir}
+                        dist={this.state.relSelectedPos.distance}
                         navigation={this.props.navigation}
                         handlePress={this.handlePress}
                         point={this.state.selectedPOI}

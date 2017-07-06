@@ -9,7 +9,6 @@ class PointOfInterest extends Component {
         super(props);
         this.state = {
             open: false,
-            viewSize: new Animated.Value(200),
             upvoted: false,
             itemLikes: 'default',
             firebaseId: 'default'
@@ -99,7 +98,7 @@ class PointOfInterest extends Component {
 
         return (
             <TouchableWithoutFeedback onPress={() => this.props.handlePress(this.props.point)} >
-                <Animated.View style={{ ...cardStyle, height: this.state.viewSize}}>
+                <Animated.View style={{ ...cardStyle }}>
                     {this.state.open ? <Image
                         source={{uri: `https://www.nycgovparks.org${this.props.point.thumb_path}`}}
                         style={{height: 75, width: 75}}
