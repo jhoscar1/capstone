@@ -112,6 +112,8 @@ const FavStack = StackNavigator({
     screen: MapStack,
     title: "Map View"
   }
+}, {
+  headerMode: "float"
 })
 
 export default FavStack

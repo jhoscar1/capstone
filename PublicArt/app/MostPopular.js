@@ -44,6 +44,8 @@ const PopularStack = StackNavigator({
 		screen: MapStack,
 		title: "Map View"
 	}
+}, {
+  headerMode: "float"
 })
 
 

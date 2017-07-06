@@ -142,6 +142,8 @@ const MapStack = StackNavigator({
     path: 'poi/:name',
     title: "Details"
   }
+}, {
+  headerMode: "none"
 })
 
 // AppRegistry.registerComponent('MapStack', () => MapStack);

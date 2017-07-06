@@ -143,6 +143,8 @@ const CameraStack = StackNavigator({
 		path: 'poi/:name',
 		title: "Details"
 	}
+}, {
+  headerMode: "float"
 })
 
 export default CameraStack;
