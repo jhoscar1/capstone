@@ -104,10 +104,10 @@ export default class PublicArt extends Component {
       (error) => console.error(error),
       {timeout: 10000, enableHighAccuracy: true, maximumAge: 1000, distanceFilter: 3}
     )
-    this.props.navigation.setParams(
-      {handleMapInfo: this.onMapPress,
-      handleMyFaves: this.onFavPress} );
-    // this.props.navigation.setParams({ handleMyFaves: this.onFavPress });
+    this.props.navigation.setParams({
+      handleMapInfo: this.onMapPress,
+      handleMyFaves: this.onFavPress
+    });
   }
 
   componentWillUnmount() {
