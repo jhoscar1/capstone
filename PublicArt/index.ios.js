@@ -22,13 +22,8 @@ import Mapview from './app/MapView/Mapview.js'
 import AppCamera from './app/CameraView/Camera.js';
 import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
-<<<<<<< HEAD
 import Favorites from './app/FavoritesView/MyFavorites.js';
 import TabBar from './app/tabBar/Navigator.js'
-=======
-import Favorites from './app/MyFavorites'
-import MostPopular from './app/MostPopular';
->>>>>>> master
 
 
 export default class PublicArt extends Component {
@@ -102,4 +97,5 @@ export default class PublicArt extends Component {
 }
 
 AppRegistry.registerComponent('PublicArt', () => PublicArt);
+
 

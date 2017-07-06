@@ -1,6 +1,10 @@
 const utils = {};
 
-utils.getDistanceInMeters = (long1, long2, lat1, lat2) => {
+utils.getDistanceInMeters = (poi, coords) => {
+    let lat2 = +poi.lat;
+    let long2 = +poi.lng;
+    let lat1 = +coords.latitude;
+    let long1 = +coords.longitude;
     // haversine
     let R = 6371 // radius of eath in KM
     let dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -14,7 +18,12 @@ utils.getDistanceInMeters = (long1, long2, lat1, lat2) => {
 
 // this returns the relative direction of the POI - for example, if user is facing south
 // but the attraction is due north, then this will return 180
-utils.getDirection = (long1, long2, lat1, lat2) => {
+
+utils.getDirection = (poi, coords) => {
+    let lat2 = +poi.lat;
+    let long2 = +poi.lng;
+    let lat1 = +coords.latitude;
+    let long1 = +coords.longitude;
     let theta = Math.atan2(lat2 - lat1, long2 - long1);
     if (theta < 0){
         theta += (2 * (Math.PI))
@@ -45,5 +54,13 @@ utils.convertToOrientation = (userDirection, thetaDirection) => {
     }
   return relDiff;
 };
+
+utils.getRelativePos = (poi, heading, coords) => {
+    return {
+        poi,
+        distance: utils.getDistanceInMeters(poi, coords),
+        dir: utils.convertToOrientation(heading, utils.getDirection(poi, coords))
+    };
+}
 
 export default utils;

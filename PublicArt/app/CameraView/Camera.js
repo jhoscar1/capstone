@@ -8,6 +8,7 @@ import firebaseApp from '../../firebase';
 import ReactNativeHeading from 'react-native-heading'
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SelectedPointOfInterest from './SelectedPointOfInterest';
 
 class AppCamera extends Component {
 	constructor(props) {
@@ -16,7 +17,11 @@ class AppCamera extends Component {
 			gyro: {},
 			headingIsSupported: false,
 			heading: '',
+			selectedPOI: {},
+            relSelectedPos: {},
+            selected: false
 		}
+		this.handlePress = this.handlePress.bind(this);
 	}
 
 	componentDidMount() {
@@ -39,50 +44,79 @@ class AppCamera extends Component {
 
 	}
 
+	handlePress(POI) {
+        if (!this.state.selected) {
+            const relativePosition = utils.getRelativePos(POI, this.props.heading, this.props.position.coords)
+            this.setState({
+                selectedPOI: POI,
+                relSelectedPos: relativePosition,
+                selected: true
+            });
+            console.log(relativePosition);
+        }
+        else {
+            this.setState({
+                selectedPOI: {},
+                relSelectedPos: {},
+                selected: false
+            })
+        }
+    }
+
 	render() {
 		/* gets all pois and their lats and lngs */
 		let relPosition =  [];
-		this.props.screenProps.pois.forEach(poi => {
-			let lat2 = +poi.lat;
-			let long2 = +poi.lng;
-			let lat1 = +this.props.screenProps.position.coords.latitude;
-			let long1 = +this.props.screenProps.position.coords.longitude;
-			let relativePos = {
-			  distance: utils.getDistanceInMeters(long1, long2, lat1, lat2),
-			  dir: utils.convertToOrientation(this.state.heading, utils.getDirection(long1, long2, lat1, lat2))
-			}
-			relPosition.push(relativePos)
-		  })
+        this.props.screenProps.pois.forEach(poi => {
+            let relativePos = utils.getRelativePos(poi, this.state.heading, this.props.screenProps.position.coords)
+            relPosition.push(relativePos)
+        })
 		console.log(relPosition.length)
 		// console.log("CAMERA PROPS: ", this.props)
 		let counter = 1;
+
 
 		return (
 			<View style={styles.container}>
 			{
 				(this.props.screenProps.position && relPosition.length) ?
 					[<Camera  ref={(cam) => {this.camera = cam}} style={styles.preview} />,			
-					relPosition.map((poi, idx) => {
-						return (
-							(poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
-							<PointOfInterest 
-								key={idx}
-								dir={poi.dir} 
-								dist={poi.distance} 
-								num={counter++} 
-								navigation={this.props.screenProps.navigation}
-								key={idx} 
-								tilt={this.state.gyro} 
-								point={this.props.screenProps.pois[idx]} 
-								onClick={() => {this.setState({selectedPOI})}} 
-							/>
-							: null
-						)
-					})]
+					
+					Object.keys(this.state.selectedPOI).length ?
+                    <SelectedPointOfInterest
+                        dir={this.state.relSelectedPos.dir}
+                        dist={this.state.relSelectedPos.distance}
+                        navigation={this.props.screenProps.navigation}
+                        handlePress={this.handlePress}
+                        point={this.state.selectedPOI}
+                        left={50 + ((Dimensions.get('window').width / 80) * this.state.relSelectedPos.dir)}
+                        top={50*counter + ((Dimensions.get('window').height/300)) + Dimensions.get('window').height/10}
+                    />
+                    :
+                    (relPosition.length) ? relPosition.reverse().map((poi, idx) => {
+                        return (
+                            (poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
+                            <PointOfInterest 
+                                dir={poi.dir} 
+                                dist={poi.distance} 
+                                num={counter++} 
+                                navigation={this.props.screenProps.navigation}
+                                key={idx} 
+                                tilt={this.state.gyro} 
+                                point={this.props.screenProps.pois[idx]} 
+                                onClick={() => {this.setState({selectedPOI})}}
+                                handlePress={this.handlePress}
+                            />
+                            : null
+                        )
+                    })
+                    : null]
 				: <View><ActivityIndicator size={'large'} /><Text style={{fontSize: 24, fontWeight: '800'}}>Loading Art Installations...</Text></View>
 			}
 			</View>
 		)
+		
+
+
 	}
 }
 
