@@ -9,7 +9,7 @@ import {
   FlatList,
   Dimensions
 } from 'react-native';
-import firebaseApp from '../firebase';
+import firebaseApp from '../../firebase';
 import {StackNavigator} from 'react-navigation';
 
 export default class ListItem extends Component {
@@ -20,17 +20,16 @@ export default class ListItem extends Component {
 	}
 
 	mapView() {
-		this.props.navigation.navigate('Mapview',
+		this.props.navigation.navigate('SinglePOIMap',
 			{
 				userLocation: this.props.position,
 				markers: [this.props.item]
 			})
 	}
 
-
-
 	moreInfo() {
-		this.props.navigation.navigate('Details', { name: this.props.item.link})
+		console.log("More Info! ", this.props.navigation)
+		this.props.navigation.navigate('Details', {name: this.props.item.link})
 	}
 
 	render() {
@@ -46,9 +45,7 @@ export default class ListItem extends Component {
 			textAlign: 'center'
 		}
 
-		const textContainerStyle = {
-			width: Dimensions.get('window').width - 80
-		}
+		const textContainerStyle = { width: Dimensions.get('window').width - 80 }
 
 		const { navigation } = this.props;
 		
@@ -62,9 +59,9 @@ export default class ListItem extends Component {
 					</View>
 				</View>
 				<View style={viewStyle}>
-					<Button onPress={navigation.state.params && this.mapView} title='Map View' />
-					<Button onPress={navigation.state.params && this.moreInfo} title='More Info'/>
-					<Button onPress={navigation.state.params && (() => {this.props.unfavorite(this.props.item)})} title='Un-favorite' />
+					<Button onPress={this.mapView} title='Map View' />
+					<Button onPress={() => {navigation.navigate('Details', {name: this.props.item.link})}} title='More Info'/>
+					<Button onPress={(() => {this.props.unfavorite(this.props.item)})} title='Un-favorite' />
 				</View>
 			</View>			
 		)
