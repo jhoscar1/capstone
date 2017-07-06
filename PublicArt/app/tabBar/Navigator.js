@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
 import AppCamera from '../CameraView/Camera'
-import Mapview from '../MapView/Mapview'
+import MapStack from '../MapView/Mapview'
 import FavStack from '../FavoritesView/MyFavorites'
 import Icon from 'react-native-vector-icons/Ionicons';
 import MostPopular from '../MostPopular.js'
@@ -19,7 +19,7 @@ const TabBar = TabNavigator({
 		})
 	},
 	Map: {
-	  screen: Mapview,
+	  screen: MapStack,
 		navigationOptions: (props) => ({
 			title: 'I (AR)t NY',
 			tabBarLabel: 'Map',
@@ -50,6 +50,7 @@ const TabBar = TabNavigator({
 
 	}
 }, {
+	lazy: true,
 	tabBarOptions: {
 		activeTintColor: 'blue',
 		inactiveTintColor: 'black',

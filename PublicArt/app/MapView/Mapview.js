@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   Text,
   Image
 } from 'react-native';
 import MapView from 'react-native-maps';
 import MapCallout from './MapCallout';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { NavigationActions } from 'react-navigation'
+import { StackNavigator } from 'react-navigation';
+import PointDetails from '../PointDetails';
 
 class Mapview extends Component {
   constructor(props){
@@ -135,4 +134,18 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Mapview;
+const MapStack = StackNavigator({
+  MainMap: {
+    screen: Mapview,
+    title: "Map View"
+  },
+  MapDetails: {
+    screen: PointDetails,
+    path: 'poi/:name',
+    title: "Details"
+  }
+})
+
+// AppRegistry.registerComponent('MapStack', () => MapStack);
+
+export default MapStack;

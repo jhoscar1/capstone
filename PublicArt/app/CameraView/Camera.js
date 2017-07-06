@@ -8,7 +8,7 @@ import firebaseApp from '../../firebase';
 import ReactNativeHeading from 'react-native-heading'
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import Icon from 'react-native-vector-icons/Ionicons';
-import SelectedPointOfInterest from './SelectedPointOfInterest';
+import SelectedPointOfInterest from '../SelectedPointOfInterest';
 
 class AppCamera extends Component {
 	constructor(props) {
@@ -46,7 +46,7 @@ class AppCamera extends Component {
 
 	handlePress(POI) {
         if (!this.state.selected) {
-            const relativePosition = utils.getRelativePos(POI, this.props.heading, this.props.position.coords)
+            const relativePosition = utils.getRelativePos(POI, this.state.heading, this.props.screenProps.position.coords)
             this.setState({
                 selectedPOI: POI,
                 relSelectedPos: relativePosition,
@@ -79,10 +79,11 @@ class AppCamera extends Component {
 			<View style={styles.container}>
 			{
 				(this.props.screenProps.position && relPosition.length) ?
-					[<Camera  ref={(cam) => {this.camera = cam}} style={styles.preview} />,			
+					[<Camera  ref={(cam) => {this.camera = cam}} style={styles.preview} key={'cam'} />,			
 					
 					Object.keys(this.state.selectedPOI).length ?
                     <SelectedPointOfInterest
+						key={this.state.selectedPOI.unique_id}
                         dir={this.state.relSelectedPos.dir}
                         dist={this.state.relSelectedPos.distance}
                         navigation={this.props.screenProps.navigation}
@@ -92,7 +93,7 @@ class AppCamera extends Component {
                         top={50*counter + ((Dimensions.get('window').height/300)) + Dimensions.get('window').height/10}
                     />
                     :
-                    (relPosition.length) ? relPosition.reverse().map((poi, idx) => {
+                    (relPosition.length) ? relPosition.map((poi, idx) => {
                         return (
                             (poi.distance < 300 && poi.dir < 50 && poi.dir > -50) ?
                             <PointOfInterest 

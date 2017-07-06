@@ -16,7 +16,6 @@ export default class ListItem extends Component {
 	constructor(props) {
 		super(props);
 		this.mapView = this.mapView.bind(this);
-		this.moreInfo = this.moreInfo.bind(this);
 	}
 
 	mapView() {
@@ -25,11 +24,6 @@ export default class ListItem extends Component {
 				userLocation: this.props.position,
 				markers: [this.props.item]
 			})
-	}
-
-	moreInfo() {
-		console.log("More Info! ", this.props.navigation)
-		this.props.navigation.navigate('Details', {name: this.props.item.link})
 	}
 
 	render() {

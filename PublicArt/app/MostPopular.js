@@ -10,7 +10,7 @@ import {
   Dimensions
 } from 'react-native';
 import firebaseApp from '../firebase';
-import ListItem from './ListItem'
+import ListItem from './FavoritesView/ListItem'
 
 class MostPopular extends Component {
 	constructor(props) {
@@ -42,7 +42,7 @@ class MostPopular extends Component {
 					keyExtractor={item => String(item.unique_id)} 
 					renderItem={({item}) => <ListItem 
 						item={item}
-						position={this.props.navigation.state.params.position}
+						position={this.props.screenProps.position}
 						navigation={this.props.navigation}
 					/>
 					}
