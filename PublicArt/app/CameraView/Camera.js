@@ -53,7 +53,6 @@ class AppCamera extends Component {
                 relSelectedPos: relativePosition,
                 selected: true
             });
-            console.log(relativePosition);
         }
         else {
             this.setState({
@@ -71,7 +70,6 @@ class AppCamera extends Component {
             let relativePos = utils.getRelativePos(poi, this.state.heading, this.props.screenProps.position.coords)
             relPosition.push(relativePos)
         })
-
 		let counter = 1;
 
 

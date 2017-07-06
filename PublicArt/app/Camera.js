@@ -24,7 +24,6 @@ export default class AppCamera extends Component {
                 relSelectedPos: relativePosition,
                 selected: true
             });
-            console.log(relativePosition);
         }
         else {
             this.setState({

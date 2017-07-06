@@ -26,7 +26,6 @@ class Mapview extends Component {
   }
 
   render() {
-    console.log("map props when rendering: ", this.props)
     let region = {};
 
     const navigation = this.props.navigation
@@ -41,7 +40,6 @@ class Mapview extends Component {
           latitudeDelta: 0.0122,
           longitudeDelta: 0.0021,
         }
-        console.log("MARKERS: ", markerArr)
         return (
           <View style={styles.container}>
           <MapView
@@ -66,7 +64,7 @@ class Mapview extends Component {
                       id={marker.unique_id}
                       onPress={(event) => this.markerSelected(marker.unique_id)}>
                         <MapView.Callout tooltip style={styles.customView}
-                          onPress={() => navigation.navigate('Details', { name: marker.link})}>
+                          onPress={() => navigation.navigate('MapDetails', { name: marker.link})}>
                           {marker.unique_id === this.state.selectedMarker ?
                           <MapCallout>
                             <Text

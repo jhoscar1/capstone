@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   View,
   Button,
   Text,
   Image,
-  AsyncStorage,
-  FlatList,
   Dimensions
 } from 'react-native';
-import firebaseApp from '../../firebase';
-import {StackNavigator} from 'react-navigation';
 
 export default class ListItem extends Component {
 	constructor(props) {

@@ -7,22 +7,8 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  DeviceEventEmitter,
-  TouchableWithoutFeedback,
-  ActivityIndicator,
-  Image
 } from 'react-native';
-import { StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import PointDetails from './app/PointDetails.js'
-import Mapview from './app/MapView/Mapview.js'
-import AppCamera from './app/CameraView/Camera.js';
 import firebaseApp from './firebase';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Favorites from './app/FavoritesView/MyFavorites.js';
 import TabBar from './app/tabBar/Navigator.js'
 
 
@@ -49,7 +35,9 @@ export default class PublicArt extends Component {
           if (typeof allpois == 'object') {
             allpois = Object.values(allpois);
           }
-
+          allpois = allpois.sort((a, b) => {
+            return b.likes - a.likes
+          })
           this.setState({allPois: allpois});
           allpois.forEach(poi => {
             let x1 = +poi.lat;
