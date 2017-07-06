@@ -61,7 +61,12 @@ export default class ListItem extends Component {
 				<View style={viewStyle}>
 					<Button onPress={this.mapView} title='Map View' />
 					<Button onPress={() => {navigation.navigate('Details', {name: this.props.item.link})}} title='More Info'/>
-					<Button onPress={(() => {this.props.unfavorite(this.props.item)})} title='Un-favorite' />
+					{
+						this.props.unfavorite ?
+						<Button onPress={navigation.state.params && (() => {this.props.unfavorite(this.props.item)})} title='Un-favorite' />
+						:
+						null
+					}
 				</View>
 			</View>			
 		)

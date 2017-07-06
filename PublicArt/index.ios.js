@@ -22,8 +22,13 @@ import Mapview from './app/MapView/Mapview.js'
 import AppCamera from './app/CameraView/Camera.js';
 import firebaseApp from './firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
+<<<<<<< HEAD
 import Favorites from './app/FavoritesView/MyFavorites.js';
 import TabBar from './app/tabBar/Navigator.js'
+=======
+import Favorites from './app/MyFavorites'
+import MostPopular from './app/MostPopular';
+>>>>>>> master
 
 
 export default class PublicArt extends Component {
@@ -95,23 +100,6 @@ export default class PublicArt extends Component {
         position: this.state.position}} />)
   }
 }
-
-// const AppRouter = StackNavigator({
-//   Home: {
-//     screen: PublicArt,
-//   },
-//   Details: {
-//     screen: PointDetails,
-//     path: 'poi/:name',
-//   },
-//   // Map: {
-//   //   screen: Mapview,
-//   // }
-// }, {
-//   headerMode: 'none',
-// })
-
-
 
 AppRegistry.registerComponent('PublicArt', () => PublicArt);
 

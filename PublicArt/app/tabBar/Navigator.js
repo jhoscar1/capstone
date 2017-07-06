@@ -4,6 +4,7 @@ import AppCamera from '../CameraView/Camera'
 import Mapview from '../MapView/Mapview'
 import FavStack from '../FavoritesView/MyFavorites'
 import Icon from 'react-native-vector-icons/Ionicons';
+import MostPopular from '../MostPopular.js'
 
 // Routers
 const TabBar = TabNavigator({
@@ -36,6 +37,17 @@ const TabBar = TabNavigator({
 			<Icon name="ios-heart-outline" size={26} style={{width: 26, height: 26}} />
 		  )
 		})
+	},
+	Popular: {
+		screen: MostPopular,
+		navigationOptions: (props) => ({
+			title: 'I (AR)t NY',
+			tabBarLabel: 'Popular',
+			tabBarIcon: ({tintColor}) => (
+			<Icon name="ios-ribbon-outline" size={26} style={{width: 26, height: 26}} />
+		  )
+		})
+
 	}
 }, {
 	tabBarOptions: {

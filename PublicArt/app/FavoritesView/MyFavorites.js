@@ -25,6 +25,7 @@ class MyFavorites extends Component {
 		}
 		this.unfavorite = this.unfavorite.bind(this);
 		this.getFavorites = this.getFavorites.bind(this);
+    	this.onPopularPress = this.onPopularPress.bind(this);
 	}
 
 	unfavorite(poi) {
@@ -78,6 +79,11 @@ class MyFavorites extends Component {
 				.catch(console.error.bind(console))
 			})
 		})
+		this.props.navigation.setParams({handlePopular: this.onPopularPress})
+	}
+
+	onPopularPress() {
+		this.props.navigation.navigate('Popular', {})
 	}
 
 	componentDidMount() {
@@ -100,8 +106,14 @@ class MyFavorites extends Component {
 					{
 						(this.state.favorited.length) ?
 						<FlatList data={this.state.favorited}
-							renderItem={({item}) => <ListItem  key={item.unique_id} position={this.props.screenProps.position}
-															   item={item} navigation={this.props.navigation} unfavorite={this.unfavorite}/> } />
+							keyExtractor={item => String(item.unique_id)}
+							renderItem={({item}) => <ListItem 
+											position={this.props.screenProps.position}
+											item={item} 
+											navigation={this.props.navigation} 
+											unfavorite={this.unfavorite}/> 
+											} 
+										/>
 						: <Text>You haven't saved any favorites yet!</Text>
 					}
 				</View>)

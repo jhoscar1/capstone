@@ -128,6 +128,10 @@ const styles = StyleSheet.create({
     height: 75,
     width: 75,
     alignSelf: 'center'
+  },
+  customView: {
+    height: 100,
+    width: 140,
   }
 });
 
