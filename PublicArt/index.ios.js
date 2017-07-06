@@ -14,7 +14,7 @@ import {
   DeviceEventEmitter,
   TouchableWithoutFeedback
 } from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator, NavigationActions} from 'react-navigation';
 import { Accelerometer, Gyroscope } from 'react-native-sensors';
 import PointDetails from './app/PointDetails'
 import Mapview from './app/Mapview'
@@ -40,6 +40,12 @@ export default class PublicArt extends Component {
 }
 
   componentDidMount() {
+    const setMapParam = NavigationActions.setParams({
+            params: { markers: this.state.allPois,
+                      userLocation: this.state.position },
+            key: 'Map'
+          });
+          this.props.navigation.dispatch(setMapParam)
     const accelerationObservable = new Accelerometer({
       updateInterval: 100, // defaults to 100ms
     });

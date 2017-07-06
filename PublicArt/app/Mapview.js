@@ -8,11 +8,14 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 import MapCallout from './MapCallout';
+import global from '../secrets';
 
 class Mapview extends Component {
   constructor(props){
     super(props)
-    const userLocation = this.props.navigation.state.params.userLocation.coords
+    console.log('MAPPROPS', this.props);
+    const userLocation = this.props.navigation.state.params.userLocation.coords ?
+    this.props.navigation.state.params.userLocation.coords : this.props.navigation.state.params.userLocation;
     this.state = {
       region: {
         latitude: userLocation.latitude,
@@ -23,11 +26,36 @@ class Mapview extends Component {
       markers: this.props.navigation.state.params.markers,
       selectedMarker: false
     };
+    this.decode = this.decode.bind(this);
   }
 
+  decode(t,e) {
+    for(var n,o,u=0,l=0,r=0,d= [],h=0,i=0,a=null,c=Math.pow(10,e||5);u<t.length;){a=null,h=0,i=0;do a=t.charCodeAt(u++)-63,i|=(31&a)<<h,h+=5;while(a>=32);n=1&i?~(i>>1):i>>1,h=i=0;do a=t.charCodeAt(u++)-63,i|=(31&a)<<h,h+=5;while(a>=32);o=1&i?~(i>>1):i>>1,l+=n,r+=o,d.push([l/c,r/c])}return d=d.map(function(t){return{latitude:t[0],longitude:t[1]}})}
+
+
+componentDidMount(){
+  const mode = 'walking';
+  const origin = {latitude: this.props.navigation.state.params.userLocation.latitude, longitude: this.props.navigation.state.params.userLocation.longitude}
+  const destination = 'Empire State Building New York, NY';
+  const APIKEY = global.GoogleMapsAPIKey;
+  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${APIKEY}&mode=${mode}`;
+
+  fetch(url)
+  .then(response => response.json())
+  .then(responseJson => {
+    console.log('RESPONSE==>', responseJson)
+    if (responseJson.routes.length) {
+      this.setState({
+        coords: this.decode(responseJson.routes[0].overview_polyline.points)
+      });
+    }
+  }).catch(e => {console.warn(e)});
+}
 
   render() {
     const navigation = this.props.navigation
+    console.log('NAVIGATION==>', navigation)
+    console.log('THE STATE==>', this.state)
     return (
       <View style={styles.container}>
       <MapView
@@ -65,6 +93,13 @@ class Mapview extends Component {
               </MapView.Marker>
               : null
           ))}
+          {this.state.coords ?
+            <MapView.Polyline
+            coordinates={[...this.state.coords]}
+            strokeWidth= {5}
+            strokeColor={'red'}
+            />
+          : null}
         </MapView>
       </View>
     );
