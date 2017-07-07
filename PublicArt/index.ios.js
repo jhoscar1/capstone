@@ -11,6 +11,8 @@ import {
 import firebaseApp from './firebase';
 import TabBar from './app/tabBar/Navigator.js'
 
+global.__DEV__ = false
+
 
 export default class PublicArt extends Component {
   constructor(props) {

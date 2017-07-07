@@ -12,7 +12,7 @@ const PointOfInterest = (props) => {
     // 100 == face down
     // let tilt = (props.tilt.z + 1) * 50
     let h = Dimensions.get('window').height
-    let size = props.dist / 10
+    let size = props.dist / 14
     const cardStyle = {
         borderRadius: 5,
         padding: 15,
