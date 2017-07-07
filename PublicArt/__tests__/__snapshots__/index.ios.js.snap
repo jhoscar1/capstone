@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1 1`] = `1`;
+
+exports[`renders callout correctly 1`] = `undefined`;
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "bottom": 0,
+      "justifyContent": "flex-end",
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
+  <MapView
+    initialRegion={
+      Object {
+        "latitude": 40.729713,
+        "latitudeDelta": 0.0122,
+        "longitude": -73.9915285,
+        "longitudeDelta": 0.0021,
+      }
+    }
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <Marker
+      coordinate={
+        Object {
+          "latitude": 40.729713,
+          "longitude": -73.9915285,
+        }
+      }
+      image={1}
+      style={
+        Object {
+          "position": "relative",
+          "zIndex": 1,
+        }
+      }
+    />
+    <Marker
+      coordinate={
+        Object {
+          "latitude": 40.71390377,
+          "longitude": -74.00609437,
+        }
+      }
+      id={1}
+      onPress={[Function]}
+    >
+      <Callout
+        onPress={[Function]}
+        style={undefined}
+        tooltip={true}
+      />
+    </Marker>
+    <Marker
+      coordinate={
+        Object {
+          "latitude": 40.89098508,
+          "longitude": -73.89453102,
+        }
+      }
+      id={2}
+      onPress={[Function]}
+    >
+      <Callout
+        onPress={[Function]}
+        style={undefined}
+        tooltip={true}
+      />
+    </Marker>
+  </MapView>
+</View>
+`;

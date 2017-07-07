@@ -17,8 +17,8 @@ class Mapview extends Component {
       region: {
         latitude: userLocation.latitude,
         longitude: userLocation.longitude,
-        latitudeDelta: 0.0122,
-        longitudeDelta: 0.0021,
+        latitudeDelta: 0.0522,
+        longitudeDelta: 0.0061,
        },
       markers: this.props.navigation.state.params.markers,
       selectedMarker: false
