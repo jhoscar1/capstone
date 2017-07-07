@@ -136,12 +136,16 @@ const styles = StyleSheet.create({
 const CameraStack = StackNavigator({
 	MainCamera: {
 		screen: AppCamera,
-		title: "Home"
+		navigationOptions: {
+			title: "I (AR)t NY"
+		}
 	},
 	CameraDetails: {
 		screen: PointDetails,
 		path: 'poi/:name',
-		title: "Details"
+		navigationOptions: {
+			title: "Details"
+		}
 	}
 }, {
   headerMode: "float"

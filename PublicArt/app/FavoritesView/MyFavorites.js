@@ -101,16 +101,22 @@ class MyFavorites extends Component {
 const FavStack = StackNavigator({
   MyFaves: {
     screen: MyFavorites,
-    title: "My Favorites"
+    navigationOptions: {
+    	title: "My Favorites"
+    }
   },
   Details: {
     screen: PointDetails,
     path: 'poi/:name',
-    title: "Details"
+    navigationOptions: {
+    	// title: "Details"
+    }
   },
   SinglePOIMap: {
     screen: MapStack,
-    title: "Map View"
+    navigationOptions: {
+    	title: "Map View"
+    }
   }
 }, {
   headerMode: "float"

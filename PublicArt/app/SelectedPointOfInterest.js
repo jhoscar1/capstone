@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Animated, View, Text, Button, StyleSheet, Image, TouchableWithoutFeedback, Dimensions, AsyncStorage} from 'react-native';
+import {Animated, View, Text, StyleSheet, Image, TouchableWithoutFeedback, Dimensions, AsyncStorage} from 'react-native';
 import firebaseApp from '../firebase';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Button from 'react-native-button'
 
 class SelectedPointOfInterest extends Component {
     constructor(props) {
@@ -133,6 +134,9 @@ class SelectedPointOfInterest extends Component {
             marginRight: 15,
             alignSelf: 'flex-end'
         }
+        const likes ={
+            marginLeft: Dimensions.get('screen').width / 2.1,
+        }
         return (
             <TouchableWithoutFeedback onPress={() => this.animateOnUnmount(this.props.point)} >
                 <Animated.View style={{ ...cardStyle, height: this.state.height, width: this.state.width}}>
@@ -150,18 +154,17 @@ class SelectedPointOfInterest extends Component {
                             <View>
                                 <View>
                                     <Button
-                                        style={{color: 'blue'}}
-                                        title="Learn More"
+                                        style={{color: "#3a4454", maxWidth: Dimensions.get('screen').width / 1.75, marginTop: 5}}
                                         onPress={() => navigation.navigate('CameraDetails', { name: this.props.point.link})}
-                                    />
+                                    >Learn More</Button>
                                 </View>
-                                <View style={{flexDirection: 'row'}}>
-                                    <Text style={styles.likes}>{this.state.itemLikes}</Text>
+                                <View style={{flexDirection: 'row', marginTop: 15}}>
+                                    <Text style={likes}>{this.state.itemLikes}</Text>
                                     <Icon
-                                        name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
+                                        name={this.state.upvoted ? 'ios-heart' : 'ios-heart-outline'}
                                         size={25}
                                         style={styles.upvote}
-                                        color={this.state.upvoted ? '#4F8EF7' : '#000000' }
+                                        color={this.state.upvoted ? "#3a85ff" : "#3a4454" }
                                         onPress={this.selectUpvote}>
                                     </Icon>
                                 </View>
@@ -178,11 +181,12 @@ class SelectedPointOfInterest extends Component {
 
 const styles = StyleSheet.create({
     upvote: {
-        marginLeft: 5
+        marginLeft: 5,
+        alignItems: "flex-end"
     },
-    likes: {
-        marginLeft: 185
-    }
+    // likes: {
+    //     marginLeft: 185
+    // }
 })
 
 export default SelectedPointOfInterest;

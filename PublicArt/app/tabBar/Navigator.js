@@ -13,8 +13,8 @@ const TabBar = TabNavigator({
 		navigationOptions: (props) => ({
 			title: 'I (AR)t NY',
 			tabBarLabel: 'Home',
-			tabBarIcon: ({tintColor}) => (
-			<Icon name="ios-camera-outline" size={26} style={{width: 26, height: 26}} />
+			tabBarIcon: ({tintColor, focused}) => (
+			<Icon name="ios-camera-outline" size={26} style={{left: 3, width: 26, height: 26, color: (focused) ? "#3a85ff" : "#3a4454"}} />
 		  )
 		})
 	},
@@ -23,8 +23,8 @@ const TabBar = TabNavigator({
 		navigationOptions: (props) => ({
 			title: 'I (AR)t NY',
 			tabBarLabel: 'Map',
-			tabBarIcon: ({tintColor}) => (
-			<Icon name="ios-map-outline" size={26} style={{width: 26, height: 26}} />
+			tabBarIcon: ({tintColor, focused}) => (
+			<Icon name="ios-map-outline" size={26} style={{left: 3, width: 26, height: 26, color: (focused) ? "#3a85ff" : "#3a4454"}} />
 		  )
 		})
 	},
@@ -33,8 +33,8 @@ const TabBar = TabNavigator({
 	  navigationOptions: (props) => ({
 			title: 'I (AR)t NY',
 			tabBarLabel: 'Favorites',
-			tabBarIcon: ({tintColor}) => (
-			<Icon name="ios-heart-outline" size={26} style={{width: 26, height: 26}} />
+			tabBarIcon: ({tintColor, focused}) => (
+			<Icon name="ios-heart-outline" size={26} style={{width: 26, height: 26, color: (focused) ? "#3a85ff" : "#3a4454"}} />
 		  )
 		})
 	},
@@ -43,8 +43,8 @@ const TabBar = TabNavigator({
 		navigationOptions: (props) => ({
 			title: 'I (AR)t NY',
 			tabBarLabel: 'Popular',
-			tabBarIcon: ({tintColor}) => (
-			<Icon name="ios-ribbon-outline" size={26} style={{width: 26, height: 26}} />
+			tabBarIcon: ({tintColor, focused}) => (
+			<Icon name="ios-ribbon-outline" size={26} style={{left: 3, width: 26, height: 26, color: (focused) ? "#3a85ff" : "#3a4454"}} />
 		  )
 		})
 
@@ -52,8 +52,8 @@ const TabBar = TabNavigator({
 }, {
 	lazy: true,
 	tabBarOptions: {
-		activeTintColor: 'blue',
-		inactiveTintColor: 'black',
+		activeTintColor: '#3a85ff',
+		inactiveTintColor: '#3a4454',
 		activeBackgroundColor: 'white',
 		inactiveBackgroundColor: 'white',
 		title: "I (AR)t NY"
