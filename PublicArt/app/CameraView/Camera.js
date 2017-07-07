@@ -5,7 +5,7 @@ import PointOfInterest from './PointOfInterest';
 import utils from '../../utils';
 import { StackNavigator } from 'react-navigation';
 import ReactNativeHeading from 'react-native-heading'
-import { Accelerometer } from 'react-native-sensors';
+// import { Accelerometer } from 'react-native-sensors';
 import SelectedPointOfInterest from '../SelectedPointOfInterest';
 import PointDetails from '../PointDetails.js'
 
@@ -13,7 +13,7 @@ class AppCamera extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			gyro: {},
+			// gyro: {},
 			headingIsSupported: false,
 			heading: '',
 			selectedPOI: {},
@@ -24,13 +24,13 @@ class AppCamera extends Component {
 	}
 
 	componentDidMount() {
-		const accelerationObservable = new Accelerometer({
-    	updateInterval: 100, // defaults to 100ms
-	    });
+		// const accelerationObservable = new Accelerometer({
+  //   	updateInterval: 100, // defaults to 100ms
+	 //    });
 
-		// Normal RxJS functions
-	  	accelerationObservable
-	  	.subscribe(speed => this.setState({gyro: speed}));
+		// // Normal RxJS functions
+	 //  	accelerationObservable
+	 //  	.subscribe(speed => this.setState({gyro: speed}));
 	    // get direction of user
 	    ReactNativeHeading.start(15)
 	    .then(didStart => {
@@ -98,7 +98,7 @@ class AppCamera extends Component {
                                 num={counter++} 
                                 navigation={this.props.screenProps.navigation}
                                 key={idx} 
-                                tilt={this.state.gyro} 
+                                // tilt={this.state.gyro} 
                                 point={this.props.screenProps.pois[idx]} 
                                 onClick={() => {this.setState({selectedPOI})}}
                                 handlePress={this.handlePress}
