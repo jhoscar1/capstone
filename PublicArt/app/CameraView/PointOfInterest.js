@@ -10,7 +10,7 @@ const PointOfInterest = (props) => {
     // 0 == face up
     // 50 == straight up and down
     // 100 == face down
-    let tilt = (props.tilt.z + 1) * 50
+    // let tilt = (props.tilt.z + 1) * 50
     let h = Dimensions.get('window').height
     let size = props.dist / 10
     const cardStyle = {
@@ -20,7 +20,7 @@ const PointOfInterest = (props) => {
         marginBottom: 15,
         position: 'absolute',
         left: 50 + ((Dimensions.get('window').width / 80) * props.dir),
-        top: 50*props.num + ((h/300) * tilt) + h/10,
+        top: 50*props.num, //+ ((h/300) * tilt) + h/10,
         backgroundColor: '#F5FCFF',
         flexDirection: 'row',
         alignItems: 'center',
