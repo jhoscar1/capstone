@@ -135,17 +135,19 @@ const styles = StyleSheet.create({
 const MapStack = StackNavigator({
   MainMap: {
     screen: Mapview,
-    title: "Map View"
+    navigationOptions: {
+      title: "I (AR)t NY"
+    }
   },
   MapDetails: {
     screen: PointDetails,
     path: 'poi/:name',
-    title: "Details"
+    navigationOptions: {
+      title: "Details"
+    }
   }
 }, {
   headerMode: "none"
 })
-
-// AppRegistry.registerComponent('MapStack', () => MapStack);
 
 export default MapStack;

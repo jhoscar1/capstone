@@ -33,16 +33,22 @@ const MostPopular = (props) => {
 const PopularStack = StackNavigator({
 	MostPop: {
 		screen: MostPopular,
-		title: "Most Popular"
+		navigationOptions: {
+			title: "Most Popular"
+		}
 	},
 	PopDetails: {
 		screen: PointDetails,
 		path: 'poi/:name',
-    	title: "Details"
+    	navigationOptions: {
+    		// title: "Details"
+    	}
 	},
 	PopMap: {
 		screen: MapStack,
-		title: "Map View"
+		navigationOptions: {
+			title: "Map View"
+		}
 	}
 }, {
   headerMode: "float"
