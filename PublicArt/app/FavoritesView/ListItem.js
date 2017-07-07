@@ -4,7 +4,8 @@ import {
   Button,
   Text,
   Image,
-  Dimensions
+  Dimensions,
+  StyleSheet
 } from 'react-native';
 
 export default class ListItem extends Component {
@@ -56,7 +57,7 @@ export default class ListItem extends Component {
 		const { navigation } = this.props;
 		
 		return(
-			<View key={this.props.item.unique_id}>
+			<View style={styles.listBorder}>
 				<View style={viewStyle}>
 					<Image source={{uri: `https://www.nycgovparks.org${this.props.item.thumb_path}`}}
 	               		    style={{height: 75, width: 75}} />
@@ -79,5 +80,11 @@ export default class ListItem extends Component {
  	}
 }
 
-
+const styles = StyleSheet.create({
+	listBorder: {
+		borderBottomColor: '#bbb',
+		borderBottomWidth: StyleSheet.hairlineWidth,
+		marginBottom: 5
+	}
+})
 
