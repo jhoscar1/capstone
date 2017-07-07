@@ -133,6 +133,10 @@ class SelectedPointOfInterest extends Component {
             marginRight: 15,
             alignSelf: 'flex-end'
         }
+        const likes ={
+            left: this.state.width - 30,
+            alignItems: "flex-end"
+        }
         return (
             <TouchableWithoutFeedback onPress={() => this.animateOnUnmount(this.props.point)} >
                 <Animated.View style={{ ...cardStyle, height: this.state.height, width: this.state.width}}>
@@ -150,18 +154,18 @@ class SelectedPointOfInterest extends Component {
                             <View>
                                 <View>
                                     <Button
-                                        style={{color: 'blue'}}
+                                        style={{color: "#3a4454", width: this.state.width-100}}
                                         title="Learn More"
                                         onPress={() => navigation.navigate('CameraDetails', { name: this.props.point.link})}
                                     />
                                 </View>
                                 <View style={{flexDirection: 'row'}}>
-                                    <Text style={styles.likes}>{this.state.itemLikes}</Text>
+                                    <Text style={likes}>{this.state.itemLikes}</Text>
                                     <Icon
-                                        name={this.state.upvoted ? 'ios-thumbs-up' : 'ios-thumbs-up-outline'}
+                                        name={this.state.upvoted ? 'ios-heart' : 'ios-heart-outline'}
                                         size={25}
                                         style={styles.upvote}
-                                        color={this.state.upvoted ? '#4F8EF7' : '#000000' }
+                                        color={this.state.upvoted ? "#3a85ff" : "#3a4454" }
                                         onPress={this.selectUpvote}>
                                     </Icon>
                                 </View>
@@ -178,11 +182,12 @@ class SelectedPointOfInterest extends Component {
 
 const styles = StyleSheet.create({
     upvote: {
-        marginLeft: 5
+        marginLeft: 5,
+        alignItems: "flex-end"
     },
-    likes: {
-        marginLeft: 185
-    }
+    // likes: {
+    //     marginLeft: 185
+    // }
 })
 
 export default SelectedPointOfInterest;
