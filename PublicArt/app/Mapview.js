@@ -9,6 +9,7 @@ import {
 import MapView from 'react-native-maps';
 import MapCallout from './MapCallout';
 import global from '../secrets';
+import utils from '../utils';
 
 class Mapview extends Component {
   constructor(props){
@@ -27,6 +28,7 @@ class Mapview extends Component {
       selectedMarker: false
     };
     this.decode = this.decode.bind(this);
+    this.plotMap = this.plotMap.bind(this);
   }
 
   decode(t,e) {
@@ -34,12 +36,64 @@ class Mapview extends Component {
 
 
 componentDidMount(){
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
   const mode = 'walking';
-  const origin = {latitude: this.props.navigation.state.params.userLocation.latitude, longitude: this.props.navigation.state.params.userLocation.longitude}
-  const destination = 'Empire State Building New York, NY';
-  const APIKEY = global.GoogleMapsAPIKey;
-  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${APIKEY}&mode=${mode}`;
+  const origin = [this.props.navigation.state.params.userLocation.latitude, this.props.navigation.state.params.userLocation.longitude]
+  const destinationPlace = this.state.markers[getRandomInt(1, this.state.markers.length - 1)];
+  // const destination = [destinationPlace.lat, destinationPlace.lng];
+  const destination = ['40.704', '-74.013']
+  // const otherPlaces = this.state.markers.filter((el) => {
+  //   return utils.getDistanceInMeters(origin[1], Number(el.lng), origin[0], Number(el.lat)) < 1000;
+  // }).slice(0, 4)
 
+  const anotherPlace = this.state.markers[getRandomInt(1, this.state.markers.length - 1)];
+  this.plotMap();
+  // const onTheWay = [anotherPlace.lat, anotherPlace.lng]
+  // const onTheWay = otherPlaces.map(place => {
+  //   return {latitude: place.lat, longitude: place.lng};
+  // });
+// const onTheWay = [{lat: '40.7129', lng: '-74.0051'}, {lat: '40.7046', lng: '-74.0139'}].toString();
+//   // const otherPlace = utils.getDistanceInMeters(origin[0], )
+  // const APIKEY = global.GoogleMapsAPIKey;
+  // const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${onTheWay}&key=${APIKEY}&mode=${mode}`;
+  // console.log('destination-->', destination);
+  // console.log('OTHER PLACES', otherPlaces)
+  // console.log('ontheway', onTheWay)
+  // console.log('URL-->', url)
+
+  // fetch(url)
+  // .then(response => response.json())
+  // .then(responseJson => {
+  //   console.log('RESPONSE==>', responseJson)
+  //   if (responseJson.routes.length) {
+  //     this.setState({
+  //       coords: this.decode(responseJson.routes[0].overview_polyline.points)
+  //     });
+  //   }
+  // }).catch(e => {console.warn(e)});
+}
+
+plotMap(){
+  const origin = [this.props.navigation.state.params.userLocation.latitude, this.props.navigation.state.params.userLocation.longitude];
+  const otherPlaces = this.state.markers.filter((el) => {
+    return utils.getDistanceInMeters(origin[1], Number(el.lng), origin[0], Number(el.lat)) < 1000;
+  }).slice(0, 4)
+  const onTheWay = otherPlaces.map(place => {
+    return {latitude: Number(place.lat), longitude: Number(place.lng)};
+  }).sort((a, b) => {
+    return utils.getDistanceInMeters(origin[1], Number(a.lng), origin[0], Number(a.lat)) < utils.getDistanceInMeters(origin[1], Number(b.lng), origin[0], Number(b.lat))
+  })
+  const wayThere = onTheWay.slice(0, 2);
+  const mode = 'walking';
+  const destination = onTheWay[3];
+  console.log('THEWAY', onTheWay)
+  console.log('destination', destination)
+  const APIKEY = global.GoogleMapsAPIKey;
+  const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${wayThere}&key=${APIKEY}&mode=${mode}`;
   fetch(url)
   .then(response => response.json())
   .then(responseJson => {
@@ -50,6 +104,17 @@ componentDidMount(){
       });
     }
   }).catch(e => {console.warn(e)});
+  // this.setState({
+  //   coords: this.state.markers.filter((el) => {
+  //     return utils.getDistanceInMeters(origin[1], Number(el.lng), origin[0], Number(el.lat)) < 1000;
+  //   }).slice(0, 4)
+  // });
+  // this.setState({
+  //   coords: [{latitude: 40.7129, longitude: -74.0051}, {latitude: 40.7046, longitude: -74.0139}]
+  // });
+  // this.setState({
+  //   coords: onTheWay
+  // });
 }
 
   render() {

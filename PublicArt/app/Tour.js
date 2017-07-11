@@ -15,7 +15,7 @@ export default class TourMaker extends Component {
   onMapPress(){
     const position = this.props.navigation.state.params.userLocation.coords;
     const pointsOfInterest = this.props.navigation.state.params.markers;
-    this.props.navigation.navigate('Mapview', {userLocation: position, markers: pointsOfInterest})
+    this.props.navigation.navigate('Mapview', {userLocation: position, markers: pointsOfInterest, tourLength: this.state.tourLength})
   }
 
   render() {
